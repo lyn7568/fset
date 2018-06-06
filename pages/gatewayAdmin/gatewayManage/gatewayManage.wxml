@@ -1,0 +1,18 @@
+<!--pages/gatewayAdmin/gatewayManage/gatewayManage.wxml-->
+<import src="/template/tempList.wxml" />
+<view class="search-bar">
+  <view class="search-wrap">
+    <icon type="search" size="16" class="icon-search" />
+    <input type="text" placeholder="请输入节点地址" class="search-input" name="searchKeyword" confirm-type="search" value="{{searchKeyword}}" bindconfirm='keywordSearch' />
+  </view>
+</view>
+<view class="containerr">
+  <scroll-view class="navbar" scroll-x="{{true}}" scroll-left="{{scrollNavbarLeft}}">
+    <view class="navbar-item {{ navbarArray[item].type }}" id="{{item}}" wx:for="{{array}}" wx:key="array" catchtap="onTapNavbar">
+      <view class="navbar-item-wrap"> {{navbarArray[item].text}}</view>
+    </view>
+  </scroll-view>
+</view>
+<view class="search-result">
+    <template is="tableModel" data="{{listData:listData,th:tableTh}}" />
+</view>

@@ -1,0 +1,21 @@
+/* pages/gatewayAdmin/gatewayManage/gatewayManage.wxss */
+@import "../../../template/tempList.wxss";
+
+/* 导航条 */
+.navbar{ white-space: nowrap;background: #ffffff;border-bottom:2rpx solid #e5e5e5;width:100%}
+.navbar-item{display: inline-block; width:calc(100% / 4); line-height: 120rpx;font-size:36rpx;height:120rpx;text-align: center; color:#333;}
+.navbar-item-active{position:relative;color:rgba(0,124,185,1);}
+.navbar-item-active:after{position:absolute;content:"";height:8rpx;border-radius:16rpx;background:rgba(0,124,185,1);left:20%;right:20%;bottom: 0}
+
+/*搜索*/
+.search{ flex: auto; display: flex;flex-direction: column;}
+.search-bar{flex: none; display: flex;align-items: center;justify-content: space-between;padding:20rpx; background: rgba(0,124,185,.8);}
+.search-wrap{position: relative; flex: auto; display: flex; align-items: center; height: 80rpx; padding: 0 20rpx; background: #fff;border-radius:10rpx;}
+.search-wrap .icon-search{ margin-right: 10rpx;}
+.search-wrap .search-input{ flex: auto;font-size: 32rpx;}
+.search-cancel{ padding: 0 20rpx; font-size: 32rpx; color: #ffffff;}
+
+/*搜索结果*/
+ .search-result{ flex: auto; position: relative;} 
+ .search-result scroll-view{position: absolute; bottom: 0;left: 0;right: 0;top: 0;} 
+

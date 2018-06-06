@@ -1,0 +1,62 @@
+<!--pages/gatewayAdmin/gatewayAdd/gatewayAdd.wxml-->
+<import src="/model/model.wxml" />
+
+<view class="weui-cells weui-cells_form">
+  <view class="weui-cell">
+    <view class="weui-cell__bd">
+      <text>设备地址</text>
+    </view>
+    <view class="weui-cell__ft">
+      <input class="weui-input" placeholder-class="phcolor" placeholder="请输入设备地址" />
+    </view>
+  </view>
+  <view class="weui-cell">
+    <view class="weui-cell__bd">
+      <text>名称</text>
+    </view>
+    <view class="weui-cell__ft">
+      <input class="weui-input" placeholder-class="phcolor" placeholder="请输入设备名称" />
+    </view>
+  </view>
+  <view class="weui-cell">
+    <view class="weui-cell__bd">
+      <text>类型</text>
+    </view>
+    <view class="weui-cell__ft">
+      <input class="weui-input" placeholder-class="phcolor" placeholder="请输入设备类型" />
+    </view>
+  </view>
+  <view class="weui-cell">
+    <view class="weui-cell__bd">
+      <text>型号</text>
+    </view>
+    <view class="weui-cell__ft">
+      <input class="weui-input" placeholder-class="phcolor" placeholder="请输入设备型号" />
+    </view>
+  </view>
+  <view class="weui-cell" bindtap="translate">
+    <view class="weui-cell__bd">
+      <text>位置</text>
+    </view>
+    <view class="weui-cell__ft" wx:if='{{province || city || county}}'>
+      {{province}} {{city}} {{county}}
+    </view>
+    <view class="weui-cell__ft" wx:else>
+      {{cityholder}}
+    </view>
+    <template is="areaData" data="{{...item}}" />
+  </view>
+  <view class="weui-cell">
+    <view class="weui-cell__bd">
+      <text>位置经纬</text>
+    </view>
+    <view class="weui-cell__ft">
+      <input class="weui-input" placeholder-class="phcolor" placeholder="请输入位置经纬" />
+    </view>
+  </view>
+</view>
+
+<view class="weui-btn-area">
+  <button type="primary" disabled="{{disabled}}">确定</button>
+  <button type="default" disabled="{{disabled}}">取消</button>
+</view>

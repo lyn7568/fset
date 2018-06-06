@@ -1,0 +1,2 @@
+/* pages/gatewayAdmin/gatewayAdd/gatewayAdd.wxss */
+ @import '../../../model/model.wxss' 

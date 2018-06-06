@@ -1,0 +1,18 @@
+{
+  "pages":[
+    "pages/index/index",
+    "pages/logs/logs",
+    "pages/login/login",
+    "pages/gatewayAdmin/gatewayList",
+    "pages/gatewayAdmin/gatewayDetail/gatewayDetail",
+    "pages/gatewayAdmin/gatewayManage/gatewayManage",
+    "pages/gatewayAdmin/gatewayAdd/gatewayAdd",
+    "pages/gatewayAdmin/gatewayUpdate/gatewayUpdate"
+  ],
+  "window":{
+    "backgroundTextStyle":"dark",
+    "navigationBarBackgroundColor": "#2f4050",
+    "navigationBarTitleText": "飞烁科技",
+    "navigationBarTextStyle":"white"
+  }
+}
