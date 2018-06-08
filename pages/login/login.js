@@ -7,8 +7,6 @@ Page({
    * 页面的初始数据
    */
   data: {
-    token: '',
-    weixin: '',
     accountName:'',
     accountPwd:'',
     bdDisabled: true,
@@ -20,14 +18,11 @@ Page({
    */
   onLoad: function (options) {
     var self = this;
-    this.data.token = wx.getStorageSync('guid');
-    this.data.weixin = wx.getStorageSync('weChatInfo');
     wx.getSystemInfo({
       success: function (res) {
         self.setData({
           scrollHeight: res.windowHeight
         });
-
       }
     })
   },
@@ -58,19 +53,20 @@ Page({
         password: that.data.accountPwd
       },
       sh: function (res) {
-        console.log(res);
-        that.setUser
+        if (res.result = "success"){
+          wx.setStorageSync('username', that.data.accountName);
+          wx.redirectTo({
+            url: '../index/index',
+          })
+        } else {
+          wx.showToast({
+            title: '用户名或密码错误',
+            icon: 'none'
+          })
+        }
+        
       }
     })
 
-  },
-  login: function (res) {
-    // wx.setStorageSync('id', res.id);
-    // wx.setStorageSync('name', res.name);
-  },
-  setUser: function (res) {
-    wx.navigateBack({
-      delta: 1
-    })
   }
 })

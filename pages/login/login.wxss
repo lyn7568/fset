@@ -17,6 +17,7 @@
 }
 .cloudimg{
   display:block;
+  width:100%;
 }  
 .middle{
   width:100%;

@@ -1,19 +1,12 @@
 // pages/gatewayAdmin/gatewayManage/gatewayManage.js
-// const common = require('../../../utils/common.js');
+const common = require('../../../utils/common.js');
+
 Page({
   /**
    * 页面的初始数据
    */
   data: {
-    listData: [
-      { "code": "电饭锅", "text": "回复的", "type": "发鬼地方" },
-      { "code": "电饭锅", "text": "回复的", "type": "发鬼地方" },
-      { "code": "电饭锅", "text": "回复的", "type": "发鬼地方" },
-      { "code": "电饭锅", "text": "回复的", "type": "发鬼地方" },
-      { "code": "电饭锅", "text": "回复的", "type": "发鬼地方" },
-      { "code": "电饭锅", "text": "回复的", "type": "发鬼地方" },
-      { "code": "电饭锅", "text": "回复的", "type": "发鬼地方" },
-    ],
+    listData: [],
     tableTh: {
       "one": "节点名称",
       "two": "节点地址"
@@ -49,14 +42,13 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    if (options.key) {
+    console.log(options)
       this.setData({
-        searchKeyword: options.key,
-        searchTmp: options.key
+        currendId: options.id
       });
-    }
     this.scrollLeftNav(0)
     this.switchChannel(0);
+    this.getCheckEsn()
     console.log(this.data)
   },
 
@@ -92,30 +84,40 @@ Page({
       loadingComplete: true,
       conList: [],
     });
-    this.search(targetChannelIndex);
+    // this.search(targetChannelIndex);
   },
-  search: function (index) {
+  getCheckEsn: function () {
     var that = this;
-    
-    // common.get({
-    //   url: url,
-    //   data: dataStr,
-    //   sh: function (res) {
-    //     var $info = res;
-    //     if ($info.length > 0) {
+    common.post({
+      url: '/equipmentManagement/getCheckEsn',
+      data: {
+        ip: this.currendId
+      },
+      sh: function (res) {
+        console.log(res)
+        if(res.data.relust==='success') {
           
-    //       that.watchobjFun($info, typeC, "conList", { num: 0 })
-    //     }
+        }else{
+          wx.showToast({
+            title: res.data.result,
+            icon: 'none'
+          })
+        }
+        var $info = res;
+        // if ($info.length > 0) {
+          
+        //   that.watchobjFun($info, typeC, "conList", { num: 0 })
+        // }
 
-    //     if ($info.length < rows) {
-    //       that.setData({
-    //         loadingModalHide: true,
-    //         loadingComplete: false,
-    //       })
-    //     }
+        // if ($info.length < rows) {
+        //   that.setData({
+        //     loadingModalHide: true,
+        //     loadingComplete: false,
+        //   })
+        // }
 
-    //   }
-    // })
+      }
+    })
   },
   keywordSearch: function (e) {
     // console.log(e)
@@ -146,7 +148,7 @@ Page({
       that.setData({
         isFormSearch: false  //触发到上拉事件，把isFromSearch设为为false
       });
-      that.search(this.data.currentChannelIndex);
+      // that.search(this.data.currentChannelIndex);
     }
   },
   tapMove: function (e) {

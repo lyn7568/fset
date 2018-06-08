@@ -1,7 +1,0 @@
-var temUrl = 'http://192.168.3.233:81';
-//  var temUrl = 'http://www.ekexiu.com';
-
-
-module.exports = {
-  temUrl: temUrl,
-}

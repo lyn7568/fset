@@ -14,7 +14,7 @@
   width: 65%;
   margin: 1.5em auto;
   line-height: 1.6em;
-  font-size: 14px;
+  font-size: 28rpx;
   text-align: center;
 }
 .weui-loadmore__tips {
@@ -47,6 +47,7 @@
 /* table bind */
 .table {
   border: 0px solid darkgray;
+  font-size:32rpx;
 }
  .table .scroll-tbody {padding-top:100rpx} 
 .tr {
@@ -122,3 +123,21 @@
 .manage-btn{
   background-color: rgba(0,124,185,.6);
 }
+
+
+
+/* Citypick */
+/*选择器*/
+.selectorCity{ width: 100%; position: fixed; bottom: 0; left: 0; z-index: 999999}
+.selectorCity .inner_box{ position: relative; z-index: 999999}
+.selectorCity .header_box{ padding: 25rpx 0; overflow: hidden; box-sizing: border-box; background: white;}
+.selectorCity .header_box .item{ float: left; font-size: 34rpx; color: black; box-sizing: border-box;}
+.selectorCity .header_box .l{ width: 50%; padding-left: 25rpx;}
+/*.selectorCity .header_box .c{ width: 50%; text-align: center}*/
+.selectorCity .header_box .r{ width: 50%; text-align: right; padding-right: 25rpx;}
+.selectorCity .selected{ height: 90rpx;}
+.selectorCity .picker_box{ width: 100%; height: 485rpx; background: #fff;}
+.selectorCity .picker_box picker-view-column{ text-align: center;}
+.selectorCity .picker_box picker-view-column view{ line-height: 90rpx;}
+
+.selectorCity .layer{ width: 100%; height: 100%; position: fixed; left: 0; top: 0; z-index: 10; background:rgba(0,0,0,0.5); }

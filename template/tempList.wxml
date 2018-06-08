@@ -20,22 +20,22 @@
 
 <!-- city select -->
 <template name="areaPicker">
-	<picker-view class="picker-view" indicator-style="height: 50px;" style="width: 100%; height: 300px;" value="{{value}}" bindchange="bindChange">
-		<picker-view-column>
-			<view wx:for="{{provinceData}}" wx:key="code" class="addr-item">{{item.fullNameDot}}</view>
-		</picker-view-column>
-		<picker-view-column>
-			<view wx:for="{{cityData}}" wx:key="code" class="addr-item">{{item.fullNameDot}}</view>
-		</picker-view-column>
-		<picker-view-column wx:if="{{hideDistrict}}">
-			<view wx:for="{{districtData}}" wx:key="code" class="addr-item">{{item.fullNameDot}}</view>
-		</picker-view-column>
-	</picker-view>
+  <picker-view class="picker-view" indicator-style="height: 50px;" style="width: 100%; height: 300px;" value="{{value}}" bindchange="bindChange">
+    <picker-view-column>
+      <view wx:for="{{provinceData}}" wx:key="code" class="addr-item">{{item.fullNameDot}}</view>
+    </picker-view-column>
+    <picker-view-column>
+      <view wx:for="{{cityData}}" wx:key="code" class="addr-item">{{item.fullNameDot}}</view>
+    </picker-view-column>
+    <picker-view-column wx:if="{{hideDistrict}}">
+      <view wx:for="{{districtData}}" wx:key="code" class="addr-item">{{item.fullNameDot}}</view>
+    </picker-view-column>
+  </picker-view>
 </template>
 
 <!-- table show-->
 <template name="tableModel">
-	<view class="table">
+  <!-- <view class="table">
       <view class="tr bg-w">
         <view class="th">{{th.one}}</view>
         <view class="th">{{th.two}}</view>
@@ -43,15 +43,40 @@
       <scroll-view scroll-y="true" bindscrolltolower="searchScrollLower" lower-threshold="50" class="scroll-tbody">
         <view class="touch-item {{item.isTouchMove ? 'touch-move-active' : ''}} {{index % 2 == 0 ? 'bg-g':'bg-w'}}" data-index="{{index}}" bindtouchstart="touchstart" bindtouchmove="touchmove" wx:for="{{listData}}" wx:key="">
           <view class="tr touch-content">
-            <view class="td">{{item.code}}</view>
-            <view class="td">{{item.text}}</view>
+            <view class="td">{{item.cl01}}</view>
+            <view class="td">{{item.cl02}}</view>
           </view>
           <view class="touch-btn">
-            <navigator class="btn-item detail-btn" url="/pages/gatewayAdmin/gatewayDetail/gatewayDetail?id={{index.code}}">详情</navigator>
-            <navigator class="btn-item manage-btn" url="/pages/gatewayAdmin/gatewayManage/gatewayManage?id={{index.code}}">节点</navigator>
+            <navigator class="btn-item detail-btn" url="/pages/gatewayAdmin/gatewayDetail/gatewayDetail?id={{item.cl02}}">详情</navigator>
+            <navigator class="btn-item manage-btn" url="/pages/gatewayAdmin/gatewayManage/gatewayManage?id={{item.cl02}}">节点</navigator>
           </view>
         </view>
         <template is="loadSty" data="{{isHideLoadMore:isHideLoadMore}}" />
       </scroll-view>
+    </view> -->
+</template>
+
+<template name="CityPick">
+  <view hidden="{{isCity}}" class="selectorCity">
+    <view class="inner_box">
+      <view class="header_box">
+        <view class="item l" data-act="cancel" data-mold="city" bindtap="ideChoice">取消</view>
+        <view class="item c"> </view>
+        <view class="item r" data-act="confirm" data-mold="city" bindtap="ideChoice">确定</view>
+      </view>
+
+      <picker-view class="picker_box" indicator-class="selected" value="{{cityValue}}" bindchange="cityChange">
+        <picker-view-column>
+          <view wx:for="{{provinces}}">{{item.name}}</view>
+        </picker-view-column>
+        <picker-view-column>
+          <view wx:for="{{citys}}">{{item.name}}</view>
+        </picker-view-column>
+        <picker-view-column>
+          <view wx:for="{{countys}}">{{item.name}}</view>
+        </picker-view-column>
+      </picker-view>
     </view>
+    <view class="layer"></view>
+  </view>
 </template>

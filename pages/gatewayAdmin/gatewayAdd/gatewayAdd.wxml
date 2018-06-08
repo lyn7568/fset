@@ -1,5 +1,6 @@
 <!--pages/gatewayAdmin/gatewayAdd/gatewayAdd.wxml-->
 <import src="/model/model.wxml" />
+<import src="/template/tempList.wxml" />
 
 <view class="weui-cells weui-cells_form">
   <view class="weui-cell">
@@ -7,7 +8,7 @@
       <text>设备地址</text>
     </view>
     <view class="weui-cell__ft">
-      <input class="weui-input" placeholder-class="phcolor" placeholder="请输入设备地址" />
+      <input class="weui-input" placeholder-class="phcolor" placeholder="请输入设备地址" bindblur="findIsSure" />
     </view>
   </view>
   <view class="weui-cell">
@@ -23,7 +24,7 @@
       <text>类型</text>
     </view>
     <view class="weui-cell__ft">
-      <input class="weui-input" placeholder-class="phcolor" placeholder="请输入设备类型" />
+      <input class="weui-input" placeholder-class="phcolorRedonly" placeholder="获取到的设备类型" value="{{typeS}}" disabled />
     </view>
   </view>
   <view class="weui-cell">
@@ -31,7 +32,7 @@
       <text>型号</text>
     </view>
     <view class="weui-cell__ft">
-      <input class="weui-input" placeholder-class="phcolor" placeholder="请输入设备型号" />
+      <input class="weui-input" placeholder-class="phcolorRedonly" placeholder="获取到的设备型号" value="{{typeX}}" disabled />
     </view>
   </view>
   <view class="weui-cell" bindtap="translate">
@@ -44,7 +45,8 @@
     <view class="weui-cell__ft" wx:else>
       {{cityholder}}
     </view>
-    <template is="areaData" data="{{...item}}" />
+    <!-- <template is="areaData" data="{{...item}}" /> -->
+    <template is="CityPick" />
   </view>
   <view class="weui-cell">
     <view class="weui-cell__bd">
@@ -57,6 +59,6 @@
 </view>
 
 <view class="weui-btn-area">
-  <button type="primary" disabled="{{disabled}}">确定</button>
-  <button type="default" disabled="{{disabled}}">取消</button>
+  <button type="primary" disabled="{{isfindSure?false:true}}" bindtap="addEquipment">确定</button>
+  <button type="default">取消</button>
 </view>

@@ -1,5 +1,7 @@
 // pages/gatewayAdmin/gatewayAdd/gatewayAdd.js
-var model = require('../../../model/model.js')
+var model = require('../../../model/model.js');
+const common = require('../../../utils/common.js');
+// const citypick = require('../../../template/tempList.js');
 
 var show = false;
 var item = {};
@@ -9,7 +11,14 @@ Page({
     item: {
       show: show
     },
-    cityholder:"请选择城市"
+    cityholder:"请选择城市",
+    isfindSure:false//设备是否存在
+  },
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function () {
+    this.username = wx.getStorageSync('username');
   },
   //生命周期函数--监听页面初次渲染完成
   onReady: function (e) {
@@ -35,20 +44,84 @@ Page({
       county: item.countys[item.value[2]].name
     });
   },
-  onReachBottom: function () {
+
+  findIsSure(e) {
+    console.log(e);
+    var that = this;
+    if (e.detail.value){
+      common.post({
+        url: '/android/equipmentManagement/findByIp',
+        data: {
+          ip: e.detail.value,
+          username: this.username
+        },
+        sh: function (res) {
+          console.log(res);
+          if (res.data.result === 'fail') {
+            wx.showToast({
+              title: '该设备已被注册',
+              icon: 'none'
+            })
+          } else {
+            that.setData({
+              nameS: e.detail.value
+            });
+            that.findEquipment(e.detail.value);
+          }
+        }
+      })
+    }
   },
-  nono: function () { }
+  findEquipment(ip) {
+    var that = this;
+    common.post({
+      url: '/equipmentManagement/findIp',
+      data: {
+        ip:ip
+      },
+      sh: function (res) {
+        console.log(res);
+        if(res.data.result === 'success'){
+          that.setData({
+            typeS: res.data.name_,
+            typeX: res.data.type_,
+            isfindSure: true
+          });
+        }else{
+          wx.showToast({
+            title: res.data.result,
+            icon: 'none'
+          })
+        }
+      }
+    })
+  },
+  addEquipment() {
+    var that = this;
+    common.post({
+      url: '/equipmentManagement/addEquit',
+      data: {
+        // eq_name: ,
+        // eq_id:,
+        // eq_type:that.typeX,
+        // jingwei:
+      },
+      sh: function (res) {
+        console.log(res);
+        if (res.data.result === 'success') {
+          wx.showToast({
+            title: '设备添加成功'
+          })
+          wx.redirectTo({
+            url: '../gatewayList/gatewayList',
+          })
+        } else {
+          wx.showToast({
+            title: res.data.result,
+            icon: 'none'
+          })
+        }
+      }
+    })
+  }
 })
-
-// import initAreaPicker, { getSelectedAreaData } from '../../../utils/areaPicker.js';
-
-// Page({
-//   onShow: () => {
-//     initAreaPicker({
-//       // hideDistrict: true, // 是否隐藏区县选择栏，默认显示
-//     });
-//   },
-//   getSelecedData() {
-//     console.table(getSelectedAreaData());
-//   }
-// });
