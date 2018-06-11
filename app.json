@@ -4,10 +4,11 @@
     "pages/logs/logs",
     "pages/login/login",
     "pages/gatewayAdmin/gatewayList/gatewayList",
-    "pages/gatewayAdmin/gatewayDetail/gatewayDetail",
-    "pages/gatewayAdmin/gatewayManage/gatewayManage",
     "pages/gatewayAdmin/gatewayAdd/gatewayAdd",
-    "pages/gatewayAdmin/gatewayUpdate/gatewayUpdate"
+    "pages/gatewayAdmin/gatewayUpdate/gatewayUpdate",
+    "pages/gatewayAdmin/gatewayManage/gatewayManage",
+    "pages/gatewayAdmin/gatewayDetailJd/gatewayDetailJd",
+    "pages/gatewayAdmin/gatewayManageJd/gatewayManageJd"
   ],
   "window":{
     "backgroundTextStyle":"dark",

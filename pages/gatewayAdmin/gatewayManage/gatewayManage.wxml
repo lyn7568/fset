@@ -9,7 +9,7 @@
 </view>
 <view class="containerr">
   <scroll-view class="navbar" scroll-x="{{true}}" scroll-left="{{scrollNavbarLeft}}">
-    <view class="navbar-item {{ navbarArray[item].type }}" id="{{item}}" wx:for="{{array}}" wx:key="array" catchtap="onTapNavbar">
+    <view class="navbar-item {{ navbarArray[item].active }}" id="{{item}}" wx:for="{{array}}" wx:key="array" catchtap="onTapNavbar">
       <view class="navbar-item-wrap"> {{navbarArray[item].text}}</view>
     </view>
   </scroll-view>
@@ -27,11 +27,10 @@
             <view class="td">{{item.cl02}}</view>
           </view>
           <view class="touch-btn">
-            <navigator class="btn-item detail-btn" url="/pages/gatewayAdmin/gatewayDetail/gatewayDetail?id={{item.cl02}}">详情</navigator>
-            <navigator class="btn-item manage-btn" url="/pages/gatewayAdmin/gatewayManage/gatewayManage?id={{item.cl02}}">节点</navigator>
+            <navigator class="btn-item detail-btn" url="/pages/gatewayAdmin/gatewayDetailJd/gatewayDetailJd?jdIp={{item.cl02}}&wgIp={{currendId}}">详情</navigator>
           </view>
         </view>
-        <template is="loadSty" data="{{isHideLoadMore:isHideLoadMore}}" />
+        <template is="loadSty" data="{{loadingModalHide:loadingModalHide,loadingComplete:loadingComplete}}" />
       </scroll-view>
     </view>
 </view>

@@ -52,7 +52,7 @@ Page({
       }
     })
   },
-  delSelf: function () {
+  delSelf: function (e) {
     wx.showModal({
       title: '提示',
       content: '确定要删除该设备吗?',
@@ -65,9 +65,9 @@ Page({
       }
     })
   },
-  updateSelf: function () {
+  updateSelf: function (e) {
     wx.navigateTo({
-      url: '/pages/gatewayAdmin/gatewayUpdate/gatewayUpdate'
+      url: '/pages/gatewayAdmin/gatewayUpdate/gatewayUpdate?id=' + e.target.dataset.ip
     })
   },
   getSelfMap: function () {

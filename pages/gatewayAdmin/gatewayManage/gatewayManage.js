@@ -14,21 +14,22 @@ Page({
     scrollTop: 100,
     navbarArray: [{
       text: '开关模块',
-      type: 'navbar-item-active'
+      active: 'navbar-item-active',
+      type:'kg'
     }, {
       text: '智能面板',
-      type:''
+      type:'znpanel'
     }, {
       text: '传感器模块',
-      type: ''
+      type: 'cgq'
     }, {
       text: '调光面板',
-      type: ''
+      type: 'tgpanel'
     }],
     array: [0, 1, 2, 3],
     currentChannelIndex: 0,
-    rows: 10,
-    conList: [],//所有内容列表
+    pagesize: 10,
+    pageno:1,
     searchKeyword: '',
     searchTmp: "",
     isFormSearch: true,
@@ -43,36 +44,22 @@ Page({
    */
   onLoad: function (options) {
     console.log(options)
-      this.setData({
-        currendId: options.id
-      });
-    this.scrollLeftNav(0)
+    this.setData({
+      currendId: options.id
+    });
     this.switchChannel(0);
-    this.getCheckEsn()
     console.log(this.data)
   },
 
   onTapNavbar: function (e) {
     this.switchChannel(parseInt(e.currentTarget.id));
-    this.scrollLeftNav(parseInt(e.currentTarget.id));
-  },
-  scrollLeftNav: function (tabid) {
-    // if (tabid > 2) {
-    //   this.setData({
-    //     scrollNavbarLeft: 300
-    //   })
-    // } else {
-    //   this.setData({
-    //     scrollNavbarLeft: 0
-    //   })
-    // }
   },
   switchChannel: function (targetChannelIndex) {
     let navbarArray = this.data.navbarArray;
     navbarArray.forEach((item, index, array) => {
-      item.type = '';
+      item.active = '';
       if (index == targetChannelIndex) {
-        item.type = 'navbar-item-active';
+        item.active = 'navbar-item-active';
       }
     });
     this.setData({
@@ -82,63 +69,68 @@ Page({
       isFormSearch: true,
       loadingModalHide: false,
       loadingComplete: true,
-      conList: [],
+      listData: [],
     });
-    // this.search(targetChannelIndex);
+    this.getJdList(targetChannelIndex);
   },
-  getCheckEsn: function () {
+  getJdList: function (index) {
     var that = this;
+    let navbarArray = this.data.navbarArray;
     common.post({
-      url: '/equipmentManagement/getCheckEsn',
+      url: '/equipmentManagement/getJdList',
       data: {
-        ip: this.currendId
+        page: '{\"curpage\":' + that.data.pageno + ',\"pagesize\":' + that.data.pagesize + ',\"sumcount\":null}',
+        values: '{\"pid\":\"' + that.data.currendId + '\",\"ip\":\"' + that.data.searchKeyword + '\",\"key\": \"cl02\",\"order\": \"asc\",\"type\": \"' + navbarArray[index].type + '\"}',
+        fields: '[]'
       },
       sh: function (res) {
-        console.log(res)
-        if(res.data.relust==='success') {
-          
-        }else{
-          wx.showToast({
-            title: res.data.result,
-            icon: 'none'
+        var $info = res.data.rows;
+        if ($info.length > 0) {
+          var parM = {};
+          var list = that.data.listData,
+            list1 = [];
+          that.data.isFormSearch ? list1 = $info : list1 = list.concat($info);
+          parM.listData = list1;
+          parM.loadingModalHide = false;
+          parM.loadingComplete = true;
+          if (list.length == list1.length) {
+            parM.loadingModalHide = true;
+            parM.loadingComplete = false;
+          }
+          if (list1.length < that.data.pagesize && that.data.isFormSearch) {
+            parM.loadingModalHide = true;
+            parM.loadingComplete = false;
+          }
+          that.setData(parM);
+        }
+        if ($info.length < that.data.pagesize) {
+          that.setData({
+            loadingModalHide: true,
+            loadingComplete: false,
           })
         }
-        var $info = res;
-        // if ($info.length > 0) {
-          
-        //   that.watchobjFun($info, typeC, "conList", { num: 0 })
-        // }
-
-        // if ($info.length < rows) {
-        //   that.setData({
-        //     loadingModalHide: true,
-        //     loadingComplete: false,
-        //   })
-        // }
-
       }
     })
   },
   keywordSearch: function (e) {
-    // console.log(e)
+     console.log(e)
     if (e.detail.value) {
       this.setData({
         isFormSearch: true,
         loadingModalHide: false,
         loadingComplete: true,
-        conList: [],
+        listData: [],
         searchKeyword: e.detail.value,
         searchTmp: e.detail.value
       });
-      this.search(this.data.currentChannelIndex);
+      this.getJdList(this.data.currentChannelIndex);
     } else {
       this.setData({
         searchKeyword: ""
       });
       wx.showToast({
-        title: '请输入关键词',
-        icon: 'none',
-        duration: 2000
+        title: '请输入节点地址',
+        icon: 'none'
       })
     }
   },
@@ -148,7 +140,7 @@ Page({
       that.setData({
         isFormSearch: false  //触发到上拉事件，把isFromSearch设为为false
       });
-      // that.search(this.data.currentChannelIndex);
+      that.getJdList(that.data.currentChannelIndex);
     }
   },
   tapMove: function (e) {
@@ -156,46 +148,6 @@ Page({
       scrollTop: this.data.scrollTop + 10
     })
   },
-  // watchobjFun: function (daStr, typeC, str, ref) {
-  //   var that = this,
-  //     rows = that.data.rows
-  //   if (typeC) {
-  //     queryInfo.queryAuthInfo(daStr, typeC, str, ref, function (that, param) {
-  //       var list = that.data[str],
-  //         list1 = []
-  //       that.data.isFormSearch ? list1 = daStr : list1 = list.concat(param[str]);
-  //       param[str] = list1;
-  //       param.loadingModalHide = false;
-  //       param.loadingComplete = true;
-  //       if (list.length == list1.length) {
-  //         param.loadingModalHide = true;
-  //         param.loadingComplete = false;
-  //       }
-  //       if (list1.length < rows && that.data.isFormSearch) {
-  //         param.loadingModalHide = true;
-  //         param.loadingComplete = false;
-  //       }
-  //       that.setData(param);
-  //     })
-  //   } else {
-  //     var parM = {};
-  //     var list = that.data[str],
-  //       list1 = [];
-  //     that.data.isFormSearch ? list1 = daStr : list1 = list.concat(daStr);
-  //     parM[str] = list1;
-  //     parM.loadingModalHide = false;
-  //     parM.loadingComplete = true;
-  //     if (list.length == list1.length) {
-  //       parM.loadingModalHide = true;
-  //       parM.loadingComplete = false;
-  //     }
-  //     if (list1.length < rows && that.data.isFormSearch) {
-  //       parM.loadingModalHide = true;
-  //       parM.loadingComplete = false;
-  //     }
-  //     that.setData(parM);
-  //   }
-  // },
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */

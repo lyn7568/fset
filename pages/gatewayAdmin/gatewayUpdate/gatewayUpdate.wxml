@@ -5,7 +5,7 @@
       <text>名称</text>
     </view>
     <view class="weui-cell__ft">
-      <input class="weui-input" placeholder-class="phcolor" placeholder="请输入设备名称" />
+      <input class="weui-input" type="text" value="{{nameS}}" />
     </view>
   </view>
   <view class="weui-cell select-option">
@@ -16,7 +16,7 @@
       </picker>
     </view>
     <view class="weui-cell__ft">
-      <input class="weui-input" placeholder="请输入经度" />
+      <input class="weui-input" type="text" value="{{jdS}}" />
     </view>
   </view>
   <view class="weui-cell select-option">
@@ -27,11 +27,11 @@
       </picker>
     </view>
     <view class="weui-cell__ft">
-      <input class="weui-input" placeholder="请输入纬度" />
+      <input class="weui-input" type="text" value="{{wdS}}" />
     </view>
   </view>
 </view>
 <view class="weui-btn-area">
-  <button type="primary" disabled="{{disabled}}">确定</button>
-  <button type="default" disabled="{{disabled}}">取消</button>
+  <button type="primary" bindtap="updateInfo">确定</button>
+  <button type="default" bindtap="cancelUpdateInfo">取消</button>
 </view>

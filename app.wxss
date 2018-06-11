@@ -91,3 +91,7 @@ button[disabled][type=primary] {
 .weui-picker__action{
   color:rgba(0,124,185,1)
 }
+
+/* 加载 */
+.loading{padding: 20rpx;text-align: center;font-size: 24rpx;color:#999;}
+.loading image{width:30rpx;height:30rpx;margin-right:6rpx;position:relative;top:6rpx;}

@@ -1,5 +1,4 @@
 <!--pages/gatewayAdmin/gatewayAdd/gatewayAdd.wxml-->
-<import src="/model/model.wxml" />
 <import src="/template/tempList.wxml" />
 
 <view class="weui-cells weui-cells_form">
@@ -35,18 +34,16 @@
       <input class="weui-input" placeholder-class="phcolorRedonly" placeholder="获取到的设备型号" value="{{typeX}}" disabled />
     </view>
   </view>
-  <view class="weui-cell" bindtap="translate">
+  <view class="weui-cell" catchtap="sureAction">
     <view class="weui-cell__bd">
       <text>位置</text>
     </view>
-    <view class="weui-cell__ft" wx:if='{{province || city || county}}'>
-      {{province}} {{city}} {{county}}
+    <view class="weui-cell__ft" wx-if="{{cityText}}">
+      {{cityText}}
     </view>
-    <view class="weui-cell__ft" wx:else>
+     <view class="weui-cell__ft" wx:else>
       {{cityholder}}
     </view>
-    <!-- <template is="areaData" data="{{...item}}" /> -->
-    <template is="CityPick" />
   </view>
   <view class="weui-cell">
     <view class="weui-cell__bd">
@@ -62,3 +59,5 @@
   <button type="primary" disabled="{{isfindSure?false:true}}" bindtap="addEquipment">确定</button>
   <button type="default">取消</button>
 </view>
+
+<template is="CityPick" data="{{isCity:isCity,cityValue:cityValue,provinces:provinces,citys:citys,countys:countys}}" /> 

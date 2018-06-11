@@ -1,2 +1,2 @@
 /* pages/gatewayAdmin/gatewayAdd/gatewayAdd.wxss */
- @import '../../../model/model.wxss' 
+ @import '../../../template/tempList.wxss';
