@@ -44,7 +44,7 @@
   <view class="modal-title">修改节点名称</view>
   <view class="modal-content">
     <view class="modal-input">
-      <input type="text" class="input" value="{{listData.cl01}}"></input>
+      <input type="text" class="input" bindinput="tapName" value="{{nameS}}"></input>
     </view>
   </view>
   <view class="modal-footer">

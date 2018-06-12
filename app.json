@@ -8,7 +8,8 @@
     "pages/gatewayAdmin/gatewayUpdate/gatewayUpdate",
     "pages/gatewayAdmin/gatewayManage/gatewayManage",
     "pages/gatewayAdmin/gatewayDetailJd/gatewayDetailJd",
-    "pages/gatewayAdmin/gatewayManageJd/gatewayManageJd"
+    "pages/gatewayAdmin/gatewayManageJd/gatewayManageJd",
+    "pages/getLocationMap/getLocationMap"
   ],
   "window":{
     "backgroundTextStyle":"dark",

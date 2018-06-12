@@ -43,7 +43,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(options)
     this.setData({
       currendId: options.id
     });
@@ -75,6 +74,10 @@ Page({
   },
   getJdList: function (index) {
     var that = this;
+    wx.showLoading({
+      title: '加载中',
+      mask: true
+    })
     let navbarArray = this.data.navbarArray;
     common.post({
       url: '/equipmentManagement/getJdList',
@@ -84,6 +87,8 @@ Page({
         fields: '[]'
       },
       sh: function (res) {
+        wx.hideLoading()
+        console.log(res)
         var $info = res.data.rows;
         if ($info.length > 0) {
           var parM = {};

@@ -5,7 +5,7 @@
       <text>名称</text>
     </view>
     <view class="weui-cell__ft">
-      <input class="weui-input" type="text" value="{{nameS}}" />
+      <input class="weui-input" type="text" bindinput="tapName" value="{{nameS}}" />
     </view>
   </view>
   <view class="weui-cell select-option">
@@ -16,7 +16,7 @@
       </picker>
     </view>
     <view class="weui-cell__ft">
-      <input class="weui-input" type="text" value="{{jdS}}" />
+      <input class="weui-input" type="text" value="{{jdS}}" bindinput="tapJds"/>
     </view>
   </view>
   <view class="weui-cell select-option">
@@ -27,7 +27,7 @@
       </picker>
     </view>
     <view class="weui-cell__ft">
-      <input class="weui-input" type="text" value="{{wdS}}" />
+      <input class="weui-input" type="text" value="{{wdS}}" bindinput="tapWds"/>
     </view>
   </view>
 </view>

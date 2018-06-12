@@ -9,7 +9,7 @@
     </view>
     <view class="weui-cell__ft left-arrow"></view>
   </navigator>
-  <picker bindchange="bindCasPickerChange" value="{{casIndex}}" data-casid="{{casArray[casIndex].id}}" range="{{casArray}}" range-key="{{'mc'}}">
+  <picker bindchange="bindCasPickerChange" value="{{casIndex}}" range="{{casArray}}" range-key="{{'mc'}}">
     <view class="weui-cell">
       <view class="weui-cell__bd">
         <text>选择设备</text>

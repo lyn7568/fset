@@ -73,6 +73,10 @@ Page({
   findIsSure(e) {
     console.log(e);
     var that = this;
+    wx.showLoading({
+      title: '设备搜索中',
+      mask: true
+    })
     if (e.detail.value){
       common.post({
         url: '/android/equipmentManagement/findByIp',
@@ -82,6 +86,7 @@ Page({
         },
         sh: function (res) {
           console.log(res);
+          wx.hideLoading()
           if (res.data.result === 'fail') {
             wx.showToast({
               title: '该设备已被注册',

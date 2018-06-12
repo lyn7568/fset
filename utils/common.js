@@ -24,11 +24,27 @@ const post = function (param) {
     success: function (res) {
       if (res.statusCode === 200) {
           sh(res);
-      } else {
-        if (eh) eh(res.statusCode);
+      }else{
+        if (res.statusCode === 403) {
+          wx.showToast({
+            title: '对不起，您没有操作权限，请联系管理员',
+            icon: 'none'
+          })
+        } else if (res.statusCode === 500) {
+          wx.showToast({
+            title: '服务器响应失败，请重试',
+            icon: 'none'
+          })
+        }else{
+          if (eh) eh(res.statusCode);
+        }
       }
     },
     fail: function (res) {
+      wx.showToast({
+        title: '服务器响应失败，请重试',
+        icon: 'none'
+      });
       if (fh) fh(res);
     },
     complete: function (res) {

@@ -38,7 +38,6 @@ Page({
     })
   },
   bindLatitude: function (e) {
-    console.log(this.data.latitude[e.detail.value])
     if (e.detail.value == 4) {
       this.setData({ replyT: true })
     } else {
@@ -88,6 +87,21 @@ Page({
       }
     })
   },
+  tapName: function (e) {
+    this.setData({
+      nameS: e.detail.value
+    })
+  },
+  tapJds: function (e) {
+    this.setData({
+      jdS: e.detail.value
+    })
+  },
+  tapWds: function (e) {
+    this.setData({
+      wdS: e.detail.value
+    })
+  },
   updateInfo(){
     var that = this;
     wx.showLoading({
@@ -106,17 +120,16 @@ Page({
         username: that.username
       },
       sh: function (res) {
-        console.log(res)
-        if (res.data.relust === 'success') {
-          wx.hideLoading()
-          wx.showToast({
-            title: '设备信息修改成功'
-          })
+        wx.hideLoading()
+        if (res.data.result === 'success') {
           wx.navigateBack({
             delta: 1
           })
+          wx.showToast({
+            title: '信息修改成功',
+            icon: 'success'
+          })
         } else {
-          wx.hideLoading()
           wx.showToast({
             title: res.data.result,
             icon: 'none'

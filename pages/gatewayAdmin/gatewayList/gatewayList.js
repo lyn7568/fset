@@ -4,14 +4,16 @@ const common = require('../../../utils/common.js');
 Page({
   data: {
     casArray: [],
-    casId:'',
     casIndex: 0,
-    listData: {}
+    listData: ''
   },
   onLoad: function () {
     this.username = wx.getStorageSync('username');
     this.getCasArray();
     console.log(this.data);
+  },
+  onShow: function () {
+    this.getCasArray();
   },
   getCasArray:function(){
     var that = this;
@@ -22,23 +24,26 @@ Page({
       },
       sh: function (res) {
         that.setData({
-          casArray: res.data[0].name,
-          casId: res.data[0].name[0].id
+          listData:'',
+          casArray: res.data[0].name
         })
         that.getListData(res.data[0].name[0].id);
       }
     })
   },
   bindCasPickerChange: function (e) {
-    console.log(e)
     this.setData({
-      casIndex: e.detail.value,
-      casId: e.target.dataset.casid
+      casIndex: e.detail.value
     })
-    this.getListData(e.target.dataset.casid);
+    let selectId = this.data.casArray[e.detail.value].id;
+    this.getListData(selectId);
   },
   getListData(id){
     var that = this;
+    wx.showLoading({
+      title: '加载中',
+      mask: true
+    })
     common.post({
       url: '/android/equipmentManagement/equipmentList',
       data: {
@@ -46,6 +51,7 @@ Page({
         username: this.username
       },
       sh: function (res) {
+        wx.hideLoading()
         that.setData({
           listData: res.data[0]
         })
@@ -71,11 +77,51 @@ Page({
     })
   },
   getSelfMap: function () {
-
+    var that = this;
+    if (that.data.listData.cl06){
+      let jwd = that.data.listData.cl06.split(',');
+      let jdS = '', wdS = '';
+      if (jwd[0] >= 0) {
+        jdS = jwd[0];
+      } else {
+        jdS = jwd[0].substring(1, jwd[0].length())
+      }
+      if (jwd[1] >= 0) {
+        wdS = jwd[1]
+      } else {
+        wdS = jwd[1].substring(1, jwd[1].length())
+      }
+      wx.navigateTo({
+        url: '/pages/getLocationMap/getLocationMap?jdS=' + jdS + '&wdS=' + wdS
+      })
+    }
   },
   goToJiedian: function (e) {
-    wx.navigateTo({
-      url: '/pages/gatewayAdmin/gatewayManage/gatewayManage?id=' + e.target.dataset.ip
+    let jieDianIp = e.target.dataset.ip
+    var that = this;
+    wx.showLoading({
+      title: '加载中',
+      mask: true
     })
+    // common.post({
+    //   url: '/equipmentManagement/getCheckEsn',
+    //   data: {
+    //     ip: jieDianIp
+    //   },
+    //   sh: function (res) {
+    //     console.log(res)
+    //     wx.hideLoading()
+    //     if (res.data.result === 'success') {
+          wx.navigateTo({
+            url: '/pages/gatewayAdmin/gatewayManage/gatewayManage?id=' + jieDianIp
+          })
+    //     } else {
+    //       wx.showToast({
+    //         title: res.data.result,
+    //         icon: 'none'
+    //       })
+    //     }
+    //   }
+    // })
   }
 })

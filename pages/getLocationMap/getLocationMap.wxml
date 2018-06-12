@@ -1,0 +1,10 @@
+<!--pages/getLocationMap/getLocationMap.wxml-->
+  <map
+    id="myMap"
+    style="width: 100%; height:{{height}}px;"
+    latitude="{{latitude}}"
+    longitude="{{longitude}}"
+    markers="{{markers}}"
+    covers="{{covers}}"
+    show-location
+  ></map>

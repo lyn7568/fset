@@ -8,6 +8,7 @@ const common = require('../../utils/common.js');
 
 Page({
   data: {
+    height: 'auto',
     motto: 'Hello World',
     userInfo: {},
     hasUserInfo: false,
@@ -30,7 +31,15 @@ Page({
     }]
   },
   onLoad: function () {
+    var that = this
     common.firstInit.init(); //初始化
+    wx.getSystemInfo({
+      success: function (res) {
+        that.setData({
+          height: res.windowHeight
+        })
+      }
+    })
   },
   quitFset:function(){
     wx.removeStorageSync('username');

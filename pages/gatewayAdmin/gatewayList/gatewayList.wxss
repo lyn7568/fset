@@ -27,3 +27,12 @@
   color:#FFFFFF;
    background-color:rgba(0,124,185,1);
 }
+
+.weui-form-preview{
+  background-color: #ffffff;
+} 
+
+button{
+  border-radius:0;
+  background-color: #ffffff;
+}
