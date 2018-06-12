@@ -27,7 +27,7 @@ Page({
           listData:'',
           casArray: res.data[0].name
         })
-        that.getListData(res.data[0].name[0].id);
+        that.getCheckEsn(res.data[0].name[0].id);
       }
     })
   },
@@ -36,14 +36,27 @@ Page({
       casIndex: e.detail.value
     })
     let selectId = this.data.casArray[e.detail.value].id;
-    this.getListData(selectId);
+    this.getCheckEsn(selectId);
   },
-  getListData(id){
+  getCheckEsn(id){
     var that = this;
     wx.showLoading({
       title: '加载中',
       mask: true
     })
+    common.post({
+      url: '/equipmentManagement/getCheckEsn',
+      data: {
+        ip: id
+      },
+      sh: function (res) {
+        wx.hideLoading()
+        that.getListData(id);
+      }
+    })
+  },
+  getListData(id){
+    var that = this;
     common.post({
       url: '/android/equipmentManagement/equipmentList',
       data: {
@@ -51,7 +64,6 @@ Page({
         username: this.username
       },
       sh: function (res) {
-        wx.hideLoading()
         that.setData({
           listData: res.data[0]
         })
@@ -98,30 +110,8 @@ Page({
   },
   goToJiedian: function (e) {
     let jieDianIp = e.target.dataset.ip
-    var that = this;
-    wx.showLoading({
-      title: '加载中',
-      mask: true
+    wx.navigateTo({
+      url: '/pages/gatewayAdmin/gatewayManage/gatewayManage?id=' + jieDianIp
     })
-    // common.post({
-    //   url: '/equipmentManagement/getCheckEsn',
-    //   data: {
-    //     ip: jieDianIp
-    //   },
-    //   sh: function (res) {
-    //     console.log(res)
-    //     wx.hideLoading()
-    //     if (res.data.result === 'success') {
-          wx.navigateTo({
-            url: '/pages/gatewayAdmin/gatewayManage/gatewayManage?id=' + jieDianIp
-          })
-    //     } else {
-    //       wx.showToast({
-    //         title: res.data.result,
-    //         icon: 'none'
-    //       })
-    //     }
-    //   }
-    // })
   }
 })
