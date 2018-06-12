@@ -2,6 +2,7 @@
   <map
     id="myMap"
     style="width: 100%; height:{{height}}px;"
+    v-if="{{markers}}"
     latitude="{{latitude}}"
     longitude="{{longitude}}"
     markers="{{markers}}"

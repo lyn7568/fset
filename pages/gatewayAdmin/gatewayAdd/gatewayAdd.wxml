@@ -7,7 +7,7 @@
         <text>设备地址</text>
       </view>
       <view class="weui-cell__ft">
-        <input class="weui-input" placeholder-class="phcolor" placeholder="请输入设备地址" bindblur="findIsSure" />
+        <input class="weui-input" placeholder-class="phcolor" placeholder="请输入设备地址" value="{{eqIp}}" bindblur="findIsSure" />
       </view>
     </view>
     <view class="weui-cell">
@@ -15,7 +15,7 @@
         <text>名称</text>
       </view>
       <view class="weui-cell__ft">
-        <input class="weui-input" placeholder-class="phcolor" placeholder="请输入设备名称" />
+        <input class="weui-input" placeholder-class="phcolor" placeholder="请输入设备名称" value="{{eqName}}" bindinput="getEqName" />
       </view>
     </view>
     <view class="weui-cell">
@@ -45,19 +45,19 @@
         {{cityholder}}
       </view>
     </view>
-    <view class="weui-cell">
+    <!-- <view class="weui-cell">
       <view class="weui-cell__bd">
         <text>位置经纬</text>
       </view>
       <view class="weui-cell__ft">
         <input class="weui-input" placeholder-class="phcolor" placeholder="请输入位置经纬" />
       </view>
-    </view>
+    </view> -->
   </view>
 
   <view class='margintop2'>
     <button type="primary" disabled="{{isfindSure?false:true}}" bindtap="addEquipment">确定</button>
-    <button class='margintop' type="default">取消</button>
+    <button class='margintop' type="default" bindtap="cacelAdd">取消</button>
   </view>
 </view>
 <template is="CityPick" data="{{isCity:isCity,cityValue:cityValue,provinces:provinces,citys:citys,countys:countys}}" /> 

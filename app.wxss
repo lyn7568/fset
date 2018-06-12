@@ -62,6 +62,9 @@ button{
   right: 28rpx;
 }
 
+.weui-form-preview__btn_warn{
+  color:#E64340;
+}
 .margintop{
   margin-top:30rpx
 }

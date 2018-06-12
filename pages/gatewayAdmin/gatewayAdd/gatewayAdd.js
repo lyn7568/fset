@@ -67,25 +67,24 @@ Page({
     this.setData({
       cityValue: this.data.cityValue
     });
-
     this.username = wx.getStorageSync('username');
+    console.log(this.data)
   },
   findIsSure(e) {
-    console.log(e);
+    var epid = e.detail.value
     var that = this;
     wx.showLoading({
       title: '设备搜索中',
       mask: true
     })
-    if (e.detail.value){
+    if (epid){
       common.post({
         url: '/android/equipmentManagement/findByIp',
         data: {
-          ip: e.detail.value,
+          ip: epid,
           username: this.username
         },
         sh: function (res) {
-          console.log(res);
           wx.hideLoading()
           if (res.data.result === 'fail') {
             wx.showToast({
@@ -93,10 +92,10 @@ Page({
               icon: 'none'
             })
           } else {
+            that.findEquipment(epid);
             that.setData({
-              nameS: e.detail.value
+              eqIp: epid
             });
-            that.findEquipment(e.detail.value);
           }
         }
       })
@@ -110,11 +109,11 @@ Page({
         ip:ip
       },
       sh: function (res) {
-        console.log(res);
         if(res.data.result === 'success'){
           that.setData({
-            typeS: res.data.name_,
-            typeX: res.data.type_,
+            typeS: res.data.data.name_,
+            typeX: res.data.data.type_,
+            typeN: res.data.data.type,
             isfindSure: true
           });
         }else{
@@ -126,15 +125,35 @@ Page({
       }
     })
   },
+  getEqName(e){
+    this.setData({
+      eqName: e.detail.value
+    })
+  },
   addEquipment() {
     var that = this;
+    if (!that.data.eqName){
+      wx.showToast({
+        title: '设备名称不能为空',
+        icon:'none'
+      })
+      return
+    }
+    if (!that.data.cityText) {
+      wx.showToast({
+        title: '位置不能为空',
+        icon: 'none'
+      })
+      return
+    }
     common.post({
-      url: '/equipmentManagement/addEquit',
+      url: '/android/equipmentManagement/addEquit',
       data: {
-        // eq_name: ,
-        // eq_id:,
-        // eq_type:that.typeX,
-        // jingwei:
+        eq_id:that.data.eqIp,
+        eq_name: that.data.eqName,
+        eq_type: that.data.typeN,
+        jingwei:that.data.cityText,
+        username: that.username
       },
       sh: function (res) {
         console.log(res);
@@ -142,8 +161,8 @@ Page({
           wx.showToast({
             title: '设备添加成功'
           })
-          wx.redirectTo({
-            url: '../gatewayList/gatewayList',
+          wx.navigateBack({
+            delta: 1
           })
         } else {
           wx.showToast({
@@ -152,6 +171,11 @@ Page({
           })
         }
       }
+    })
+  },
+  cacelAdd(){
+    wx.navigateBack({
+      delta: 1
     })
   },
 //citypick
@@ -163,7 +187,6 @@ Page({
   },
   sureActionLayer: function () {
     var that = this;
-    console.log(111)
     that.setData({
       isCity: true
     })
@@ -231,7 +254,7 @@ Page({
       cityName = city_s[t[1]].name;
       countyName = county_s[t[2]].name;
 
-      that.cityText = provinceName + '-' + cityName + '-' + countyName
+      that.cityText = provinceName  + cityName + countyName
       that.cityCode = province_id + '-' + city_id + '-' + county_id
       that.setData({
         cityText: that.cityText,

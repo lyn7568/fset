@@ -1,8 +1,4 @@
 /* pages/gatewayAdmin/gatewayDetail/gatewayDetail.wxss */
-.weui-form-preview__btn_warn{
-  color:#E64340;
-}
-
 
 /* showModal */
 .modal-mask {

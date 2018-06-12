@@ -9,11 +9,13 @@ Page({
   },
   onLoad: function () {
     this.username = wx.getStorageSync('username');
-    this.getCasArray();
-    console.log(this.data);
   },
   onShow: function () {
+    this.setData({
+      casIndex: 0
+    })
     this.getCasArray();
+    console.log(this.data);
   },
   getCasArray:function(){
     var that = this;
@@ -93,16 +95,8 @@ Page({
     if (that.data.listData.cl06){
       let jwd = that.data.listData.cl06.split(',');
       let jdS = '', wdS = '';
-      if (jwd[0] >= 0) {
-        jdS = jwd[0];
-      } else {
-        jdS = jwd[0].substring(1, jwd[0].length())
-      }
-      if (jwd[1] >= 0) {
-        wdS = jwd[1]
-      } else {
-        wdS = jwd[1].substring(1, jwd[1].length())
-      }
+      jdS = jwd[0];
+      wdS = jwd[1];
       wx.navigateTo({
         url: '/pages/getLocationMap/getLocationMap?jdS=' + jdS + '&wdS=' + wdS + '&wgip=' + e.target.dataset.ip
       })
