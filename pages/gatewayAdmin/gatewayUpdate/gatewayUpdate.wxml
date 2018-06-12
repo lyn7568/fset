@@ -1,37 +1,40 @@
 <!--pages/gatewayAdmin/gatewayUpdate/gatewayUpdate.wxml-->
-<view class="weui-cells">
-  <view class="weui-cell">
-    <view class="weui-cell__bd">
-      <text>名称</text>
+<view class="mainbody">
+  <view class="weui-cells">
+    <view class="weui-cell">
+      <view class="weui-cell__bd">
+        <text>名称</text>
+      </view>
+      <view class="weui-cell__ft">
+        <input class="weui-input" type="text" bindinput="tapName" value="{{nameS}}" />
+      </view>
     </view>
-    <view class="weui-cell__ft">
-      <input class="weui-input" type="text" bindinput="tapName" value="{{nameS}}" />
+    <view class="weui-cell select-option">
+      <view class="weui-cell__hd">
+        <picker class="options" bindchange="bindLongitude" value="{{longitudeIndex}}" range="{{longitude}}">
+          <text>{{longitude[longitudeIndex]}}</text>
+          <view class="left-arrow"></view>
+        </picker>
+      </view>
+      <view class="weui-cell__ft">
+        <input class="weui-input" type="text" value="{{jdS}}" bindinput="tapJds"/>
+      </view>
+    </view>
+    <view class="weui-cell select-option">
+      <view class="weui-cell__hd">
+        <picker class="options" bindchange="bindLatitude" value="{{latitudeIndex}}" range="{{latitude}}">
+          <text>{{latitude[latitudeIndex]}}</text>
+          <view class="left-arrow"></view>
+        </picker>
+      </view>
+      <view class="weui-cell__ft">
+        <input class="weui-input" type="text" value="{{wdS}}" bindinput="tapWds"/>
+      </view>
     </view>
   </view>
-  <view class="weui-cell select-option">
-    <view class="weui-cell__hd">
-      <picker class="options" bindchange="bindLongitude" value="{{longitudeIndex}}" range="{{longitude}}">
-        <text>{{longitude[longitudeIndex]}}</text>
-        <view class="left-arrow"></view>
-      </picker>
-    </view>
-    <view class="weui-cell__ft">
-      <input class="weui-input" type="text" value="{{jdS}}" bindinput="tapJds"/>
-    </view>
-  </view>
-  <view class="weui-cell select-option">
-    <view class="weui-cell__hd">
-      <picker class="options" bindchange="bindLatitude" value="{{latitudeIndex}}" range="{{latitude}}">
-        <text>{{latitude[latitudeIndex]}}</text>
-        <view class="left-arrow"></view>
-      </picker>
-    </view>
-    <view class="weui-cell__ft">
-      <input class="weui-input" type="text" value="{{wdS}}" bindinput="tapWds"/>
-    </view>
+  <view class="margintop2">
+    <button type="primary" bindtap="updateInfo">确定</button>
+    <button class="margintop" type="default" bindtap="cancelUpdateInfo">取消</button>
   </view>
 </view>
-<view class="weui-btn-area">
-  <button type="primary" bindtap="updateInfo">确定</button>
-  <button type="default" bindtap="cancelUpdateInfo">取消</button>
-</view>
+<template is="foot" />

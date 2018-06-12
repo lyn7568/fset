@@ -1,70 +1,70 @@
 <!--pages/gatewayAdmin/gatewayList/gatewayList.wxml-->
 <import src="/template/tempList.wxml" />
 
-
-<view class="weui-cells">
-  <navigator url="/pages/gatewayAdmin/gatewayAdd/gatewayAdd" class="weui-cell weui-cell_access">
-    <view class="weui-cell__bd">
-      <text>添加设备</text>
-    </view>
-    <view class="weui-cell__ft left-arrow"></view>
-  </navigator>
-  <picker bindchange="bindCasPickerChange" value="{{casIndex}}" range="{{casArray}}" range-key="{{'mc'}}">
-    <view class="weui-cell">
+<view class="mainbody">
+  <view class="weui-cells">
+    <navigator url="/pages/gatewayAdmin/gatewayAdd/gatewayAdd" class="weui-cell weui-cell_access">
       <view class="weui-cell__bd">
-        <text>选择设备</text>
+        <text>添加设备</text>
       </view>
-      <view class="weui-cell__ft">
-        <view>
-          <text>{{casArray[casIndex].mc}}</text>
+      <view class="weui-cell__ft left-arrow"></view>
+    </navigator>
+    <picker bindchange="bindCasPickerChange" value="{{casIndex}}" range="{{casArray}}" range-key="{{'mc'}}">
+      <view class="weui-cell">
+        <view class="weui-cell__bd">
+          <text>选择设备</text>
+        </view>
+        <view class="weui-cell__ft">
+          <view>
+            <text>{{casArray[casIndex].mc}}</text>
+          </view>
         </view>
       </view>
-    </view>
-  </picker>
-</view>
+    </picker>
+  </view>
 
-<view class="weui-cells margintop">
-  <view class="weui-cell">
-    <view class="weui-cell__bd">
-      <text>设备名称</text>
+  <view class="weui-cells margintop">
+    <view class="weui-cell">
+      <view class="weui-cell__bd">
+        <text>设备名称</text>
+      </view>
+      <view class="weui-cell__ft">{{listData.cl01}}</view>
     </view>
-    <view class="weui-cell__ft">{{listData.cl01}}</view>
+    <view class="weui-cell">
+      <view class="weui-cell__bd">
+        <text>设备地址</text>
+      </view>
+      <view class="weui-cell__ft">{{listData.cl02}}</view>
+    </view>
+    <view class="weui-cell">
+      <view class="weui-cell__bd">
+        <text>设备类型</text>
+      </view>
+      <view class="weui-cell__ft">{{listData.cl03}}</view>
+    </view>
+    <view class="weui-cell">
+      <view class="weui-cell__bd">
+        <text>设备型号</text>
+      </view>
+      <view class="weui-cell__ft">{{listData.cl04}}</view>
+    </view>
+    <view class="weui-cell">
+      <view class="weui-cell__bd">
+        <text>设备状态</text>
+      </view>
+      <view class="weui-cell__ft">{{listData.cl05}}</view>
+    </view>
+    <view class="weui-form-preview">
+      <view class="weui-form-preview__ft">
+        <button class="weui-form-preview__btn weui-form-preview__btn_default" data-ip="{{listData.cl02}}" bindtap="getSelfMap">位置</button>
+        <button type="submit" data-ip="{{listData.cl02}}" class="weui-form-preview__btn weui-form-preview__btn_primary" bindtap="updateSelf">编辑</button>
+        <button type="submit" class="weui-form-preview__btn weui-form-preview__btn_warn" data-ip="{{listData.cl02}}" bindtap="delSelf">删除</button>
+      </view>
+    </view>
   </view>
-  <view class="weui-cell">
-    <view class="weui-cell__bd">
-      <text>设备地址</text>
-    </view>
-    <view class="weui-cell__ft">{{listData.cl02}}</view>
-  </view>
-  <view class="weui-cell">
-    <view class="weui-cell__bd">
-      <text>设备类型</text>
-    </view>
-    <view class="weui-cell__ft">{{listData.cl03}}</view>
-  </view>
-  <view class="weui-cell">
-    <view class="weui-cell__bd">
-      <text>设备型号</text>
-    </view>
-    <view class="weui-cell__ft">{{listData.cl04}}</view>
-  </view>
-  <view class="weui-cell">
-    <view class="weui-cell__bd">
-      <text>设备状态</text>
-    </view>
-    <view class="weui-cell__ft">{{listData.cl05}}</view>
-  </view>
-  <view class="weui-form-preview">
-    <view class="weui-form-preview__ft">
-      <button class="weui-form-preview__btn weui-form-preview__btn_default" bindtap="getSelfMap">位置</button>
-      <button type="submit" data-ip="{{listData.cl02}}" class="weui-form-preview__btn weui-form-preview__btn_primary" bindtap="updateSelf">编辑</button>
-      <button type="submit" class="weui-form-preview__btn weui-form-preview__btn_warn" bindtap="delSelf">删除</button>
-    </view>
+
+  <view class="weui-cells margintop2">
+      <button class="jd_btn" data-ip="{{listData.cl02}}" bindtap="goToJiedian">设备节点</button>
   </view>
 </view>
-
-<view class="weui-cells margintop2">
-    <button class="jd_btn" data-ip="{{listData.cl02}}" bindtap="goToJiedian">设备节点</button>
-</view>
-
 <template is="foot" />

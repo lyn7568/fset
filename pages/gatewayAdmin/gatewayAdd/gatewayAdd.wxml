@@ -1,63 +1,64 @@
 <!--pages/gatewayAdmin/gatewayAdd/gatewayAdd.wxml-->
 <import src="/template/tempList.wxml" />
+<view class="mainbody">
+  <view class="weui-cells weui-cells_form">
+    <view class="weui-cell">
+      <view class="weui-cell__bd">
+        <text>设备地址</text>
+      </view>
+      <view class="weui-cell__ft">
+        <input class="weui-input" placeholder-class="phcolor" placeholder="请输入设备地址" bindblur="findIsSure" />
+      </view>
+    </view>
+    <view class="weui-cell">
+      <view class="weui-cell__bd">
+        <text>名称</text>
+      </view>
+      <view class="weui-cell__ft">
+        <input class="weui-input" placeholder-class="phcolor" placeholder="请输入设备名称" />
+      </view>
+    </view>
+    <view class="weui-cell">
+      <view class="weui-cell__bd">
+        <text>类型</text>
+      </view>
+      <view class="weui-cell__ft">
+        <input class="weui-input" placeholder-class="phcolorRedonly" placeholder="获取到的设备类型" value="{{typeS}}" disabled />
+      </view>
+    </view>
+    <view class="weui-cell">
+      <view class="weui-cell__bd">
+        <text>型号</text>
+      </view>
+      <view class="weui-cell__ft">
+        <input class="weui-input" placeholder-class="phcolorRedonly" placeholder="获取到的设备型号" value="{{typeX}}" disabled />
+      </view>
+    </view>
+    <view class="weui-cell" catchtap="sureAction">
+      <view class="weui-cell__bd">
+        <text>位置</text>
+      </view>
+      <view class="weui-cell__ft" wx-if="{{cityText}}">
+        {{cityText}}
+      </view>
+      <view class="weui-cell__ft" wx:else>
+        {{cityholder}}
+      </view>
+    </view>
+    <view class="weui-cell">
+      <view class="weui-cell__bd">
+        <text>位置经纬</text>
+      </view>
+      <view class="weui-cell__ft">
+        <input class="weui-input" placeholder-class="phcolor" placeholder="请输入位置经纬" />
+      </view>
+    </view>
+  </view>
 
-<view class="weui-cells weui-cells_form">
-  <view class="weui-cell">
-    <view class="weui-cell__bd">
-      <text>设备地址</text>
-    </view>
-    <view class="weui-cell__ft">
-      <input class="weui-input" placeholder-class="phcolor" placeholder="请输入设备地址" bindblur="findIsSure" />
-    </view>
-  </view>
-  <view class="weui-cell">
-    <view class="weui-cell__bd">
-      <text>名称</text>
-    </view>
-    <view class="weui-cell__ft">
-      <input class="weui-input" placeholder-class="phcolor" placeholder="请输入设备名称" />
-    </view>
-  </view>
-  <view class="weui-cell">
-    <view class="weui-cell__bd">
-      <text>类型</text>
-    </view>
-    <view class="weui-cell__ft">
-      <input class="weui-input" placeholder-class="phcolorRedonly" placeholder="获取到的设备类型" value="{{typeS}}" disabled />
-    </view>
-  </view>
-  <view class="weui-cell">
-    <view class="weui-cell__bd">
-      <text>型号</text>
-    </view>
-    <view class="weui-cell__ft">
-      <input class="weui-input" placeholder-class="phcolorRedonly" placeholder="获取到的设备型号" value="{{typeX}}" disabled />
-    </view>
-  </view>
-  <view class="weui-cell" catchtap="sureAction">
-    <view class="weui-cell__bd">
-      <text>位置</text>
-    </view>
-    <view class="weui-cell__ft" wx-if="{{cityText}}">
-      {{cityText}}
-    </view>
-     <view class="weui-cell__ft" wx:else>
-      {{cityholder}}
-    </view>
-  </view>
-  <view class="weui-cell">
-    <view class="weui-cell__bd">
-      <text>位置经纬</text>
-    </view>
-    <view class="weui-cell__ft">
-      <input class="weui-input" placeholder-class="phcolor" placeholder="请输入位置经纬" />
-    </view>
+  <view class='margintop2'>
+    <button type="primary" disabled="{{isfindSure?false:true}}" bindtap="addEquipment">确定</button>
+    <button class='margintop' type="default">取消</button>
   </view>
 </view>
-
-<view class="weui-btn-area">
-  <button type="primary" disabled="{{isfindSure?false:true}}" bindtap="addEquipment">确定</button>
-  <button type="default">取消</button>
-</view>
-
 <template is="CityPick" data="{{isCity:isCity,cityValue:cityValue,provinces:provinces,citys:citys,countys:countys}}" /> 
+<template is="foot" />

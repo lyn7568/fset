@@ -88,7 +88,7 @@ Page({
       url: '/pages/gatewayAdmin/gatewayUpdate/gatewayUpdate?id=' + e.target.dataset.ip
     })
   },
-  getSelfMap: function () {
+  getSelfMap: function (e) {
     var that = this;
     if (that.data.listData.cl06){
       let jwd = that.data.listData.cl06.split(',');
@@ -104,14 +104,28 @@ Page({
         wdS = jwd[1].substring(1, jwd[1].length())
       }
       wx.navigateTo({
-        url: '/pages/getLocationMap/getLocationMap?jdS=' + jdS + '&wdS=' + wdS
+        url: '/pages/getLocationMap/getLocationMap?jdS=' + jdS + '&wdS=' + wdS + '&wgip=' + e.target.dataset.ip
       })
     }
   },
   goToJiedian: function (e) {
-    let jieDianIp = e.target.dataset.ip
-    wx.navigateTo({
-      url: '/pages/gatewayAdmin/gatewayManage/gatewayManage?id=' + jieDianIp
+    let WgIp = e.target.dataset.ip
+    wx.showLoading({
+      title: '加载中',
+      mask: true
     })
+    common.post({
+      url: '/android/equipmentManagement/getNodeList',
+      data: {
+        ip: WgIp
+      },
+      sh: function (res) {
+        wx.hideLoading()
+        wx.navigateTo({
+          url: '/pages/gatewayAdmin/gatewayManage/gatewayManage?id=' + WgIp
+        })
+      }
+    })
+
   }
 })

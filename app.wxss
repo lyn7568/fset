@@ -8,6 +8,14 @@ display: flex;
 flex-direction: column;
 }
 
+.weui-form-preview{
+  background-color: #ffffff;
+} 
+
+button{
+  border-radius:0;
+  background-color: #ffffff;
+}
 .container {
   height: 100%;
   display: flex;
@@ -18,7 +26,9 @@ flex-direction: column;
   box-sizing: border-box;
 }
 
-
+.mainbody{
+  z-index: 1
+}
 .page__bd{
   overflow: hidden;
   background: #ffffff;
@@ -50,6 +60,13 @@ flex-direction: column;
   top: 50%;
   margin-top: -8rpx;
   right: 28rpx;
+}
+
+.margintop{
+  margin-top:30rpx
+}
+.margintop2{
+  margin-top:60rpx
 }
 
 /* input中placeholder-class */

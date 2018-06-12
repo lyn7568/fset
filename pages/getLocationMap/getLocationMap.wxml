@@ -4,5 +4,6 @@
     style="width: 100%; height:{{height}}px;"
     latitude="{{latitude}}"
     longitude="{{longitude}}"
+    markers="{{markers}}"
     show-location
   ></map>

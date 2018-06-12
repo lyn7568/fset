@@ -5,22 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    height: 'auto',
-    latitude: '',
-    longitude: '',
-    markers: [{
-      id: 1,
-      latitude: 23.099994,
-      longitude: 113.324520,
-      name: 'T.I.T 创意园'
-    }],
-    covers: [{
-      latitude: 23.099994,
-      longitude: 113.344520
-    }, {
-      latitude: 23.099994,
-      longitude: 113.304520
-    }]
+    height: 'auto'
   },
 
   /**
@@ -29,9 +14,15 @@ Page({
   onLoad: function (options) {
     console.log(options)
     this.setData({
+      latitude: options.wdS,
       longitude: options.jdS,
-      latitude: options.wdS
+      markers: [{
+        id: options.wgip,
+        latitude: options.wdS,
+        longitude: options.jdS
+      }]
     });
+    
     var that = this
     wx.getSystemInfo({
       success: function (res) {
