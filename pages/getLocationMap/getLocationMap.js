@@ -46,15 +46,14 @@ Page({
             latitude: that.data.latitude,
             longitude: that.data.longitude,
             callout: {
-              content: "名称：" + $info.cl01 + "\n地址：" + $info.cl02 + "\n设备类型：" + $info.cl03 + "\n设备型号：" + $info.cl04 + "\n状态：" + $info.cl05 + "\n位置：" + $info.cl07 + "\n\n",
+              content: "名称：" + $info.cl01 + "\n地址：" + $info.cl02 + "\n设备类型：" + $info.cl03 + "\n设备型号：" + $info.cl04 + "\n状态：" + $info.cl05 + "\n位置：" + $info.cl07,
               color: "#333333",
               fontSize: 15,
               borderRadius: 10,
               bgColor: "#ffffff",
               padding: 10,
-              alpha:.4,
               textAlign: "left",
-              display: "ALWAYS"
+              display: "BYCLICK"
             }
           }]
         })

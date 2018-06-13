@@ -1,9 +1,10 @@
 //index.js
+
 //获取应用实例
 var start_clientX;
 var end_clientX;
 const app = getApp()
-const util = require("../../utils/util.js") 
+const util = require("../../utils/util.js")
 const common = require('../../utils/common.js');
 
 Page({

@@ -17,6 +17,15 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    var self = this;
+    wx.getSystemInfo({
+      success: function (res) {
+        self.setData({
+          scrollHeight: res.windowHeight
+        });
+
+      }
+    })
   },
   setCss: function () {
     if (this.data.accountName.trim().length != 0 && this.data.accountPwd.trim().length != 0) {
