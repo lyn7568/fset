@@ -1,6 +1,6 @@
 <!-- footer -->
 <template name="foot">
-  <view class="weui-footer weui-footer_fixed-bottom">
+  <view class="weui-footer weui-footer_fixed-bottom" style="z-index:0;">
     <text class="weui-footer__text">Copyright © 2008-2016 fset</text>
   </view>
 </template>

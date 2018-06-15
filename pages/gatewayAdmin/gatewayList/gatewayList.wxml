@@ -67,4 +67,4 @@
       <button class="jd_btn" data-ip="{{listData.cl02}}" bindtap="goToJiedian">设备节点</button>
   </view>
 </view>
-<template is="foot" />
+<!-- <template is="foot" /> -->

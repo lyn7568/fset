@@ -8,7 +8,7 @@
   </view>
 </view>
 <view class="containerr">
-  <scroll-view class="navbar" scroll-x="{{true}}" scroll-left="{{scrollNavbarLeft}}">
+  <scroll-view class="navbar" scroll-x="{{true}}">
     <view class="navbar-item {{ navbarArray[item].active }}" id="{{item}}" wx:for="{{array}}" wx:key="array" catchtap="onTapNavbar">
       <view class="navbar-item-wrap"> {{navbarArray[item].text}}</view>
     </view>

@@ -27,7 +27,8 @@ button{
 }
 
 .mainbody{
-  z-index: 10
+  z-index: 10;
+  position: relative;
 }
 .page__bd{
   overflow: hidden;
@@ -70,6 +71,9 @@ button{
 }
 .margintop2{
   margin-top:60rpx
+}
+.marginbottom{
+   margin-bottom:60rpx
 }
 
 /* input中placeholder-class */

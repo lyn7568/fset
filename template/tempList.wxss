@@ -100,6 +100,9 @@
 .manage-btn{
   background-color: rgba(0,124,185,.6);
 }
+.del-btn{
+  background-color: rgba(255,0,0,.6);
+}
 
 
 

@@ -1,3 +1,4 @@
 {
-  "navigationBarTitleText": "节点管理"
+  "navigationBarTitleText": "节点管理",
+  "enablePullDownRefresh": true
 }

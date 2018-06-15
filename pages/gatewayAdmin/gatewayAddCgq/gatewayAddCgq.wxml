@@ -1,0 +1,32 @@
+<!--pages/gatewayAdmin/gatewayAddCgq/gatewayAddCgq.wxml-->
+<view class="mainbody">
+  <view class="weui-cells weui-cells_form">
+    <view class="weui-cell weui-cell_access">
+      <view class="weui-cell__bd">
+        <text>名称</text>
+      </view>
+      <view class="weui-cell__ft">
+        <input class="weui-input" placeholder-class="phcolor" placeholder="请输入名称" value="{{eqName}}" bindinput="getEqName" />
+      </view>
+    </view>
+    <picker bindchange="bindCasPickerChange" value="{{casIndex}}" range="{{casArray}}">
+      <view class="weui-cell">
+        <view class="weui-cell__bd">
+          <text>传感器类型</text>
+        </view>
+        <view class="weui-cell__ft">
+          <view>
+            <text>{{casArray[casIndex]}}</text>
+          </view>
+        </view>
+      </view>
+    </picker>
+  </view>
+
+  <view class='margintop2'>
+    <button type="primary" bindtap="addEquipment">确定</button>
+    <button class='margintop' type="default" bindtap="cacelAdd">取消</button>
+  </view>
+</view>
+
+<template is="foot" />

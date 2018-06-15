@@ -58,6 +58,12 @@
 					"name": "节点详情",
 					"pathName": "pages/gatewayAdmin/gatewayDetailJd/gatewayDetailJd",
 					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "节点管理",
+					"pathName": "pages/gatewayAdmin/gatewayManageJd/gatewayManageJd",
+					"query": ""
 				}
 			]
 		}

@@ -121,5 +121,16 @@ Page({
       }
     })
 
+  },
+  onPullDownRefresh: function (event) {
+    var self = this;
+    setTimeout(function () {
+      wx.stopPullDownRefresh()
+      self.setData({
+        Complete: true
+      })
+      self.data.casIndex= 0
+      self.getCasArray();
+    })
   }
 })

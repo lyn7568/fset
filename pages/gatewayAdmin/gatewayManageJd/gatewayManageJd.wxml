@@ -1,2 +1,144 @@
 <!--pages/gatewayAdmin/gatewayManageJd/gatewayManageJd.wxml-->
-<text>pages/gatewayAdmin/gatewayManageJD/gatewayManageJD.wxml</text>
+<view class="containerr">
+  <view class="nav">
+    <view class="nav-default {{ navbarArray[item].active }}" id="{{item}}" data-index="{{index}}" wx:for="{{array}}" wx:key="array" catchtap="onTapNavbar">
+      <view> {{navbarArray[item].text}}</view>
+    </view>
+  </view>
+</view>
+<view class="search-result result-con">
+  <scroll-view scroll-y="true">
+    <view wx:if="{{currentChannelIndex===0}}">
+      <view class="weui-cells margintop">
+        <view class="weui-cell">
+          <view class="weui-cell__bd">
+            <text>站号</text>
+          </view>
+          <view class="weui-cell__ft">{{listData.cl01}}</view>
+        </view>
+        <view class="weui-cell">
+          <view class="weui-cell__bd">
+            <text>地址</text>
+          </view>
+          <view class="weui-cell__ft">{{listData.cl02}}</view>
+        </view>
+      </view>
+      <view class="weui-cells margintop">
+        <view class="weui-cell">
+          <view class="weui-cell__bd">
+            <text>当前时间</text>
+          </view>
+          <view class="weui-cell__ft">{{listData.cl03}}</view>
+        </view>
+        <view class="weui-cell">
+          <view class="weui-cell__bd">
+            <text>今天天亮</text>
+          </view>
+          <view class="weui-cell__ft">{{listData.cl04}}</view>
+        </view>
+        <view class="weui-cell">
+          <view class="weui-cell__bd">
+            <text>今天天黑</text>
+          </view>
+          <view class="weui-cell__ft">{{listData.cl05}}</view>
+        </view>
+      </view>
+      <view class="weui-cells margintop">
+        <view class="weui-cell">
+          <view class="weui-cell__bd">
+            <text>经度</text>
+          </view>
+          <view class="weui-cell__ft">{{listData.cl03}}</view>
+        </view>
+        <view class="weui-cell">
+          <view class="weui-cell__bd">
+            <text>纬度</text>
+          </view>
+          <view class="weui-cell__ft">{{listData.cl04}}</view>
+        </view>
+        <view class="weui-cell">
+          <view class="weui-cell__bd">
+            <text>时差</text>
+          </view>
+          <view class="weui-cell__ft">{{listData.cl05}}</view>
+        </view>
+        <view class="weui-cell">
+          <view class="weui-cell__bd">
+            <text>光照度</text>
+          </view>
+          <view class="weui-cell__ft">{{listData.cl05}}</view>
+        </view>
+      </view>
+      <view class="weui-cells margintop">
+        <view class="weui-cell">
+          <view class="weui-cell__bd">
+            <text>更新时间</text>
+          </view>
+          <view class="weui-cell__ft">{{listData.cl03}}</view>
+        </view>
+        <view class="weui-cell">
+          <view class="weui-cell__bd">
+            <text>网络在线连接</text>
+          </view>
+          <view class="weui-cell__ft">{{listData.cl04}}</view>
+        </view>
+      </view>
+      <view class="weui-cells margintop2 marginbottom">
+        <view class="weui-form-preview">
+          <view class="weui-form-preview__ft">
+            <button class="weui-form-preview__btn weui-form-preview__btn_default" data-ip="{{listData.cl02}}" bindtap="getSelfMap">校时</button>
+            <button type="submit" data-ip="{{listData.cl02}}" class="weui-form-preview__btn weui-form-preview__btn_primary" bindtap="updateSelf">管理</button>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view wx:if="{{currentChannelIndex===1}}">
+      <view class="table">
+        <view class="tr bg-w">
+          <view class="th">名称</view>
+          <view class="th">第几路</view>
+          <view class="th">状态</view>
+          <view class="th">模式</view>
+        </view>
+        <view class="touch-item {{item.isTouchMove ? 'touch-move-active' : ''}} {{index % 2 == 0 ? 'bg-g':'bg-w'}}" data-index="{{index}}" bindtouchstart="touchstart" bindtouchmove="touchmove" wx:for="{{listData}}" data-list="listData" wx:key="">
+          <view class="tr touch-content">
+            <view class="td">{{item.cl01}}</view>
+            <view class="td">{{item.cl02}}</view>
+            <view class="td">{{item.cl03}}</view>
+            <view class="td">{{item.cl04}}</view>
+          </view>
+          <view class="touch-btn">
+            <navigator class="btn-item detail-btn" url="/pages/gatewayAdmin/gatewayDetailJd/gatewayDetailJd?jdIp={{item.cl02}}&wgIp={{currendId}}">管理</navigator>
+            <navigator class="btn-item manage-btn" url="/pages/gatewayAdmin/gatewayDetailJd/gatewayDetailJd?jdIp={{item.cl02}}&wgIp={{currendId}}">编辑</navigator>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view wx:if="{{currentChannelIndex===2}}">
+      <view class="table">
+        <view class="tr bg-w">
+          <view class="th">名称</view>
+          <view class="th">类型</view>
+          <view class="th">数值(状态)</view>
+          <view class="th">模式</view>
+        </view>
+        <view class="touch-item {{item.isTouchMove ? 'touch-move-active' : ''}} {{index % 2 == 0 ? 'bg-g':'bg-w'}}" data-index="{{index}}" bindtouchstart="touchstart" bindtouchmove="touchmove" wx:for="{{listData3}}" data-list="listData3" wx:key="">
+          <view class="tr touch-content">
+            <view class="td">{{item.cl01}}</view>
+            <view class="td">{{item.cl02}}</view>
+            <view class="td">{{item.cl03}}</view>
+            <view class="td">{{item.cl04}}</view>
+          </view>
+          <view class="touch-btn">
+            <navigator class="btn-item detail-btn" url="/pages/gatewayAdmin/gatewayDetailJd/gatewayDetailJd?jdIp={{item.cl02}}&wgIp={{currendId}}">管理</navigator>
+            <navigator class="btn-item manage-btn" url="/pages/gatewayAdmin/gatewayDetailJd/gatewayDetailJd?jdIp={{item.cl02}}&wgIp={{currendId}}">编辑</navigator>
+            <navigator class="btn-item del-btn" url="/pages/gatewayAdmin/gatewayDetailJd/gatewayDetailJd?jdIp={{item.cl02}}&wgIp={{currendId}}">删除</navigator>
+          </view>
+        </view>
+      </view>
+      <view class="add-float" bindtap='addCgq'>
+        <image mode="widthFix" class="add-icon" src="/lib/images/add.png"></image>
+      </view>
+    </view>
+  </scroll-view>
+</view>

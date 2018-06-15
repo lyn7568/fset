@@ -1,5 +1,4 @@
-/* pages/gatewayAdmin/gatewayList.wxss */
-@import "/pages/index/index.wxss";
+/* pages/gatewayAdmin/gatewayAddCgq/gatewayAddCgq.wxss */
 
 .weui-cell_access:after{
   content: " ";
@@ -15,9 +14,4 @@
     -webkit-transform: scaleY(0.5);
     transform: scaleY(0.5);
     z-index: 2;
-}
-
-.jd_btn{
-  color:#FFFFFF;
-   background-color:rgba(0,124,185,1);
 }
