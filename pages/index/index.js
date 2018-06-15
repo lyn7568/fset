@@ -77,12 +77,6 @@ Page({
       translate: '',
     })
   },
-  //事件处理函数
-  bindViewTap: function() {
-    wx.navigateTo({
-      url: '../logs/logs'
-    })
-  },
   //map
   onReady: function(e){
     this.mapCtx = wx.createMapContext('myMap')

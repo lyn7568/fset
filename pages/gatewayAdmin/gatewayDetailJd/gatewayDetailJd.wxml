@@ -31,7 +31,6 @@
       <view class="weui-form-preview">
         <view class="weui-form-preview__ft">
           <button type="submit" class="weui-form-preview__btn weui-form-preview__btn_primary" bindtap="updateSelf">修改</button>
-          <button class="weui-form-preview__btn weui-form-preview__btn_default" bindtap="manageJD">管理</button>
         </view>
       </view>
     </view>

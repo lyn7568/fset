@@ -28,6 +28,7 @@
           </view>
           <view class="touch-btn">
             <navigator class="btn-item detail-btn" url="/pages/gatewayAdmin/gatewayDetailJd/gatewayDetailJd?jdIp={{item.cl02}}&wgIp={{currendId}}">详情</navigator>
+            <navigator class="btn-item manage-btn" url="/pages/gatewayAdmin/gatewayManageJd/gatewayManageJd?jdIp={{item.cl02}}">管理</navigator>
           </view>
         </view>
         <template is="loadSty" data="{{loadingModalHide:loadingModalHide,loadingComplete:loadingComplete}}" />

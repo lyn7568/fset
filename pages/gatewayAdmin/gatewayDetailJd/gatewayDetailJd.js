@@ -47,12 +47,6 @@ Page({
       }
     })
   },
-  manageJD:function(){
-    var that = this;
-    wx.navigateTo({
-      url: '/pages/gatewayAdmin/gatewayManageJd/gatewayManageJd?jdIp=' + that.data.currentJdIp
-    })
-  },
   updateSelf:function(){
     this.showDialogBtn()
   },
