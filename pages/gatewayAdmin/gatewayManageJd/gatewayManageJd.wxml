@@ -87,7 +87,7 @@
         <view class="weui-form-preview">
           <view class="weui-form-preview__ft">
             <button class="weui-form-preview__btn weui-form-preview__btn_default" data-ip="{{listData.cl02}}" bindtap="getSelfMap">校时</button>
-            <button type="submit" data-ip="{{listData.cl02}}" class="weui-form-preview__btn weui-form-preview__btn_primary" bindtap="updateSelf">管理</button>
+            <button type="submit" data-ip="{{listData.cl02}}" class="weui-form-preview__btn weui-form-preview__btn_primary" bindtap="configSelf">管理</button>
           </view>
         </view>
       </view>
@@ -108,7 +108,7 @@
             <view class="td">{{item.cl04}}</view>
           </view>
           <view class="touch-btn">
-            <navigator class="btn-item detail-btn" url="/pages/gatewayAdmin/gatewayDetailJd/gatewayDetailJd?jdIp={{item.cl02}}&wgIp={{currendId}}">管理</navigator>
+            <view class="btn-item detail-btn" bindtap="configSelf">管理</view>
             <navigator class="btn-item manage-btn" url="/pages/gatewayAdmin/gatewayDetailJd/gatewayDetailJd?jdIp={{item.cl02}}&wgIp={{currendId}}">编辑</navigator>
           </view>
         </view>
@@ -130,7 +130,7 @@
             <view class="td">{{item.cl04}}</view>
           </view>
           <view class="touch-btn">
-            <navigator class="btn-item detail-btn" url="/pages/gatewayAdmin/gatewayDetailJd/gatewayDetailJd?jdIp={{item.cl02}}&wgIp={{currendId}}">管理</navigator>
+            <view class="btn-item detail-btn" bindtap="configSelf">管理</view>
             <navigator class="btn-item manage-btn" url="/pages/gatewayAdmin/gatewayDetailJd/gatewayDetailJd?jdIp={{item.cl02}}&wgIp={{currendId}}">编辑</navigator>
             <navigator class="btn-item del-btn" url="/pages/gatewayAdmin/gatewayDetailJd/gatewayDetailJd?jdIp={{item.cl02}}&wgIp={{currendId}}">删除</navigator>
           </view>

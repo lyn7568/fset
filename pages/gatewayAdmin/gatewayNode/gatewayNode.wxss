@@ -1,4 +1,4 @@
-/* pages/gatewayAdmin/gatewayManage/gatewayManage.wxss */
+/* pages/gatewayAdmin/gatewayNode/gatewayNode.wxss */
 @import "../../../template/tempList.wxss";
 
 .containerr {box-sizing: border-box;position: relative;background: #ffffff} 

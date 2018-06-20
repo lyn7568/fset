@@ -1,4 +1,4 @@
-<!--pages/gatewayAdmin/gatewayManage/gatewayManage.wxml-->
+<!--pages/gatewayAdmin/gatewayNode/gatewayNode.wxml-->
 <import src="/template/tempList.wxml" />
 
 <view class="search-bar">

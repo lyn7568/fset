@@ -1,4 +1,4 @@
-// pages/gatewayAdmin/gatewayManage/gatewayManage.js
+// pages/gatewayAdmin/gatewayNode/gatewayNode.js
 const common = require('../../../utils/common.js');
 
 Page({

@@ -3,7 +3,7 @@
 
 <view class="mainbody">
   <view class="weui-cells">
-    <navigator url="/pages/gatewayAdmin/gatewayAdd/gatewayAdd" class="weui-cell weui-cell_access">
+    <navigator url="/pages/gatewayAdmin/gatewayAdd/gatewayAdd" class="weui-cell weui-cell_border">
       <view class="weui-cell__bd">
         <text>添加设备</text>
       </view>

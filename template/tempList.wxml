@@ -11,50 +11,6 @@
     <image mode='aspectFit' src="/lib/images/loading.gif"></image>正在加载中...</view>
   <view class="loading" hidden="{{loadingComplete}}">已加载全部</view>
 </template> 
-<!-- <template name="loadSty">
-  <view class="weui-loadmore" hidden="{{isHideLoadMore}}">
-    <view class="weui-loading"></view>
-    <view class="weui-loadmore__tips">正在加载</view>
-  </view>
-</template> -->
-
-<!-- city select -->
-<template name="areaPicker">
-  <picker-view class="picker-view" indicator-style="height: 50px;" style="width: 100%; height: 300px;" value="{{value}}" bindchange="bindChange">
-    <picker-view-column>
-      <view wx:for="{{provinceData}}" wx:key="code" class="addr-item">{{item.fullNameDot}}</view>
-    </picker-view-column>
-    <picker-view-column>
-      <view wx:for="{{cityData}}" wx:key="code" class="addr-item">{{item.fullNameDot}}</view>
-    </picker-view-column>
-    <picker-view-column wx:if="{{hideDistrict}}">
-      <view wx:for="{{districtData}}" wx:key="code" class="addr-item">{{item.fullNameDot}}</view>
-    </picker-view-column>
-  </picker-view>
-</template>
-
-<!-- table show-->
-<template name="tableModel">
-  <!-- <view class="table">
-      <view class="tr bg-w">
-        <view class="th">{{th.one}}</view>
-        <view class="th">{{th.two}}</view>
-      </view>
-      <scroll-view scroll-y="true" bindscrolltolower="searchScrollLower" lower-threshold="50" class="scroll-tbody">
-        <view class="touch-item {{item.isTouchMove ? 'touch-move-active' : ''}} {{index % 2 == 0 ? 'bg-g':'bg-w'}}" data-index="{{index}}" bindtouchstart="touchstart" bindtouchmove="touchmove" wx:for="{{listData}}" wx:key="">
-          <view class="tr touch-content">
-            <view class="td">{{item.cl01}}</view>
-            <view class="td">{{item.cl02}}</view>
-          </view>
-          <view class="touch-btn">
-            <navigator class="btn-item detail-btn" url="/pages/gatewayAdmin/gatewayDetail/gatewayDetail?id={{item.cl02}}">详情</navigator>
-            <navigator class="btn-item manage-btn" url="/pages/gatewayAdmin/gatewayManage/gatewayManage?id={{item.cl02}}">节点</navigator>
-          </view>
-        </view>
-        <template is="loadSty" data="{{isHideLoadMore:isHideLoadMore}}" />
-      </scroll-view>
-    </view> -->
-</template>
 
 <template name="CityPick">
   <view hidden="{{isCity}}" class="selectorCity">

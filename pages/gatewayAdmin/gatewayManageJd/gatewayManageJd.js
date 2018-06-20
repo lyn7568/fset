@@ -1,22 +1,17 @@
-// pages/gatewayAdmin/gatewayManageJD/gatewayManageJD.js
+// pages/gatewayAdmin/gatewayManageJd/gatewayManageJd.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    selected: true,
-    selected1: false,
     navbarArray: [{
       text: '通用管理',
-      active: 'nav-active',
-      type: 'kg'
+      active: 'nav-active'
     }, {
-      text: '继电器管理',
-      type: 'znpanel'
+      text: '继电器管理'
     }, {
-      text: '传感器管理',
-      type: 'cgq'
+      text: '传感器管理'
     }],
     array: [0, 1, 2],
     currentChannelIndex: 0,
@@ -74,9 +69,14 @@ Page({
 
     }, 1000)
   },
+  configSelf:function(e){
+    wx.navigateTo({
+      url: '../gatewayConfig/gatewayConfig'
+    })
+  },
   addCgq:function(){
     wx.navigateTo({
-      url: '/pages/gatewayAdmin/gatewayAddCgq/gatewayAddCgq'
+      url: '../gatewayAddCgq/gatewayAddCgq'
     })
   },
   touchstart: function (e) {

@@ -87,7 +87,7 @@ Page({
   },
   updateSelf: function (e) {
     wx.navigateTo({
-      url: '/pages/gatewayAdmin/gatewayUpdate/gatewayUpdate?id=' + e.target.dataset.ip
+      url: '../gatewayUpdate/gatewayUpdate?id=' + e.target.dataset.ip
     })
   },
   getSelfMap: function (e) {
@@ -116,7 +116,7 @@ Page({
       sh: function (res) {
         wx.hideLoading()
         wx.navigateTo({
-          url: '/pages/gatewayAdmin/gatewayManage/gatewayManage?id=' + WgIp
+          url: '../gatewayNode/gatewayNode?id=' + WgIp
         })
       }
     })

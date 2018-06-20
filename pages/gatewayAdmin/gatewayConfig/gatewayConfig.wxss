@@ -1,0 +1,41 @@
+/* pages/gatewayAdmin/gatewayConfig/gatewayConfig.wxss */
+
+ @import '../gatewayManageJd/gatewayManageJd.wxss'; 
+
+view,
+scroll-view {
+    box-sizing: border-box;
+}
+::-webkit-scrollbar {
+    display: none;
+}
+.visibility-hidden {
+    visibility: hidden;
+}
+
+.nav{white-space: nowrap;}
+.nav-default{width:calc(100% / 4.5);}
+
+.weui-cells__title{
+  line-height: 60rpx
+}
+
+.time-box{
+  display:flex;
+  justify-content: space-between;
+  align-items: center;
+  line-height:80rpx;
+}
+.time-box>input{
+  padding-right:8rpx;
+  height:80rpx;
+  line-height:80rpx;
+}
+
+.weui-cells__title{
+  display: flex;
+  justify-content: space-between;
+}
+.weui-cells__title>.del-item{
+  color:rgba(255,0,0,.6);
+}
