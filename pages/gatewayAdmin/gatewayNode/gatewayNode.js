@@ -57,15 +57,15 @@ Page({
     console.log(navbarType)
     if (navbarType === 'kg'){
       wx.navigateTo({
-        url: '.. /gatewayManageJd/gatewayManageJd?jdIp=' + jdIp
+        url: '../gatewayManageJd/gatewayManageJd?jdIp=' + jdIp
       })
     } else if (navbarType === 'znpanel'){
       wx.navigateTo({
-        url: '.. /gatewaySmart/gatewaySmart?jdIp=' + jdIp
+        url: '../gatewaySmart/gatewaySmart?jdIp=' + jdIp
       })
     } else if (navbarType === 'cgq') {
       wx.navigateTo({
-        url: '.. /gatewaySensor/gatewaySensor?jdIp=' + jdIp
+        url: '../gatewaySensor/gatewaySensor?jdIp=' + jdIp
       })
     }
     

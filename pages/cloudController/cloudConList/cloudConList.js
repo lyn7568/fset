@@ -7,7 +7,15 @@ Page({
    * 页面的初始数据
    */
   data: {
-    listData: [],
+    listData: [{
+        cl01: '1111',
+        cl02: '1111'
+      },
+      {
+        cl01: '222',
+        cl02: '222'
+      }
+    ],
     tableTh: {
       "one": "名称",
       "two": "地址"
@@ -30,32 +38,21 @@ Page({
     this.setData({
       currendId: options.id
     });
-    this.switchChannel(0);
+    this.getJdList();
     console.log(this.data)
   },
   manageSelf: function (e) {
     wx.navigateTo({
-      url: '.. /cloudConManage/cloudConManage?ykIp=' + e.target.dataset.ip
+      url: '../cloudConManage/cloudConManage?ykIp=' + e.target.dataset.ip
     })
 
   },
-
-  switchChannel: function (targetChannelIndex) {
-    this.setData({
-      searchKeyword: this.data.searchTmp,
-      isFormSearch: true,
-      loadingModalHide: false,
-      loadingComplete: true,
-      listData: [],
-    });
-    this.getJdList(targetChannelIndex);
-  },
-  getJdList: function (index) {
+  getJdList: function () {
     var that = this;
-    wx.showLoading({
-      title: '加载中',
-      mask: true
-    })
+    // wx.showLoading({
+    //   title: '加载中',
+    //   mask: true
+    // })
     // common.post({
     //   url: '/equipmentManagement/getJdList',
     //   data: {
