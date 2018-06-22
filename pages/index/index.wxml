@@ -19,11 +19,6 @@
         </view>
       </navigator> 
       <view class="line"></view>
-      <navigator url='../to_my/to_my'>  
-        <view class="wc">  
-          <text>个人信息</text>  
-        </view>  
-      </navigator>
       <view class="wc">  
         <text class="log-out" bindtap="quitFset">退出登录</text>  
       </view>
