@@ -3,7 +3,7 @@
   <!-- 侧滑栏 -->  
   <view class="page_tab">
     <view class="user-info">  
-      <image class='user_head' src='/lib/images/user-head.png'></image>  
+      <text class="iconfont icon-head user_head"></text>
       <view class='user_name'>用户姓名</view>  
     </view>  
     <view class="line"></view>
@@ -12,13 +12,10 @@
         <view class="wc">  
           <text>网关管理</text>  
         </view>  
-      </navigator>  
-      <view class="wc">  
-        <text bindtap='tosat'>云控制器</text>  
-      </view>
-      <navigator url='../news/news'>  
+      </navigator> 
+      <navigator url='../cloudController/cloudConList/cloudConList'>  
         <view class="wc">  
-          <text>统计报表</text>  
+          <text bindtap='tosat'>云控制器</text>  
         </view>
       </navigator> 
       <view class="line"></view>
@@ -37,7 +34,7 @@
   <view class="home" style="{{translate}}">  
     <view class="page-body">
     <view class="menu-float" bindtap='showview'>
-      <image mode="widthFix" class="menu-icon" src="/lib/images/menu.png"></image>
+      <text class="iconfont icon-menu"></text>
     </view>
   <view class="page-section page-section-gap">
      <map

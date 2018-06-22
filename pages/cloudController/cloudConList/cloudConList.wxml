@@ -1,18 +1,21 @@
-<!--pages/gatewayAdmin/gatewayNode/gatewayNode.wxml-->
+<!--pages/cloudController/cloudConList/cloudConList.wxml-->
 <import src="/template/tempList.wxml" />
 
 <view class="search-bar">
   <view class="search-wrap">
     <icon type="search" size="16" class="icon-search" />
-    <input type="text" placeholder="请输入节点地址" class="search-input" name="searchKeyword" confirm-type="search" value="{{searchKeyword}}" bindconfirm='keywordSearch' />
+    <input type="text" placeholder="请输入地址" class="search-input" name="searchKeyword" confirm-type="search" value="{{searchKeyword}}" bindconfirm='keywordSearch' />
   </view>
 </view>
 <view class="containerr">
-  <scroll-view class="navbar" scroll-x="{{true}}">
-    <view class="navbar-item {{ navbarArray[item].active }}" id="{{item}}" wx:for="{{array}}" wx:key="array" catchtap="onTapNavbar">
-      <view class="navbar-item-wrap"> {{navbarArray[item].text}}</view>
-    </view>
-  </scroll-view>
+  <view class="weui-cells">
+    <navigator url="/pages/gatewayAdmin/gatewayAdd/gatewayAdd" class="weui-cell">
+      <view class="weui-cell__bd">
+        <text>添加设备</text>
+      </view>
+      <view class="weui-cell__ft left-arrow"></view>
+    </navigator>
+  </view>
 </view>
 <view class="search-result">
     <view class="table">
@@ -27,7 +30,7 @@
             <view class="td">{{item.cl02}}</view>
           </view>
           <view class="touch-btn">
-            <navigator class="btn-item row-btn-1" url="/pages/gatewayAdmin/gatewayDetailJd/gatewayDetailJd?jdIp={{item.cl02}}&wgIp={{currendId}}">详情</navigator>
+            <navigator class="btn-item row-btn-1" url="../cloudConDetail/cloudConDetail?jdIp={{item.cl02}}&wgIp={{currendId}}">详情</navigator>
             <view class="btn-item row-btn-2" bindtap="manageSelf" data-ip="{{item.cl02}}">管理</view>
           </view>
         </view>

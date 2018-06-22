@@ -1,4 +1,4 @@
-// pages/gatewayAdmin/gatewayManageJd/gatewayManageJd.js
+// pages/cloudController/cloudConManage/cloudConManage.js
 const common = require('../../../utils/common.js');
 const tempcomjs = require('../../../template/tempList.js');
 
@@ -18,8 +18,8 @@ Page({
     }],
     array: [0, 1, 2],
     currentChannelIndex: 0,
-    listData:[{
-      cl01:"继电器1继电器1",
+    listData: [{
+      cl01: "继电器1继电器1",
       cl02: "继电器1",
       cl03: "关闭",
       cl04: "空闲模式",
@@ -40,7 +40,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+
   },
   onTapNavbar: function (e) {
     this.switchChannel(parseInt(e.currentTarget.dataset.index));
@@ -66,7 +66,7 @@ Page({
 
       if (self.data.currentChannelIndex === 0) {
         console.log(1)
-      } else if (self.data.currentChannelIndex === 1){
+      } else if (self.data.currentChannelIndex === 1) {
         console.log(2)
       } else if (self.data.currentChannelIndex === 2) {
         console.log(3)
@@ -77,12 +77,12 @@ Page({
   checkTimeSelf: function (e) {
     console.log('当前时间')
   },
-  configSelf:function(e){
+  configSelf: function (e) {
     wx.navigateTo({
       url: '../gatewayConfig/gatewayConfig'
     })
   },
-  addCgq:function(){
+  addCgq: function () {
     wx.navigateTo({
       url: '../gatewayAddCgq/gatewayAddCgq?flag=1'
     })

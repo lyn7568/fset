@@ -1,4 +1,4 @@
-// pages/gatewayAdmin/gatewayDetailJd/gatewayDetailJd.js
+// pages/cloudController/cloudConDetail/cloudConDetail.js
 const common = require('../../../utils/common.js');
 const tempcomjs = require('../../../template/tempList.js');
 
@@ -9,8 +9,8 @@ Page({
    */
   data: {
     showModal: false,
-    listData:[],
-    nameS:''
+    listData: [],
+    nameS: ''
   },
 
   /**
@@ -34,16 +34,29 @@ Page({
       },
       sh: function (res) {
         console.log(res);
-        if(res.data.result === 'success'){
+        if (res.data.result === 'success') {
           that.setData({
             listData: res.data,
             nameS: res.data.cl01
           })
-        }else{
+        } else {
           wx.showToast({
             title: res.data.result,
             icon: 'none'
           })
+        }
+      }
+    })
+  },
+  delSelf: function (e) {
+    wx.showModal({
+      title: '提示',
+      content: '确定要删除该设备吗?',
+      success: function (res) {
+        if (res.confirm) {
+          console.log('用户点击确定')
+        } else if (res.cancel) {
+          console.log('用户点击取消')
         }
       }
     })

@@ -1,0 +1,67 @@
+<!--pages/gatewayAdmin/gatewaySmartRelated/gatewaySmartRelated.wxml-->
+<view wx:for="{{[0,1,2,3,4,5]}}" wx:key="">
+  <view class="weui-cells__title item_cell_box">
+    <text>按键{{item+1}}</text>
+    <text wx:if="{{numIndex.scene[item].ifS}}" class="del-item" bindtap="bindDelItem">删除</text>
+  </view>
+  <view class="weui-cells">
+    <picker bindchange="bindSnum" value="{{numIndex.scene[item]}}" data-model="{{item}}" data-cas="scene" range="{{numArray}}">
+      <view class="weui-cell weui-cell_border">
+        <view class="weui-cell__bd">
+          <text>设备编号</text>
+        </view>
+        <view class="weui-cell__ft">
+          <view wx:if="{{numArray.length>0}}">
+            <text>{{numArray[numIndex.scene[item].index]}}</text>
+          </view>
+          <view wx:else>
+            <text>{{numPlaceh}}</text>
+          </view>
+        </view>
+      </view>
+    </picker>
+    <picker wx:if="{{numIndex.scene[item].ifS}}" bindchange="bindJiedian" value="{{jiedianArr[jiedianArrIndex]}}" range="{{jiedianArr}}">
+      <view class="weui-cell weui-cell_border">
+        <view class="weui-cell__bd">
+          <text>节点</text>
+        </view>
+        <view class="weui-cell__ft">
+          <view>
+            <text>{{jiedianArr[jiedianArrIndex]}}</text>
+          </view>
+        </view>
+      </view>
+    </picker>
+    <picker wx:if="{{numIndex.scene[item].ifS}}" bindchange="bindAnjian" value="{{anjianArr[anjianArrIndex]}}" range="{{anjianArr}}">
+      <view class="weui-cell weui-cell_border">
+        <view class="weui-cell__bd">
+          <text>按键</text>
+        </view>
+        <view class="weui-cell__ft">
+          <view>
+            <text>{{anjianArr[anjianArrIndex]}}</text>
+          </view>
+        </view>
+      </view>
+    </picker>
+    <picker bindchange="bindCmodel" value="{{casIndex.scene[item]}}" data-model="{{item}}" data-cas="scene" range="{{casArray.scene}}">
+      <view class="weui-cell">
+        <view class="weui-cell__bd">
+          <text>触发模式</text>
+        </view>
+        <view class="weui-cell__ft">
+          <view>
+            <text>{{casArray.scene[casIndex.scene[item]]}}</text>
+          </view>
+        </view>
+      </view>
+    </picker>
+  </view>
+</view>
+<view class="weui-cells margintop2 marginbottom">
+  <view class="weui-form-preview">
+    <view class="weui-form-preview__ft">
+      <button type="submit" class="weui-form-preview__btn weui-form-preview__btn_primary" bindtap="">确定</button>
+    </view>
+  </view>
+</view>

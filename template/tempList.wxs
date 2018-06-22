@@ -1,0 +1,10 @@
+//===============弹出编辑窗口=============
+/**
+ * 弹出框蒙层截断touchmove事件
+ */
+function preventTouchMove() {
+}
+
+module.exports = {
+  preventTouchMove: preventTouchMove
+}

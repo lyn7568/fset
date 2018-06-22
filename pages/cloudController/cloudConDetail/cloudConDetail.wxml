@@ -1,4 +1,4 @@
-<!--pages/gatewayAdmin/gatewayDetailJd/gatewayDetailJd.wxml-->
+<!--pages/cloudController/cloudConDetail/cloudConDetail.wxml-->
 <import src="/template/tempList.wxml" />
 
 <view class="page">
@@ -6,31 +6,38 @@
     <view class="weui-cells">
       <view class="weui-cell">
         <view class="weui-cell__bd">
-          <text>节点名称</text>
+          <text>名称</text>
         </view>
         <view class="weui-cell__ft">{{listData.cl01}}</view>
       </view>
       <view class="weui-cell">
         <view class="weui-cell__bd">
-          <text>节点地址</text>
+          <text>地址</text>
         </view>
         <view class="weui-cell__ft">{{listData.cl02}}</view>
       </view>
       <view class="weui-cell">
         <view class="weui-cell__bd">
-          <text>节点类型</text>
+          <text>类型</text>
         </view>
         <view class="weui-cell__ft">{{listData.cl03}}</view>
       </view>
       <view class="weui-cell">
         <view class="weui-cell__bd">
-          <text>节点状态</text>
+          <text>型号</text>
+        </view>
+        <view class="weui-cell__ft">{{listData.cl04}}</view>
+      </view>
+      <view class="weui-cell">
+        <view class="weui-cell__bd">
+          <text>状态</text>
         </view>
         <view class="weui-cell__ft">{{listData.cl05}}</view>
       </view>
       <view class="weui-form-preview">
         <view class="weui-form-preview__ft">
           <button type="submit" class="weui-form-preview__btn weui-form-preview__btn_primary" bindtap="updateSelf">修改</button>
+          <button type="submit" class="weui-form-preview__btn weui-form-preview__btn_warn" data-ip="{{listData.cl02}}" bindtap="delSelf">删除</button>
         </view>
       </view>
     </view>

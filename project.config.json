@@ -37,8 +37,8 @@
 			"list": [
 				{
 					"id": 0,
-					"name": "网关管理",
-					"pathName": "pages/gatewayAdmin/gatewayList/gatewayList",
+					"name": "节点详情",
+					"pathName": "pages/gatewayAdmin/gatewayDetailJd/gatewayDetailJd",
 					"query": ""
 				},
 				{
@@ -48,21 +48,27 @@
 					"query": ""
 				},
 				{
-					"id": -1,
+					"id": 2,
 					"name": "设备节点",
-					"pathName": "pages/gatewayAdmin/gatewayManage/gatewayManage",
+					"pathName": "pages/gatewayAdmin/gatewayNode/gatewayNode",
 					"query": ""
 				},
 				{
 					"id": 3,
-					"name": "节点详情",
-					"pathName": "pages/gatewayAdmin/gatewayDetailJd/gatewayDetailJd",
+					"name": "智能面板",
+					"pathName": "pages/gatewayAdmin/gatewaySmart/gatewaySmart",
+					"query": ""
+				},
+				{
+					"id": 4,
+					"name": "开关模块",
+					"pathName": "pages/gatewayAdmin/gatewayManageJd/gatewayManageJd",
 					"query": ""
 				},
 				{
 					"id": -1,
-					"name": "节点管理",
-					"pathName": "pages/gatewayAdmin/gatewayManageJd/gatewayManageJd",
+					"name": "传感器模块",
+					"pathName": "pages/gatewayAdmin/gatewaySensor/gatewaySensor",
 					"query": ""
 				}
 			]

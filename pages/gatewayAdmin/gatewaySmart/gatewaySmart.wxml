@@ -1,0 +1,25 @@
+<!--pages/gatewayAdmin/gatewaySmart/gatewaySmart.wxml-->
+<import src="/template/tempList.wxml" />
+
+<view class="table">
+  <view class="tr bg-w">
+    <view class="th">名称</view>
+    <view class="th">序号</view>
+    <view class="th">类型</view>
+  </view>
+  <view class="touch-item {{item.isTouchMove ? 'touch-move-active' : ''}} {{index % 2 == 0 ? 'bg-g':'bg-w'}}" data-index="{{index}}" bindtouchstart="touchstart" bindtouchmove="touchmove" wx:for="{{listData}}" data-list="listData" wx:key="">
+    <view class="tr touch-content">
+      <view class="td">{{item.cl01}}</view>
+      <view class="td">{{item.cl02}}</view>
+      <view class="td">{{item.cl03}}</view>
+    </view>
+    <view class="touch-btn">
+      <view class="btn-item row-btn-1" bindtap="configSelf">控制</view>
+      <view class="btn-item row-btn-2" bindtap="updateSelf">编辑</view>
+      <view class="btn-item row-btn-3" bindtap="contactSelf">关联</view>
+    </view>
+  </view>
+</view>
+
+  <!--弹窗-->
+  <template is="modalDialog" data="{{showModal:showModal,nameS:nameS}}" />

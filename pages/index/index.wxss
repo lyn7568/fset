@@ -93,6 +93,7 @@
   width: 160rpx;    
   height: 160rpx;    
   border-radius: 50%;
+  font-size:160rpx;
 }
 
 .line{

@@ -1,10 +1,10 @@
-<!--pages/gatewayAdmin/gatewayAddCgq/gatewayAddCgq.wxml-->
+<!--pages/gatewayAdmin/gatewayAddDnb/gatewayAddDnb.wxml-->
 <import src="/template/tempList.wxml" />
 <view class="mainbody">
   <view class="weui-cells weui-cells_form">
     <view class="weui-cell weui-cell_border">
       <view class="weui-cell__bd">
-        <text>名称</text>
+        <text>电能表地址</text>
       </view>
       <view class="weui-cell__ft">
         <input class="weui-input" placeholder-class="phcolor" placeholder="请输入名称" value="{{eqName}}" bindinput="getEqName" />
@@ -13,7 +13,7 @@
     <picker bindchange="bindCasPickerChange" value="{{casIndex}}" range="{{casArray}}">
       <view class="weui-cell">
         <view class="weui-cell__bd">
-          <text>传感器类型</text>
+          <text>电能表类型</text>
         </view>
         <view class="weui-cell__ft">
           <view>

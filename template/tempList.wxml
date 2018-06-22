@@ -1,3 +1,5 @@
+<wxs src="./tempList.wxs" module="tempWxs" />
+
 <!-- footer -->
 <template name="foot">
   <view class="weui-footer weui-footer_fixed-bottom" style="z-index:0;">
@@ -34,5 +36,23 @@
       </picker-view>
     </view>
     <view class="layer" catchtap="sureActionLayer"></view>
+  </view>
+</template>
+
+
+<!--弹窗-->
+<template name="modalDialog">
+  <view class="modal-mask" bindtap="hideModal" catchtouchmove="tempWxs.preventTouchMove" wx:if="{{showModal}}"></view>
+  <view class="modal-dialog" wx:if="{{showModal}}">
+    <view class="modal-title">修改名称</view>
+    <view class="modal-content">
+      <view class="modal-input">
+        <input type="text" class="input" bindinput="tapName" value="{{nameS}}"></input>
+      </view>
+    </view>
+    <view class="modal-footer">
+      <view class="btn-cancel" bindtap="hideModal" data-status="cancel">取消</view>
+      <view class="btn-confirm" bindtap="onConfirm" data-status="confirm">确定</view>
+    </view>
   </view>
 </template>

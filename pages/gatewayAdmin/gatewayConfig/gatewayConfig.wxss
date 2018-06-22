@@ -31,11 +31,3 @@ scroll-view {
   height:80rpx;
   line-height:80rpx;
 }
-
-.weui-cells__title{
-  display: flex;
-  justify-content: space-between;
-}
-.weui-cells__title>.del-item{
-  color:rgba(255,0,0,.6);
-}

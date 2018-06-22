@@ -95,7 +95,7 @@
     </view>
     <view wx:if="{{currentChannelIndex===3}}">
       <view wx:for="{{[0,1,2,3,4,5]}}" wx:key="">
-        <view class="weui-cells__title">
+        <view class="weui-cells__title item_cell_box">
           <text>按键{{item+1}}</text>
           <text wx:if="{{numIndex.scene[item].ifS}}" class="del-item" bindtap="bindDelItem">删除</text>
         </view>
@@ -163,7 +163,7 @@
     </view>
     <view wx:if="{{currentChannelIndex===5}}">
       <view wx:for="{{[0,1,2,3]}}" wx:key="">
-        <view class="weui-cells__title">
+        <view class="weui-cells__title item_cell_box">
           <text>光控{{item+1}}</text>
           <text wx:if="{{numIndex.light[item].ifS}}" class="del-item" bindtap="bindDelItem">删除</text>
         </view> 
@@ -219,7 +219,7 @@
     </view>
     <view wx:if="{{currentChannelIndex===6}}">
       <view wx:for="{{[0,1,2,3]}}" wx:key="">
-        <view class="weui-cells__title">
+        <view class="weui-cells__title item_cell_box">
           <text>红外{{item+1}}</text>
           <text wx:if="{{numIndex.infrare[item].ifS}}" class="del-item" bindtap="bindDelItem">删除</text>
         </view>
@@ -275,7 +275,7 @@
     </view>
     <view wx:if="{{currentChannelIndex===7}}">
       <view wx:for="{{[0,1,2,3]}}" wx:key="">
-        <view class="weui-cells__title">
+        <view class="weui-cells__title item_cell_box">
           <text>其他{{item+1}}</text>
           <text wx:if="{{numIndex.other[item].ifS}}" class="del-item" bindtap="bindDelItem">删除</text>
         </view> 

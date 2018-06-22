@@ -1,4 +1,4 @@
-<!--pages/gatewayAdmin/gatewayManageJd/gatewayManageJd.wxml-->
+<!--pages/cloudController/cloudConManage/cloudConManage.wxml-->
 <import src="/template/tempList.wxml" />
 
 <view class="containerr">

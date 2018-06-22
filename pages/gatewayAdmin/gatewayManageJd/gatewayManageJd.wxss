@@ -21,6 +21,3 @@
   justify-content: center;
   align-items: center;
 }
-.add-icon{
-  width:50rpx;
-}

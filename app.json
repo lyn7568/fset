@@ -1,7 +1,6 @@
 {
   "pages":[
     "pages/index/index",
-    "pages/logs/logs",
     "pages/echarts/echarts",
     "pages/login/login",
     "pages/gatewayAdmin/gatewayList/gatewayList",
@@ -10,8 +9,15 @@
     "pages/gatewayAdmin/gatewayNode/gatewayNode",
     "pages/gatewayAdmin/gatewayDetailJd/gatewayDetailJd",
     "pages/gatewayAdmin/gatewayManageJd/gatewayManageJd",
+    "pages/gatewayAdmin/gatewaySmart/gatewaySmart",
+    "pages/gatewayAdmin/gatewaySmartRelated/gatewaySmartRelated",
+    "pages/gatewayAdmin/gatewaySensor/gatewaySensor",
     "pages/gatewayAdmin/gatewayConfig/gatewayConfig",
     "pages/gatewayAdmin/gatewayAddCgq/gatewayAddCgq",
+    "pages/gatewayAdmin/gatewayAddDnb/gatewayAddDnb",
+    "pages/cloudController/cloudConList/cloudConList",
+    "pages/cloudController/cloudConManage/cloudConManage",
+    "pages/cloudController/cloudConDetail/cloudConDetail",
     "pages/getLocationMap/getLocationMap"
   ],
   "window":{

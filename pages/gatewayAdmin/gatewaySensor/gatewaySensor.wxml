@@ -1,0 +1,60 @@
+<!--pages/gatewayAdmin/gatewaySensor/gatewaySensor.wxml-->
+<import src="/template/tempList.wxml" />
+
+<view class="containerr">
+  <view class="nav">
+    <view class="nav-default {{ navbarArray[item].active }}" id="{{item}}" data-index="{{index}}" wx:for="{{array}}" wx:key="array" catchtap="onTapNavbar">
+      <view> {{navbarArray[item].text}}</view>
+    </view>
+  </view>
+</view>
+<view class="search-result result-con">
+  <scroll-view scroll-y="true">
+    <view wx:if="{{currentChannelIndex===0}}">
+      <view class="table">
+        <view class="tr bg-w">
+          <view class="th">名称</view>
+          <view class="th">类型</view>
+          <view class="th">数值(状态)</view>
+          <view class="th">模式</view>
+        </view>
+        <view class="touch-item {{item.isTouchMove ? 'touch-move-active' : ''}} {{index % 2 == 0 ? 'bg-g':'bg-w'}}" data-index="{{index}}" bindtouchstart="touchstart" bindtouchmove="touchmove" wx:for="{{listData3}}" data-list="listData3" wx:key="">
+          <view class="tr touch-content">
+            <view class="td">{{item.cl01}}</view>
+            <view class="td">{{item.cl02}}</view>
+            <view class="td">{{item.cl03}}</view>
+            <view class="td">{{item.cl04}}</view>
+          </view>
+          <view class="touch-btn">
+            <view class="btn-item row-btn-1" bindtap="configSelf">管理</view>
+            <view class="btn-item row-btn-2" bindtap="updateSelf">编辑</view>
+            <view class="btn-item del-btn"  bindtap="delSelf">删除</view>
+          </view>
+        </view>
+      </view>
+      <view class="add-float" bindtap='addCgq'>
+        <text class="iconfont icon-add"></text>
+      </view>
+    </view>
+    <view wx:if="{{currentChannelIndex===1}}">
+      <view class="table">
+        <view class="tr bg-w">
+          <view class="th">名称</view>
+          <view class="th">数值</view>
+        </view>
+        <view class="touch-item {{item.isTouchMove ? 'touch-move-active' : ''}} {{index % 2 == 0 ? 'bg-g':'bg-w'}}" wx:for="{{listData}}" wx:key="">
+          <view class="tr touch-content">
+            <view class="td">{{item.cl01}}</view>
+            <view class="td">{{item.cl02}}</view>
+          </view>
+        </view>
+      </view>
+      <view class="add-float" bindtap='addDnb'>
+        <text class="iconfont icon-add"></text>
+      </view>
+    </view>
+  </scroll-view>
+</view>
+
+ <!--弹窗-->
+  <template is="modalDialog" data="{{showModal:showModal,nameS:nameS}}" />
