@@ -15,10 +15,18 @@
             <text>开关状态</text>
           </view>
           <view class="weui-cell__ft">
-            <switch checked/>
+            <switch checked="{{tab0_kg}}"/>
           </view>
         </view>
-        <view class="weui-cell">
+        <view class="weui-cell" wx:if="{{ifGeneral}}">
+          <view class="weui-cell__bd">
+            <text>延时</text>
+          </view>
+          <view class="weui-cell__ft time-box">
+            <input type="number" value="{{timeDelay1}}" bindinput="bindTimeDelay1"></input><text>毫秒</text>
+          </view>
+        </view>
+        <view class="weui-cell" wx:if="{{!ifGeneral}}">
           <view class="weui-cell__bd">
             <text>当前状态</text>
           </view>
@@ -30,7 +38,7 @@
       <view class="weui-cells margintop2 marginbottom">
         <view class="weui-form-preview">
           <view class="weui-form-preview__ft">
-            <button type="submit" class="weui-form-preview__btn weui-form-preview__btn_primary" bindtap="">确定</button>
+            <button type="submit" class="weui-form-preview__btn weui-form-preview__btn_primary"   bindtap="sureSetting">确定</button>
           </view>
         </view>
       </view>
@@ -42,14 +50,14 @@
             <text>消防输入</text>
           </view>
           <view class="weui-cell__ft">
-            <switch checked/>
+            <switch checked="{{tab1_kg}}"/>
           </view>
         </view>
       </view>
       <view class="weui-cells margintop2 marginbottom">
         <view class="weui-form-preview">
           <view class="weui-form-preview__ft">
-            <button type="submit" class="weui-form-preview__btn weui-form-preview__btn_primary" bindtap="">确定</button>
+            <button type="submit" class="weui-form-preview__btn weui-form-preview__btn_primary"   bindtap="sureSetting">确定</button>
           </view>
         </view>
       </view>
@@ -88,7 +96,7 @@
       <view class="weui-cells margintop2 marginbottom">
         <view class="weui-form-preview">
           <view class="weui-form-preview__ft">
-            <button type="submit" class="weui-form-preview__btn weui-form-preview__btn_primary" bindtap="">确定</button>
+            <button type="submit" class="weui-form-preview__btn weui-form-preview__btn_primary" bindtap="sureSetting">确定</button>
           </view>
         </view>
       </view>
@@ -100,14 +108,14 @@
           <text wx:if="{{numIndex.scene[item].ifS}}" class="del-item" bindtap="bindDelItem">删除</text>
         </view>
         <view class="weui-cells">
-          <picker bindchange="bindSnum" value="{{numIndex.scene[item]}}" data-model="{{item}}" data-cas="scene" range="{{numArray}}">
+          <picker bindchange="bindSnum" value="{{numIndex.scene[item]}}" data-model="{{item}}" data-cas="scene" range="{{numArray}}" range-key="{{'name'}}">
             <view class="weui-cell weui-cell_border">
               <view class="weui-cell__bd">
                 <text>设备编号</text>
               </view>
               <view class="weui-cell__ft">
                 <view wx:if="{{numArray.length>0}}">
-                  <text>{{numArray[numIndex.scene[item].index]}}</text>
+                  <text>{{numArray[numIndex.scene[item].index].name}}</text>
                 </view>
                 <view wx:else>
                   <text>{{numPlaceh}}</text>
@@ -115,26 +123,26 @@
               </view>
             </view>
           </picker>
-          <picker wx:if="{{numIndex.scene[item].ifS}}" bindchange="bindJiedian" value="{{jiedianArr[jiedianArrIndex]}}" range="{{jiedianArr}}">
+          <picker wx:if="{{numIndex.scene[item].ifS}}" bindchange="bindJiedian" value="{{jiedianArrIndex}}" range="{{jiedianArr}}" range-key="{{'name'}}">
             <view class="weui-cell weui-cell_border">
               <view class="weui-cell__bd">
                 <text>节点</text>
               </view>
               <view class="weui-cell__ft">
                 <view>
-                  <text>{{jiedianArr[jiedianArrIndex]}}</text>
+                  <text>{{jiedianArr[jiedianArrIndex].name}}</text>
                 </view>
               </view>
             </view>
           </picker>
-          <picker wx:if="{{numIndex.scene[item].ifS}}" bindchange="bindAnjian" value="{{anjianArr[anjianArrIndex]}}" range="{{anjianArr}}">
+          <picker wx:if="{{numIndex.scene[item].ifS}}" bindchange="bindAnjian" value="{{anjianArrIndex}}" range="{{anjianArr}}" range-key="{{'name'}}">
             <view class="weui-cell weui-cell_border">
               <view class="weui-cell__bd">
                 <text>按键</text>
               </view>
               <view class="weui-cell__ft">
                 <view>
-                  <text>{{anjianArr[anjianArrIndex]}}</text>
+                  <text>{{anjianArr[anjianArrIndex].name}}</text>
                 </view>
               </view>
             </view>
@@ -156,7 +164,7 @@
       <view class="weui-cells margintop2 marginbottom">
         <view class="weui-form-preview">
           <view class="weui-form-preview__ft">
-            <button type="submit" class="weui-form-preview__btn weui-form-preview__btn_primary" bindtap="">确定</button>
+            <button type="submit" class="weui-form-preview__btn weui-form-preview__btn_primary"   bindtap="sureSetting">确定</button>
           </view>
         </view>
       </view>
@@ -168,14 +176,14 @@
           <text wx:if="{{numIndex.light[item].ifS}}" class="del-item" bindtap="bindDelItem">删除</text>
         </view> 
         <view class="weui-cells">
-          <picker bindchange="bindSnum" value="{{numIndex.light[item]}}" data-model="{{item}}" data-cas="light" range="{{numArray}}">
+          <picker bindchange="bindSnum" value="{{numIndex.light[item]}}" data-model="{{item}}" data-cas="light" range="{{numArray}}" range-key="{{'name'}}">
             <view class="weui-cell">
               <view class="weui-cell__bd">
                 <text>设备编号</text>
               </view>
               <view class="weui-cell__ft">
                 <view wx:if="{{numArray.length>0}}">
-                  <text>{{numArray[numIndex.light[item].index]}}</text>
+                  <text>{{numArray[numIndex.light[item].index].name}}</text>
                 </view>
                 <view wx:else>
                   <text>{{numPlaceh}}</text>
@@ -183,26 +191,26 @@
               </view>
             </view>
           </picker>
-          <picker wx:if="{{numIndex.light[item].ifS}}" bindchange="bindJiedian" value="{{jiedianArr[jiedianArrIndex]}}" range="{{jiedianArr}}">
+          <picker wx:if="{{numIndex.light[item].ifS}}" bindchange="bindJiedian" value="{{jiedianArrIndex}}" range="{{jiedianArr}}" range-key="{{'name'}}">
             <view class="weui-cell weui-cell_border">
               <view class="weui-cell__bd">
                 <text>节点</text>
               </view>
               <view class="weui-cell__ft">
                 <view>
-                  <text>{{jiedianArr[jiedianArrIndex]}}</text>
+                  <text>{{jiedianArr[jiedianArrIndex].name}}</text>
                 </view>
               </view>
             </view>
           </picker>
-          <picker wx:if="{{numIndex.light[item].ifS}}" bindchange="bindAnjian" value="{{anjianArr[anjianArrIndex]}}" range="{{anjianArr}}">
+          <picker wx:if="{{numIndex.light[item].ifS}}" bindchange="bindAnjian" value="{{anjianArrIndex}}" range="{{anjianArr}}" range-key="{{'name'}}">
             <view class="weui-cell weui-cell_border">
               <view class="weui-cell__bd">
                 <text>按键</text>
               </view>
               <view class="weui-cell__ft">
                 <view>
-                  <text>{{anjianArr[anjianArrIndex]}}</text>
+                  <text>{{anjianArr[anjianArrIndex].name}}</text>
                 </view>
               </view>
             </view>
@@ -212,7 +220,7 @@
       <view class="weui-cells margintop2 marginbottom">
         <view class="weui-form-preview">
           <view class="weui-form-preview__ft">
-            <button type="submit" class="weui-form-preview__btn weui-form-preview__btn_primary" bindtap="">确定</button>
+            <button type="submit" class="weui-form-preview__btn weui-form-preview__btn_primary"   bindtap="sureSetting">确定</button>
           </view>
         </view>
       </view>
@@ -224,14 +232,14 @@
           <text wx:if="{{numIndex.infrare[item].ifS}}" class="del-item" bindtap="bindDelItem">删除</text>
         </view>
         <view class="weui-cells">
-          <picker bindchange="bindSnum" value="{{numIndex.infrare[item]}}" data-model="{{item}}" data-cas="infrare" range="{{numArray}}">
+          <picker bindchange="bindSnum" value="{{numIndex.infrare[item]}}" data-model="{{item}}" data-cas="infrare" range="{{numArray}}" range-key="{{'name'}}">
             <view class="weui-cell">
               <view class="weui-cell__bd">
                 <text>设备编号</text>
               </view>
               <view class="weui-cell__ft">
                 <view wx:if="{{numArray.length>0}}">
-                  <text>{{numArray[numIndex.infrare[item].index]}}</text>
+                  <text>{{numArray[numIndex.infrare[item].index].name}}</text>
                 </view>
                 <view wx:else>
                   <text>{{numPlaceh}}</text>
@@ -239,26 +247,26 @@
               </view>
             </view>
           </picker>
-          <picker wx:if="{{numIndex.infrare[item].ifS}}" bindchange="bindJiedian" value="{{jiedianArr[jiedianArrIndex]}}" range="{{jiedianArr}}">
+          <picker wx:if="{{numIndex.infrare[item].ifS}}" bindchange="bindJiedian" value="{{jiedianArrIndex}}" range="{{jiedianArr}}" range-key="{{'name'}}">
             <view class="weui-cell weui-cell_border">
               <view class="weui-cell__bd">
                 <text>节点</text>
               </view>
               <view class="weui-cell__ft">
                 <view>
-                  <text>{{jiedianArr[jiedianArrIndex]}}</text>
+                  <text>{{jiedianArr[jiedianArrIndex].name}}</text>
                 </view>
               </view>
             </view>
           </picker>
-          <picker wx:if="{{numIndex.infrare[item].ifS}}" bindchange="bindAnjian" value="{{anjianArr[anjianArrIndex]}}" range="{{anjianArr}}">
+          <picker wx:if="{{numIndex.infrare[item].ifS}}" bindchange="bindAnjian" value="{{anjianArrIndex}}" range="{{anjianArr}}" range-key="{{'name'}}">
             <view class="weui-cell weui-cell_border">
               <view class="weui-cell__bd">
                 <text>按键</text>
               </view>
               <view class="weui-cell__ft">
                 <view>
-                  <text>{{anjianArr[anjianArrIndex]}}</text>
+                  <text>{{anjianArr[anjianArrIndex].name}}</text>
                 </view>
               </view>
             </view>
@@ -268,7 +276,7 @@
       <view class="weui-cells margintop2 marginbottom">
         <view class="weui-form-preview">
           <view class="weui-form-preview__ft">
-            <button type="submit" class="weui-form-preview__btn weui-form-preview__btn_primary" bindtap="">确定</button>
+            <button type="submit" class="weui-form-preview__btn weui-form-preview__btn_primary"   bindtap="sureSetting">确定</button>
           </view>
         </view>
       </view>
@@ -280,38 +288,38 @@
           <text wx:if="{{numIndex.other[item].ifS}}" class="del-item" bindtap="bindDelItem">删除</text>
         </view> 
         <view class="weui-cells">
-          <picker bindchange="bindSnum" value="{{numIndex.other[item].index}}" data-model="{{item}}" data-cas="other" range="{{numArray}}">
+          <picker bindchange="bindSnum" value="{{numIndex.other[item].index}}" data-model="{{item}}" data-cas="other" range="{{numArray}}" range-key="{{'name'}}">
             <view class="weui-cell weui-cell_border">
               <view class="weui-cell__bd">
                 <text>设备编号</text>
               </view>
               <view class="weui-cell__ft">
                 <view>
-                  <text>{{numArray[numIndex.other[item].index]}}</text>
+                  <text>{{numArray[numIndex.other[item].index].name}}</text>
                 </view>
               </view>
             </view>
           </picker>
-          <picker wx:if="{{numIndex.other[item].ifS}}" bindchange="bindJiedian" value="{{jiedianArr[jiedianArrIndex]}}" range="{{jiedianArr}}">
+          <picker wx:if="{{numIndex.other[item].ifS}}" bindchange="bindJiedian" value="{{jiedianArrIndex}}" range="{{jiedianArr}}" range-key="{{'name'}}">
             <view class="weui-cell weui-cell_border">
               <view class="weui-cell__bd">
                 <text>节点</text>
               </view>
               <view class="weui-cell__ft">
                 <view>
-                  <text>{{jiedianArr[jiedianArrIndex]}}</text>
+                  <text>{{jiedianArr[jiedianArrIndex].name}}</text>
                 </view>
               </view>
             </view>
           </picker>
-          <picker wx:if="{{numIndex.other[item].ifS}}" bindchange="bindAnjian" value="{{anjianArr[anjianArrIndex]}}" range="{{anjianArr}}">
+          <picker wx:if="{{numIndex.other[item].ifS}}" bindchange="bindAnjian" value="{{anjianArrIndex}}" range="{{anjianArr}}" range-key="{{'name'}}">
             <view class="weui-cell weui-cell_border">
               <view class="weui-cell__bd">
                 <text>按键</text>
               </view>
               <view class="weui-cell__ft">
                 <view>
-                  <text>{{anjianArr[anjianArrIndex]}}</text>
+                  <text>{{anjianArr[anjianArrIndex].name}}</text>
                 </view>
               </view>
             </view>
@@ -333,7 +341,7 @@
       <view class="weui-cells margintop2 marginbottom">
         <view class="weui-form-preview">
           <view class="weui-form-preview__ft">
-            <button type="submit" class="weui-form-preview__btn weui-form-preview__btn_primary" bindtap="">确定</button>
+            <button type="submit" class="weui-form-preview__btn weui-form-preview__btn_primary"   bindtap="sureSetting">确定</button>
           </view>
         </view>
       </view>

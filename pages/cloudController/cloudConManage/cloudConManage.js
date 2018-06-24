@@ -1,4 +1,3 @@
-// pages/cloudController/cloudConManage/cloudConManage.js
 const common = require('../../../utils/common.js');
 const tempcomjs = require('../../../template/tempList.js');
 

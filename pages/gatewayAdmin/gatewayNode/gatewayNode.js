@@ -46,29 +46,50 @@ Page({
    */
   onLoad: function (options) {
     this.setData({
-      currendId: options.id
+      wgIdNow: options.id
     });
     this.switchChannel(0);
     console.log(this.data)
   },
   manageSelf: function (e) {
-    let navbarType=this.data.navbarType
+    var that = this;
+    let navbarType = that.data.navbarType
+    let wgIp = that.data.wgIdNow
     let jdIp = e.target.dataset.ip
-    console.log(navbarType)
-    if (navbarType === 'kg'){
-      wx.navigateTo({
-        url: '../gatewayManageJd/gatewayManageJd?jdIp=' + jdIp
-      })
-    } else if (navbarType === 'znpanel'){
-      wx.navigateTo({
-        url: '../gatewaySmart/gatewaySmart?jdIp=' + jdIp
-      })
-    } else if (navbarType === 'cgq') {
-      wx.navigateTo({
-        url: '../gatewaySensor/gatewaySensor?jdIp=' + jdIp
-      })
-    }
-    
+    let jdName = e.target.dataset.name
+    common.post({
+      url: '/equipmentManagement/checkJd',
+      data: {
+        wgIp: wgIp,
+        jdIp: jdIp,
+        jdType: navbarType
+      },
+      sh: function (res) {
+        console.log(res)
+        if(res.data.result === 'success'){
+          if (navbarType === 'kg') {
+            wx.navigateTo({
+              url: '../gatewayManageJd/gatewayManageJd?jdIp=' + jdIp + '&wgIp=' + wgIp + '&jdName=' + jdName
+            })
+          } else if (navbarType === 'znpanel') {
+            wx.navigateTo({
+              url: '../gatewaySmart/gatewaySmart?jdIp=' + jdIp + '&wgIp=' + wgIp
+            })
+          } else if (navbarType === 'cgq') {
+            wx.navigateTo({
+              url: '../gatewaySensor/gatewaySensor?jdIp=' + jdIp + '&wgIp=' + wgIp
+            })
+          }
+        }else{
+          wx.showToast({
+            title: res.data.result,
+            icon: 'none'
+          })
+        }
+        
+      }
+    })
+
   },
   onTapNavbar: function (e) {
     this.switchChannel(parseInt(e.currentTarget.id));
@@ -104,7 +125,7 @@ Page({
       url: '/equipmentManagement/getJdList',
       data: {
         page: '{\"curpage\":' + that.data.pageno + ',\"pagesize\":' + that.data.pagesize + ',\"sumcount\":null}',
-        values: '{\"pid\":\"' + that.data.currendId + '\",\"ip\":\"' + that.data.searchKeyword + '\",\"key\": \"cl02\",\"order\": \"asc\",\"type\": \"' + navbarArray[index].type + '\"}',
+        values: '{\"pid\":\"' + that.data.wgIdNow + '\",\"ip\":\"' + that.data.searchKeyword + '\",\"key\": \"cl02\",\"order\": \"asc\",\"type\": \"' + navbarArray[index].type + '\"}',
         fields: '[]'
       },
       sh: function (res) {

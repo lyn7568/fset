@@ -33,7 +33,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": -1,
+			"current": 4,
 			"list": [
 				{
 					"id": 0,
@@ -63,7 +63,7 @@
 					"id": 4,
 					"name": "开关模块",
 					"pathName": "pages/gatewayAdmin/gatewayManageJd/gatewayManageJd",
-					"query": ""
+					"query": "jdIp=7&wgIp=12345677&jdName=节点7"
 				},
 				{
 					"id": -1,

@@ -28,7 +28,7 @@
           </view>
           <view class="touch-btn">
             <navigator class="btn-item row-btn-1" url="/pages/gatewayAdmin/gatewayDetailJd/gatewayDetailJd?jdIp={{item.cl02}}&wgIp={{currendId}}">详情</navigator>
-            <view class="btn-item row-btn-2" bindtap="manageSelf" data-ip="{{item.cl02}}">管理</view>
+            <view class="btn-item row-btn-2" bindtap="manageSelf" data-ip="{{item.cl02}}" data-name="{{item.cl01}}">管理</view>
           </view>
         </view>
         <template is="loadSty" data="{{loadingModalHide:loadingModalHide,loadingComplete:loadingComplete}}" />

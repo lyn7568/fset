@@ -13,6 +13,7 @@
     "pages/gatewayAdmin/gatewaySmartRelated/gatewaySmartRelated",
     "pages/gatewayAdmin/gatewaySensor/gatewaySensor",
     "pages/gatewayAdmin/gatewayConfig/gatewayConfig",
+    "pages/gatewayAdmin/gatewayConfigOther/gatewayConfigOther",
     "pages/gatewayAdmin/gatewayAddCgq/gatewayAddCgq",
     "pages/gatewayAdmin/gatewayAddDnb/gatewayAddDnb",
     "pages/cloudController/cloudConList/cloudConList",

@@ -51,8 +51,8 @@
       </view>
     </view>
     <view class="modal-footer">
-      <view class="btn-cancel" bindtap="hideModal" data-status="cancel">取消</view>
-      <view class="btn-confirm" bindtap="onConfirm" data-status="confirm">确定</view>
+      <button class="btn-cancel" bindtap="hideModal" data-status="cancel">取消</button>
+      <button class="btn-confirm" bindtap="onConfirm" data-status="confirm" disabled="{{updateState}}">确定</button>
     </view>
   </view>
 </template>

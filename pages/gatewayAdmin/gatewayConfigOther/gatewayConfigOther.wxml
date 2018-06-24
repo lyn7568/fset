@@ -1,0 +1,51 @@
+<!--pages/gatewayAdmin/gatewayConfigOther/gatewayConfigOther.wxml-->
+<import src="/template/tempList.wxml" />
+<view class="mainbody">
+  <view wx:if="" class="weui-cells weui-cells_form">
+    <view class="weui-cell weui-cell_border">
+      <view class="weui-cell__bd">
+        <text>有效时长</text>
+      </view>
+      <view class="weui-cell__ft time-box">
+        <input type="number" value="{{timeDelay}}" bindinput="bindTimeDelay"></input><text>秒</text>
+      </view>
+    </view>
+    <picker bindchange="bindCasPickerChange" value="{{casIndex}}" range="{{casArray}}">
+      <view class="weui-cell">
+        <view class="weui-cell__bd">
+          <text>触发方式</text>
+        </view>
+        <view class="weui-cell__ft">
+          <view>
+            <text>{{casArray[casIndex]}}</text>
+          </view>
+        </view>
+      </view>
+    </picker>
+  </view>
+  <view wx:if="" class="weui-cells weui-cells_form">
+    <view class="weui-cell weui-cell_border">
+      <view class="weui-cell__bd">
+        <text>低阈值</text>
+      </view>
+      <view class="weui-cell__ft">
+        <input class="weui-input" placeholder-class="phcolor" placeholder="请输入名称" value="{{eqName}}" bindinput="getEqName" />
+      </view>
+    </view>
+    <view class="weui-cell weui-cell_border">
+      <view class="weui-cell__bd">
+        <text>高阈值</text>
+      </view>
+      <view class="weui-cell__ft">
+        <input class="weui-input" placeholder-class="phcolor" placeholder="请输入名称" value="{{eqName}}" bindinput="getEqName" />
+      </view>
+    </view>
+  </view>
+
+  <view class='margintop2'>
+    <button type="primary" bindtap="addEquipment">确定</button>
+    <button class='margintop' type="default" bindtap="cacelAdd">取消</button>
+  </view>
+</view>
+
+<template is="foot" />
