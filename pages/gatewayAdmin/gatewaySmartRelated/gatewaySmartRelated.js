@@ -1,4 +1,7 @@
 // pages/gatewayAdmin/gatewaySmartRelated/gatewaySmartRelated.js
+const common = require('../../../utils/common.js');
+const tempcomjs = require('../../../template/tempList.js');
+
 Page({
 
   /**
@@ -17,7 +20,6 @@ Page({
       "1",
       "2"
     ],
-    ifSelectedNum: false,//是否选择设备
     jiedianArr: {},//节点
     jiedianArrIndex: 0,
     anjianArr: {},//按键
@@ -38,58 +40,56 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    this.setData({
+      wgIpNow: options.wgIp,
+      jdIpNow: options.jdIp,
+      xhNow: options.xh
+    });
+    this.username = wx.getStorageSync('username');
+    this.getSmartRelated()
   },
-  bindJiedian: function (e) {
+  getSmartRelated: function () {
     var that = this;
-    that.setData({
-      jiedianArrIndex: e.detail.value
+    let wgIp = that.data.wgIpNow
+    let jdIp = that.data.jdIpNow
+    let xh = that.data.xhNow
+    wx.showLoading({
+      title: '加载中',
+      mask: true
     })
-  },
-  bindAnjian: function (e) {
-    var that = this;
-    that.setData({
-      anjianArrIndex: e.detail.value
-    })
-  },
-  bindCmodel: function (e) {
-    var that = this;
-    let casIndex = that.data.casIndex;
-    let modelIndex = e.currentTarget.dataset.model;
-    let modelCas = e.currentTarget.dataset.cas;
-    let modelValue = parseInt(e.detail.value);
-    casIndex[modelCas][modelIndex] = modelValue;
-    that.setData({
-      casIndex: casIndex
-    })
-  },
-  bindSnum: function (e) { //选择设备
-    var that = this;
-    let numIndex = that.data.numIndex;
-    let modelIndex = e.currentTarget.dataset.model;
-    let modelCas = e.currentTarget.dataset.cas;
-    let modelValue = parseInt(e.detail.value);
-    numIndex[modelCas][modelIndex].index = modelValue;
-    if (modelValue !== 0) {
-      numIndex[modelCas][modelIndex].ifS = true;
-    } else {
-      numIndex[modelCas][modelIndex].ifS = false;
-    }
-    that.setData({
-      numIndex: numIndex
-    })
-  },
-  bindDelItem: function(e) {
-    wx.showModal({
-      title: '提示',
-      content: '确定要删除吗?',
-      success: function (res) {
-        if (res.confirm) {
-          console.log('用户点击确定')
-        } else if (res.cancel) {
-          console.log('用户点击取消')
+    common.post({
+      url: '/equipmentManagement/readPanelSettings',
+      data: {
+        wgIp: wgIp,
+        jdIp: jdIp,
+        index: xh
+      },
+      sh: function (res) {
+        wx.hideLoading()
+        if (res.data.result === 'success') {
+          
+        } else {
+          wx.showToast({
+            title: res.data.result,
+            icon: 'none'
+          })
         }
       }
     })
+  },
+  getShebeiBH: function () {
+    tempcomjs.getShebeiBH(this)
+  },
+  bindSnum: function (e) { //选择设备
+    tempcomjs.bindSnum(this, e)
+  },
+  bindJiedian: function (e) {
+    tempcomjs.bindJiedian(this, e)
+  },
+  bindAnjian: function (e) {
+    tempcomjs.bindAnjian(this, e)
+  },
+  bindCmodel: function (e) {
+    tempcomjs.bindCmodel(this, e)
   }
 })

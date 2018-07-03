@@ -8,12 +8,13 @@
 </template>
 
 <!-- 加载 -->
- <template name="loadSty">
+<template name="loadSty">
   <view class="loading" hidden="{{loadingModalHide}}">
     <image mode='aspectFit' src="/lib/images/loading.gif"></image>正在加载中...</view>
   <view class="loading" hidden="{{loadingComplete}}">已加载全部</view>
-</template> 
+</template>
 
+<!-- 城市级联 -->
 <template name="CityPick">
   <view hidden="{{isCity}}" class="selectorCity">
     <view class="inner_box">
@@ -55,4 +56,44 @@
       <button class="btn-confirm" bindtap="onConfirm" data-status="confirm" disabled="{{updateState}}">确定</button>
     </view>
   </view>
+</template>
+
+
+
+<!--设备级联选择节点等-->
+<template name="shebeiPick">
+  <picker bindchange="bindSnum" value="{{numIndex[modelS][item]}}" data-model="{{item}}" data-cas="{{modelS}}" range="{{numArray}}" range-key="{{'name'}}">
+    <view class="weui-cell weui-cell_border">
+      <view class="weui-cell__bd">
+        <text>设备编号</text>
+      </view>
+      <view class="weui-cell__ft">
+        <text>{{numArray[numIndex[modelS][item].index].name}}</text>
+      </view>
+    </view>
+  </picker>
+  <picker wx:if="{{numIndex[modelS][item].ifS && jiedianArr.length>0}}" bindchange="bindJiedian" data-model="{{item}}" data-cas="{{modelS}}" value="{{jiedianArrIndex[modelS][item]}}" range="{{jiedianArr}}" range-key="{{'name'}}">
+    <view class="weui-cell weui-cell_border">
+      <view class="weui-cell__bd">
+        <text>节点</text>
+      </view>
+      <view class="weui-cell__ft">
+        <view>
+          <text>{{jiedianArr[jiedianArrIndex[modelS][item].index].name}}</text>
+        </view>
+      </view>
+    </view>
+  </picker>
+  <picker wx:if="{{!jiedianArrIndex[modelS][item].ifS && anjianArr.length>0}}" bindchange="bindAnjian" data-model="{{item}}" data-cas="{{modelS}}" range="{{anjianArr}}" range-key="{{'name'}}" value="{{anjianArrIndex[modelS][item]}}">
+    <view class="weui-cell {{sborder?'':'weui-cell_border'}}">
+      <view class="weui-cell__bd">
+        <text>按键</text>
+      </view>
+      <view class="weui-cell__ft">
+        <view>
+          <text>{{anjianArr[anjianArrIndex[modelS][item].index].name}}</text>
+        </view>
+      </view>
+    </view>
+  </picker>
 </template>

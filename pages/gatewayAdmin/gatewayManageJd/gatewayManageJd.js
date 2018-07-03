@@ -44,11 +44,9 @@ Page({
     this.getCommonInfo();
     this.getListOther();
   },
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
+  onShow: function () {
+    this.getCommonInfo();
+    this.getListOther();
   },
   onTapNavbar: function (e) {
     this.switchChannel(parseInt(e.currentTarget.dataset.index));
@@ -71,15 +69,11 @@ Page({
     var self = this;
     setTimeout(function () {
       wx.stopPullDownRefresh()
-
       if (self.data.currentChannelIndex === 0) {
-        console.log(1)
-      } else if (self.data.currentChannelIndex === 1){
-        console.log(2)
-      } else if (self.data.currentChannelIndex === 2) {
-        console.log(3)
+        self.getCommonInfo();
+      } else{
+        self.getListOther()
       }
-
     }, 1000)
   },
   checkTimeSelf: function (e) {
@@ -167,16 +161,17 @@ Page({
   },
   configSelf:function(e){
     let tabTy = this.data.navbarArray[this.data.currentChannelIndex].type
-    var cltype = e.currentTarget.dataset.cltype
     if (tabTy==='ty'){
       wx.navigateTo({
         url: '../gatewayConfig/gatewayConfig?ty=1&wgIp=' + this.data.wgIpNow + '&jdIp=' + this.data.jdIpNow
       })
     } else if(tabTy === 'jdq'){
+      let clid = e.currentTarget.dataset.id
       wx.navigateTo({
-        url: '../gatewayConfig/gatewayConfig?wgIp=' + this.data.wgIpNow + '&jdIp=' + this.data.jdIpNow
+        url: '../gatewayConfig/gatewayConfig?clId=' + clid +'&wgIp=' + this.data.wgIpNow + '&jdIp=' + this.data.jdIpNow
       })
     } else if (tabTy === 'cgq') {
+      let cltype = e.currentTarget.dataset.tl
       wx.navigateTo({
         url: '../gatewayConfigOther/gatewayConfigOther?ty=' + cltype +'&wgIp=' + this.data.wgIpNow + '&jdIp=' + this.data.jdIpNow
       })
@@ -205,6 +200,7 @@ Page({
                 wx.showToast({
                   title: '删除成功'
                 })
+                that.getListOther();
               } else {
                 wx.showToast({
                   title: res.data.result,
@@ -274,7 +270,7 @@ Page({
             title: '信息修改成功',
             icon: 'success'
           })
-          that.getListData();
+          that.getListOther();
         } else {
           wx.showToast({
             title: res.data.result,

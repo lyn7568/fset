@@ -1,34 +1,8 @@
 // pages/gatewayAdmin/gatewayConfig/gatewayConfig.js
 const common = require('../../../utils/common.js');
+const tempcomjs = require('../../../template/tempList.js');
 
-const commonIndex = {
-  scene: [
-    { ifS: false, index: 0 },
-    { ifS: false, index: 0 },
-    { ifS: false, index: 0 },
-    { ifS: false, index: 0 },
-    { ifS: false, index: 0 },
-    { ifS: false, index: 0 }
-  ],
-  light: [ //光控
-    { ifS: false, index: 0 },
-    { ifS: false, index: 0 },
-    { ifS: false, index: 0 },
-    { ifS: false, index: 0 }
-  ],
-  infrare: [ //红外
-    { ifS: false, index: 0 },
-    { ifS: false, index: 0 },
-    { ifS: false, index: 0 },
-    { ifS: false, index: 0 }
-  ],
-  other: [
-    { ifS: false, index: 0 },
-    { ifS: false, index: 0 },
-    { ifS: false, index: 0 },
-    { ifS: false, index: 0 }
-  ]
-}
+
 Page({
 
   /**
@@ -73,25 +47,12 @@ Page({
       scene: [0, 0, 0, 0, 0, 0],
       other: [0, 0, 0, 0]
     },
-    numArray: [ //编号
-      {id:"0",name:"请选择"},
-      {id:"1",name:"1"},
-      { id:"2", name:"2" }
-    ],
-    ifSelectedNum:false,//是否选择设备
-    jiedianArr: [
-      { id: "0", name: "节点1" },
-      { id: "1", name: "节点2" },
-      { id: "2", name: "节点3" }
-    ],//节点
-    jiedianArrIndex: commonIndex,
-    anjianArr:[
-      { id: "0", name: "按键1" },
-      { id: "1", name: "按键2" },
-      { id: "2", name: "按键3" }
-    ],//按键
-    anjianArrIndex: commonIndex,
-    numIndex: commonIndex, //编号index
+    numArray: [],//编号
+    jiedianArr: [],//节点
+    jiedianArrIndex: JSON.parse(JSON.stringify(tempcomjs.commonIndex)),
+    anjianArr:[],//按键
+    anjianArrIndex: JSON.parse(JSON.stringify(tempcomjs.commonIndex)),
+    numIndex: JSON.parse(JSON.stringify(tempcomjs.commonIndex)), //编号index
   },
 
   /**
@@ -106,101 +67,31 @@ Page({
       this.setData({
         ifGeneral: options.ty
       });
+    }else{
+      if (options.clId) {
+        this.setData({
+          clIdNow: options.clId
+        });
+        this.getDLInfo(options.clId, 0)
+      }
     }
     this.username = wx.getStorageSync('username');
     this.getShebeiBH();
   },
   getShebeiBH: function () {
-    var that = this;
-    let wgIp = that.data.wgIpNow
-    common.post({
-      url: '/relay/initEsnNumber',
-      data: {
-        wgIp: wgIp
-      },
-      sh: function (res) {
-        let delf={id:0,name:'请选择'}
-        res.data.unshift(delf);
-        that.setData({
-          numArray: res.data.list
-        });
-      }
-    })
-  },
-  getShebeiJD: function (id,index) {
-    var that = this;
-    common.post({
-      url: '/relay/getNodeList',
-      data: {
-        id: id,
-        index: index
-      },
-      sh: function (res) {
-        that.setData({
-          jiedianArr: res.data
-        });
-      }
-    })
-  },
-  getShebeiAJ: function (id, index) {
-    var that = this;
-    common.post({
-      url: '/relay/getSelectModelList',
-      data: {
-        id: id,
-        index: index
-      },
-      sh: function (res) {
-        that.setData({
-          jiedianArr: res.data
-        });
-      }
-    })
+    tempcomjs.getShebeiBH(this)
   },
   bindSnum: function (e) { //选择设备
-    var that = this;
-    let numIndex = that.data.numIndex;
-    let modelIndex = e.currentTarget.dataset.model;
-    let modelCas = e.currentTarget.dataset.cas;
-    let modelValue = parseInt(e.detail.value);
-    numIndex[modelCas][modelIndex].index = modelValue;
-    if (modelValue !== 0) {
-      numIndex[modelCas][modelIndex].ifS = true;
-    } else {
-      numIndex[modelCas][modelIndex].ifS = false;
-    }
-    that.setData({
-      numIndex: numIndex
-    })
-    let sbNum = that.data.numArray[numIndex[modelCas][modelIndex].index].id
-    let tabIndex = that.data.navbarArray[that.data.currentChannelIndex].index
-    that.getShebeiJD(sbNum, tabIndex)
+    tempcomjs.bindSnum(this,e)
   },
   bindJiedian: function (e) {
-    var that = this;
-    that.setData({
-      jiedianArrIndex: e.detail.value
-    })
-    let jdNum = that.data.jiedianArr[e.detail.value].id
-    let tabIndex = that.data.navbarArray[that.data.currentChannelIndex].index
-    that.getShebeiAJ(jdNum, tabIndex)
+    tempcomjs.bindJiedian(this, e)
   },
   bindAnjian: function (e) {
-    var that = this;
-    that.setData({
-      anjianArrIndex: e.detail.value
-    })
+    tempcomjs.bindAnjian(this, e)
   },
   bindCmodel: function (e) {
-    var that=this;
-    let casIndex = that.data.casIndex;
-    let modelIndex = e.currentTarget.dataset.model;
-    let modelCas = e.currentTarget.dataset.cas;
-    let modelValue = parseInt(e.detail.value);
-    casIndex[modelCas][modelIndex] = modelValue;
-    that.setData({
-      casIndex: casIndex
-    })
+    tempcomjs.bindCmodel(this, e)
   },
   bindTimeDelay1: function (e) {
     this.setData({
@@ -247,6 +138,7 @@ Page({
   },
   switchChannel: function (targetChannelIndex) {
     let navbarArray = this.data.navbarArray;
+    
     navbarArray.forEach((item, index, array) => {
       item.active = '';
       if (index == targetChannelIndex) {
@@ -255,9 +147,60 @@ Page({
     });
     this.setData({
       navbarArray: navbarArray,
-      currentChannelIndex: targetChannelIndex
+      currentChannelIndex: targetChannelIndex,
+      jiedianArr: [],//节点
+      jiedianArrIndex: JSON.parse(JSON.stringify(tempcomjs.commonIndex)),
+      anjianArr: [],//按键
+      anjianArrIndex: JSON.parse(JSON.stringify(tempcomjs.commonIndex))
     });
-    // this.search(targetChannelIndex);
+    if (this.data.clIdNow){
+      let tabClId = this.data.clIdNow
+      this.getDLInfo(tabClId,targetChannelIndex);
+    }
+  },
+  getDLInfo: function (id,targetChannelIndex){
+    var that = this;
+    let tabindex = that.data.navbarArray[targetChannelIndex].index
+    wx.showLoading({
+      title: '加载中',
+      mask: true
+    })
+    common.post({
+      url: '/relay/jdqConfigShow',
+      data: {
+        mid: id,
+        index: tabindex
+      },
+      sh: function (res) {
+        wx.hideLoading()
+        if (res.data.result === 'success') {
+          if (tabindex === 6){
+            if (res.data.code === '开启'){
+              that.setData({
+                tab1_kg: true
+              });
+            } else if (res.data.code === '关闭') {
+              that.setData({
+                tab1_kg: false
+              });
+            }
+          } else if (tabindex === 1) {
+            let base=[];
+            base = res.data.list[0].cl01.split(',');
+            that.setData({
+              timeDelay: base[0],
+              timeInterval: base[1],
+              // casIndex[base][0]: base[2]
+            });
+          }
+        } else {
+          wx.showToast({
+            title: res.data.result,
+            icon: 'none'
+          })
+        }
+      }
+    })
   },
   sureSetting:function(e){
     var that = this;

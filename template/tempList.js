@@ -1,3 +1,33 @@
+const common = require('../utils/common.js');
+
+const commonIndex = {
+  scene: [
+    { ifS: false, index: 0 },
+    { ifS: false, index: 0 },
+    { ifS: false, index: 0 },
+    { ifS: false, index: 0 },
+    { ifS: false, index: 0 },
+    { ifS: false, index: 0 }
+  ],
+  light: [ //光控
+    { ifS: false, index: 0 },
+    { ifS: false, index: 0 },
+    { ifS: false, index: 0 },
+    { ifS: false, index: 0 }
+  ],
+  infrare: [ //红外
+    { ifS: false, index: 0 },
+    { ifS: false, index: 0 },
+    { ifS: false, index: 0 },
+    { ifS: false, index: 0 }
+  ],
+  other: [
+    { ifS: false, index: 0 },
+    { ifS: false, index: 0 },
+    { ifS: false, index: 0 },
+    { ifS: false, index: 0 }
+  ]
+}
 //===============滑动操作=============
 function touchstart(that, nowEvent) {
   //开始触摸时 重置所有删除
@@ -65,10 +95,127 @@ function hideModal(that) {
   });
 }
 
+//==============设备编号选择级联节点=============
+function getShebeiBH(that) {
+  let wgIp = that.data.wgIpNow
+  common.post({
+    url: '/relay/initEsnNumber',
+    data: {
+      wgIp: wgIp
+    },
+    sh: function (res) {
+      let delf = { id: 0, name: '请选择' }
+      res.data.unshift(delf);
+      that.setData({
+        numArray: res.data
+      });
+    }
+  })
+}
+function getShebeiJD(that, id, index) {
+  common.post({
+    url: '/relay/getNodeList',
+    data: {
+      id: id,
+      index: index
+    },
+    sh: function (res) {
+      that.setData({
+        jiedianArr: res.data.list
+      });
+      getShebeiAJ(that, res.data.list[0].id, index)
+    }
+  })
+}
+function getShebeiAJ(that, id, index) {
+  common.post({
+    url: '/relay/getSelectModelList',
+    data: {
+      id: id,
+      index: index
+    },
+    sh: function (res) {
+      that.setData({
+        anjianArr: res.data
+      });
+    }
+  })
+}
+function bindSnum(that, nowEvent) { //选择设备
+  let numIndex2 = that.data.numIndex;
+  let modelIndex = nowEvent.currentTarget.dataset.model;
+  let modelCas = nowEvent.currentTarget.dataset.cas;
+  let modelValue = parseInt(nowEvent.detail.value);
+  numIndex2[modelCas][modelIndex].index = modelValue;
+  if (modelValue !== 0) {
+    numIndex2[modelCas][modelIndex].ifS = true;
+  } else {
+    numIndex2[modelCas][modelIndex].ifS = false;
+  }
+  that.setData({
+    numIndex: numIndex2
+  })
+  let sbNum = that.data.numArray[numIndex2[modelCas][modelIndex].index].id;
+  let tabIndex = that.data.navbarArray[that.data.currentChannelIndex].index;
+  getShebeiJD(that, sbNum, tabIndex)
+}
+function bindJiedian(that, nowEvent) {
+  let anjianArr2 = that.data.anjianArr;
+
+  let jiedianArrIndex2 = that.data.jiedianArrIndex;
+  let modelIndex = nowEvent.currentTarget.dataset.model;
+  let modelCas = nowEvent.currentTarget.dataset.cas;
+  let modelValue = parseInt(nowEvent.detail.value);
+  jiedianArrIndex2[modelCas][modelIndex].index = modelValue;
+  if (anjianArr2.length > 0) {
+    jiedianArrIndex2[modelCas][modelIndex].ifS = false;
+  } else {
+    jiedianArrIndex2[modelCas][modelIndex].ifS = true;
+  }
+  that.setData({
+    jiedianArrIndex: jiedianArrIndex2
+  })
+
+  let jdNum = that.data.jiedianArr[nowEvent.detail.value].id
+  let tabIndex = that.data.navbarArray[that.data.currentChannelIndex].index
+  getShebeiAJ(that, jdNum, tabIndex)
+}
+function bindAnjian(that,nowEvent) {
+  let anjianArr2 = that.data.anjianArr;
+  let anjianArrIndex2 = that.data.anjianArrIndex;
+  let modelIndex = nowEvent.currentTarget.dataset.model;
+  let modelCas = nowEvent.currentTarget.dataset.cas;
+  let modelValue = parseInt(nowEvent.detail.value);
+  anjianArrIndex2[modelCas][modelIndex].index = modelValue;
+  if (anjianArr2.length > 0) {
+    anjianArrIndex2[modelCas][modelIndex].ifS = false;
+  } else {
+    anjianArrIndex2[modelCas][modelIndex].ifS = true;
+  }
+  that.setData({
+    anjianArrIndex: anjianArrIndex2
+  })
+}
+function bindCmodel(that,nowEvent) {
+  let casIndex = that.data.casIndex;
+  let modelIndex = nowEvent.currentTarget.dataset.model;
+  let modelCas = nowEvent.currentTarget.dataset.cas;
+  let modelValue = parseInt(nowEvent.detail.value);
+  casIndex[modelCas][modelIndex] = modelValue;
+  that.setData({
+    casIndex: casIndex
+  })
+}
 
 module.exports = {
   touchstart,
   touchmove,
   showDialogBtn,
-  hideModal
+  hideModal,
+  getShebeiBH,
+  bindSnum,
+  bindJiedian,
+  bindAnjian,
+  bindCmodel,
+  commonIndex
 }

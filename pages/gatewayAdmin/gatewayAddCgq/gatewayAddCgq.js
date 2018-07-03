@@ -64,6 +64,7 @@ Page({
     var that = this;
     let wgIp = that.data.wgIpNow
     let jdIp = that.data.jdIpNow
+    let casFlag = that.data.casFlag
     if (!that.data.eqName) {
       wx.showToast({
         title: '名称不能为空',
@@ -71,15 +72,29 @@ Page({
       })
       return
     }
-    common.post({
-      url: '/android/relay/addCgq',
-      data: {
+    var url='',dataS={}
+    if (casFlag==='1'){
+      url = '/android/relay/addCgq';
+      dataS = {
         wgIp: wgIp,
         jdIp: jdIp,
         name: that.data.eqName,
-        type: parseInt(that.data.casIndex)+1,
+        type: parseInt(that.data.casIndex) + 1,
         username: that.username
-      },
+      }
+    } else if(casFlag === '2'){
+      url = '/sensor/addCgq';
+      dataS = {
+        wgIp: wgIp,
+        jdIp: jdIp,
+        name: that.data.eqName,
+        type: parseInt(that.data.casIndex) + 1
+        // username: that.username
+      }
+    }
+    common.post({
+      url: url,
+      data: dataS,
       sh: function (res) {
         console.log(res);
         if (res.data.result === 'success') {

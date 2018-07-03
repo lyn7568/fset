@@ -16,25 +16,50 @@ Page({
     }],
     array: [0, 1],
     currentChannelIndex: 0,
-    listData: [{
-      cl01: "继电器1继电器1",
-      cl02: "继电器1"
-    }],
-    listData3: [{
-      cl01: "红外",
-      cl02: "红外传感器",
-      cl03: "正常",
-      cl04: "空闲模式",
-    }],
+    listDataD: [],
+    listDataC: [],
     startX: 0, //开始坐标
-    startY: 0,
+    startY: 0
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    this.setData({
+      wgIpNow: options.wgIp,
+      jdIpNow: options.jdIp
+    });
+    this.username = wx.getStorageSync('username');
+    this.getSensorinfo()
+  },
+  onShow: function () {
+    this.getSensorinfo()
+  },
+  getSensorinfo: function () {
+    var that = this;
+    let wgIp = that.data.wgIpNow
+    let jdIp = that.data.jdIpNow
+    wx.showLoading({
+      title: '加载中',
+      mask: true
+    })
+    common.post({
+      url: '/android/sensor/getModelList',
+      data: {
+        wgIp: wgIp,
+        jdIp: jdIp,
+        username:that.username
+      },
+      sh: function (res) {
+        wx.hideLoading()
+        that.setData({
+          listDataC: res.data.cgq,
+          listDataD: res.data.dnt,
+          ifShowDnAdd: res.data.show
+        });
+      }
+    })
   },
   onTapNavbar: function (e) {
     this.switchChannel(parseInt(e.currentTarget.id));
@@ -53,20 +78,176 @@ Page({
     });
     // this.search(targetChannelIndex);
   },
+  addCgq: function () {
+    wx.navigateTo({
+      url: '../gatewayAddCgq/gatewayAddCgq?flag=2&jdIp=' + this.data.jdIpNow + '&wgIp=' + this.data.wgIpNow
+    })
+  },
+  addDnb: function () {
+    wx.navigateTo({
+      url: '../gatewayAddDnb/gatewayAddDnb?jdIp=' + this.data.jdIpNow + '&wgIp=' + this.data.wgIpNow
+    })
+  },
+  delDnb: function () {
+    var that = this;
+    let wgIp = that.data.wgIpNow
+    let jdIp = that.data.jdIpNow
+    wx.showModal({
+      title: '提示',
+      content: '确定要删除吗?',
+      success: function (res) {
+        if (res.confirm) {
+          common.post({
+            url: '/sensor/deleteDnt',
+            data: {
+              wgIp: wgIp,
+              jdIp: jdIp
+            },
+            sh: function (res) {
+              if (res.data.result === 'success') {
+                wx.showToast({
+                  title: '删除成功'
+                })
+                that.getSensorinfo()
+              } else {
+                wx.showToast({
+                  title: res.data.result,
+                  icon: 'none'
+                })
+              }
+            }
+          })
+        } else if (res.cancel) {
+          console.log('用户点击取消')
+        }
+      }
+    })
+  },
+  configSelf: function (e) {
+    var that = this;
+    let wgIp = that.data.wgIpNow
+    let jdIp = that.data.jdIpNow
+    // let xh = e.target.dataset.id
+    // common.post({
+    //   url: '/equipmentManagement/panelKeyCf',
+    //   data: {
+    //     wgIp: wgIp,
+    //     jdIp: jdIp,
+    //     xh: xh
+    //   },
+    //   sh: function (res) {
+    //     if (res.data.result === 'success') {
+    //       wx.showToast({
+    //         title: '控制按键' + xh
+    //       })
+    //     } else {
+    //       wx.showToast({
+    //         title: res.data.result,
+    //         icon: 'none'
+    //       })
+    //     }
+    //   }
+    // })
+  },
+  delSelf: function (e) {
+    var that =this
+    var cgqId = e.currentTarget.dataset.id
+    wx.showModal({
+      title: '提示',
+      content: '确定要删除吗?',
+      success: function (res) {
+        if (res.confirm) {
+          common.post({
+            url: '/sensor/deleteCgq',
+            data: {
+              id: cgqId
+            },
+            sh: function (res) {
+              if (res.data.result === 'success') {
+                wx.showToast({
+                  title: '删除成功'
+                })
+                that.getSensorinfo()
+                // that.setData({
+                //   listDataC: util.removeArrOne(that.data.listDataC, cgqId)
+                // });
+              } else {
+                wx.showToast({
+                  title: res.data.result,
+                  icon: 'none'
+                })
+              }
+            }
+          })
+        } else if (res.cancel) {
+          console.log('用户点击取消')
+        }
+      }
+    })
+  },
   touchstart: function (e) {
     tempcomjs.touchstart(this, e);
   },
   touchmove: function (e) {
     tempcomjs.touchmove(this, e);
   },
-  addCgq: function () {
-    wx.navigateTo({
-      url: '../gatewayAddCgq/gatewayAddCgq?flag=2'
+  updateSelf: function (e) {
+    this.showDialogBtn()
+    this.setData({
+      updateId: e.currentTarget.dataset.id,
+      updateName: e.currentTarget.dataset.name,
+      updateState: true,
+      nameS: e.currentTarget.dataset.name
     })
   },
-  addDnb: function () {
-    wx.navigateTo({
-      url: '../gatewayAddDnb/gatewayAddDnb'
+  tapName: function (e) {
+    if (e.detail.value !== this.data.updateName) {
+      this.setData({
+        updateState: false
+      })
+    } else {
+      this.setData({
+        updateState: true
+      })
+    }
+    this.setData({
+      nameS: e.detail.value
+    })
+  },
+  showDialogBtn: function () {
+    tempcomjs.showDialogBtn(this)
+  },
+  hideModal: function () {
+    tempcomjs.hideModal(this)
+  },
+  onConfirm: function () {
+    var that = this;
+    wx.showLoading({
+      title: '加载中',
+      mask: true
+    })
+    common.post({
+      url: '/sensor/editName',
+      data: {
+        id: that.data.updateId,
+        name: that.data.nameS
+      },
+      sh: function (res) {
+        wx.hideLoading()
+        if (res.data.result === 'success') {
+          that.hideModal();
+          wx.showToast({
+            title: '信息修改成功',
+            icon: 'success'
+          })
+          that.getSmartinfo();
+        } else {
+          wx.showToast({
+            title: res.data.result,
+            icon: 'none'
+          })
+        }
+      }
     })
   }
 })

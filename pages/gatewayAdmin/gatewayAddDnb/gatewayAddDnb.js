@@ -16,11 +16,62 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.setData({
+      wgIpNow: options.wgIp,
+      jdIpNow: options.jdIp
+    })
+    this.username = wx.getStorageSync('username');
   },
   bindCasPickerChange: function (e) {
     this.setData({
       casIndex: e.detail.value
+    })
+  },
+  getEqName(e) {
+    this.setData({
+      eqName: e.detail.value
+    })
+  },
+  cacelAdd() {
+    wx.navigateBack({
+      delta: 1
+    })
+  },
+  addEquipment: function () {
+    var that = this;
+    let wgIp = that.data.wgIpNow
+    let jdIp = that.data.jdIpNow
+    if (!that.data.eqName) {
+      wx.showToast({
+        title: '名称不能为空',
+        icon: 'none'
+      })
+      return
+    }
+    common.post({
+      url: '/sensor/addDnt',
+      data: {
+        wgIp: wgIp,
+        jdIp: jdIp,
+        type: parseInt(that.data.casIndex) + 1,
+        dntIp:''
+      },
+      sh: function (res) {
+        console.log(res);
+        if (res.data.result === 'success') {
+          wx.showToast({
+            title: '添加成功'
+          })
+          wx.navigateBack({
+            delta: 1
+          })
+        } else {
+          wx.showToast({
+            title: res.data.result,
+            icon: 'none'
+          })
+        }
+      }
     })
   }
 })
