@@ -29,6 +29,13 @@ Page({
   onShow: function () {
     this.getSmartinfo()
   },
+  onPullDownRefresh: function (event) {
+    var self = this;
+    setTimeout(function () {
+      wx.stopPullDownRefresh()
+      self.getSmartinfo()
+    }, 1000)
+  },
   getSmartinfo:function(){
     var that = this;
     let wgIp = that.data.wgIpNow

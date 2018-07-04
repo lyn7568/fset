@@ -36,6 +36,13 @@ Page({
   onShow: function () {
     this.getSensorinfo()
   },
+  onPullDownRefresh: function (event) {
+    var self = this;
+    setTimeout(function () {
+      wx.stopPullDownRefresh()
+      self.getSensorinfo()
+    }, 1000)
+  },
   getSensorinfo: function () {
     var that = this;
     let wgIp = that.data.wgIpNow
@@ -168,9 +175,6 @@ Page({
                   title: '删除成功'
                 })
                 that.getSensorinfo()
-                // that.setData({
-                //   listDataC: util.removeArrOne(that.data.listDataC, cgqId)
-                // });
               } else {
                 wx.showToast({
                   title: res.data.result,

@@ -7,7 +7,7 @@
         <text>电能表地址</text>
       </view>
       <view class="weui-cell__ft">
-        <input class="weui-input" placeholder-class="phcolor" placeholder="请输入名称" value="{{eqName}}" bindinput="getEqName" />
+        <input class="weui-input" placeholder-class="phcolor" placeholder="请输入地址" value="{{eqName}}" bindinput="getEqName" />
       </view>
     </view>
     <picker bindchange="bindCasPickerChange" value="{{casIndex}}" range="{{casArray}}">

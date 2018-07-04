@@ -53,6 +53,8 @@ Page({
     anjianArr:[],//按键
     anjianArrIndex: JSON.parse(JSON.stringify(tempcomjs.commonIndex)),
     numIndex: JSON.parse(JSON.stringify(tempcomjs.commonIndex)), //编号index
+    tab1_kg: 0,
+    tab0_kg: 0
   },
 
   /**
@@ -177,11 +179,11 @@ Page({
           if (tabindex === 6){
             if (res.data.code === '开启'){
               that.setData({
-                tab1_kg: true
+                tab1_kg: 1
               });
             } else if (res.data.code === '关闭') {
               that.setData({
-                tab1_kg: false
+                tab1_kg: 0
               });
             }
           } else if (tabindex === 1) {
@@ -209,6 +211,13 @@ Page({
     let jdIp = that.data.jdIpNow
     var setVals = ''
     if (tab === 0){
+      if (!that.data.timeDelay1) {
+        wx.showToast({
+          title: '延时不能为空',
+          icon: 'none'
+        })
+        return
+      }
       setVals = {
         "onOff": that.data.tab0_kg,
         "tyDelay":that.data.timeDelay1
@@ -218,6 +227,20 @@ Page({
         "onOff":that.data.tab1_kg
       }
     } else if (tab === 2) {
+      if (!that.data.timeDelay) {
+        wx.showToast({
+          title: '吸合延时不能为空',
+          icon: 'none'
+        })
+        return
+      }
+      if (!that.data.timeInterval) {
+        wx.showToast({
+          title: '吸合时长不能为空',
+          icon: 'none'
+        })
+        return
+      }
       setVals = {
         "delay":that.data.timeDelay,
         "timer":that.data.timeInterval,

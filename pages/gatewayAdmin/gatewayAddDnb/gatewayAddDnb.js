@@ -43,7 +43,7 @@ Page({
     let jdIp = that.data.jdIpNow
     if (!that.data.eqName) {
       wx.showToast({
-        title: '名称不能为空',
+        title: '地址不能为空',
         icon: 'none'
       })
       return
@@ -54,7 +54,7 @@ Page({
         wgIp: wgIp,
         jdIp: jdIp,
         type: parseInt(that.data.casIndex) + 1,
-        dntIp:''
+        dntIp: that.data.eqName
       },
       sh: function (res) {
         console.log(res);

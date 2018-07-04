@@ -9,8 +9,10 @@ Page({
   data: {
     listData: [],
     tableTh: {
-      "one": "节点名称",
-      "two": "节点地址"
+      "one": "名称",
+      "two": "地址",
+      "three": "类型",
+      "four": "状态"
     },
     scrollTop: 100,
     navbarArray: [{
@@ -38,7 +40,8 @@ Page({
     loadingModalHide: false,
     loadingComplete: true,
     startX: 0, //开始坐标
-    startY: 0
+    startY: 0,
+    updateState:false
   },
 
   /**
@@ -49,7 +52,7 @@ Page({
       wgIdNow: options.id
     });
     this.switchChannel(0);
-    console.log(this.data)
+    this.username = wx.getStorageSync('username');
   },
   manageSelf: function (e) {
     var that = this;
@@ -57,12 +60,20 @@ Page({
     let wgIp = that.data.wgIdNow
     let jdIp = e.target.dataset.ip
     let jdName = e.target.dataset.name
+    var jdType=''
+    if (navbarType === 'kg') {
+      jdType = '继电器'
+    } else if (navbarType === 'znpanel') {
+      jdType = '触摸面板'
+    } else if (navbarType === 'cgq') {
+      jdType = '传感器'
+    }
     common.post({
       url: '/equipmentManagement/checkJd',
       data: {
         wgIp: wgIp,
         jdIp: jdIp,
-        jdType: navbarType
+        jdType: jdType
       },
       sh: function (res) {
         console.log(res)
@@ -206,5 +217,67 @@ Page({
   },
   touchmove: function (e) {
     tempcomjs.touchmove(this, e);
+  },
+  updateSelf: function (e) {
+    this.showDialogBtn()
+    this.setData({
+      updateId: e.currentTarget.dataset.ip,
+      updateName: e.currentTarget.dataset.name,
+      updateState: true,
+      nameS: e.currentTarget.dataset.name
+    })
+  },
+  tapName: function (e) {
+    if (e.detail.value !== this.data.updateName) {
+      this.setData({
+        updateState: false
+      })
+    } else {
+      this.setData({
+        updateState: true
+      })
+    }
+    this.setData({
+      nameS: e.detail.value
+    })
+  },
+  showDialogBtn: function () {
+    tempcomjs.showDialogBtn(this)
+  },
+  hideModal: function () {
+    tempcomjs.hideModal(this)
+  },
+  onConfirm: function () {
+    var that = this;
+    wx.showLoading({
+      title: '加载中',
+      mask: true
+    })
+    common.post({
+      url: '/android/equipmentManagement/editName',
+      data: {
+        type: 'jd',
+        pid: that.data.wgIdNow,
+        username: that.username,
+        ip: that.data.updateId,
+        name: that.data.nameS
+      },
+      sh: function (res) {
+        wx.hideLoading()
+        if (res.data.result === 'success') {
+          that.hideModal();
+          wx.showToast({
+            title: '信息修改成功',
+            icon: 'success'
+          })
+          that.getJdList(that.data.currentChannelIndex);
+        } else {
+          wx.showToast({
+            title: res.data.result,
+            icon: 'none'
+          })
+        }
+      }
+    })
   }
 })

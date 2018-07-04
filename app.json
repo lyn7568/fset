@@ -7,7 +7,6 @@
     "pages/gatewayAdmin/gatewayAdd/gatewayAdd",
     "pages/gatewayAdmin/gatewayUpdate/gatewayUpdate",
     "pages/gatewayAdmin/gatewayNode/gatewayNode",
-    "pages/gatewayAdmin/gatewayDetailJd/gatewayDetailJd",
     "pages/gatewayAdmin/gatewayManageJd/gatewayManageJd",
     "pages/gatewayAdmin/gatewaySmart/gatewaySmart",
     "pages/gatewayAdmin/gatewaySmartRelated/gatewaySmartRelated",

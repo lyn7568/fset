@@ -1,3 +1,4 @@
 {
-  "navigationBarTitleText": "智能面板"
+  "navigationBarTitleText": "智能面板",
+  "enablePullDownRefresh": true
 }
