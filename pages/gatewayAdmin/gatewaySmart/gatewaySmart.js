@@ -140,7 +140,7 @@ Page({
     common.post({
       url: '/android/equipmentManagement/editName',
       data: {
-        wgIp: wgIp,
+        pid: wgIp,
         jdIp: jdIp,
         ip: that.data.updateId,
         type: 'key',
