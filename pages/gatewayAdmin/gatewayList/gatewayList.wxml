@@ -1,5 +1,6 @@
 <!--pages/gatewayAdmin/gatewayList/gatewayList.wxml-->
 <import src="/template/tempList.wxml" />
+<wxs src="../../../template/tempList.wxs" module="tempWxs" />
 
 <view class="mainbody">
   <view class="weui-cells">
@@ -67,4 +68,18 @@
       <button class="jd_btn" data-ip="{{listData.cl02}}" bindtap="goToJiedian">设备节点</button>
   </view>
 </view>
-<!-- <template is="foot" /> -->
+
+<!-- 删除弹窗 -->
+<view class="modal-mask" bindtap="hideModal" catchtouchmove="tempWxs.preventTouchMove" wx:if="{{showModal}}"></view>
+<view class="modal-dialog" wx:if="{{showModal}}">
+  <view class="modal-title">删除</view>
+  <view class="modal-content">
+    <view class="modal-input">
+      <input type="password" class="input" placeholder-class="phcolor" placeholder="请输入用户密码" bindinput="tapName" value="{{nameS}}"></input>
+    </view>
+  </view>
+  <view class="modal-footer">
+    <button class="btn-cancel" bindtap="hideModal" data-status="cancel">取消</button>
+    <button class="btn-confirm" bindtap="onConfirm" data-status="confirm" disabled="{{updateState}}">确定</button>
+  </view>
+</view>

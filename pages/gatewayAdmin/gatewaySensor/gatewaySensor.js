@@ -31,7 +31,6 @@ Page({
       jdIpNow: options.jdIp
     });
     this.username = wx.getStorageSync('username');
-    this.getSensorinfo()
   },
   onShow: function () {
     this.getSensorinfo()

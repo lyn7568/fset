@@ -1,3 +1,6 @@
 {
-  "navigationBarTitleText": "关联配置"
+  "navigationBarTitleText": "关联配置",
+  "usingComponents": {
+    "selectM": "/components/selectM/selectM"
+  }
 }

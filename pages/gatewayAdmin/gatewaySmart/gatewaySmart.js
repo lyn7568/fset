@@ -24,7 +24,6 @@ Page({
       jdIpNow: options.jdIp
     });
     this.username = wx.getStorageSync('username');
-    this.getSmartinfo()
   },
   onShow: function () {
     this.getSmartinfo()

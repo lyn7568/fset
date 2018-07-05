@@ -10,9 +10,7 @@ flex-direction: column;
   display: flex;
   justify-content: space-between;
 }
-.weui-cells__title.item_cell_box>.del-item{
-  color:rgba(255,0,0,.6);
-}
+
 .weui-form-preview{
   background-color: #ffffff;
 } 

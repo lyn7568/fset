@@ -3,42 +3,14 @@ const common = require('../../../utils/common.js');
 const tempcomjs = require('../../../template/tempList.js');
 
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
-    casArray: { //模式
-      scene: ['反转', '吸合', '释放', '点动']
-    },
-    casIndex: { //模式index
-      scene: [0, 0, 0, 0, 0, 0]
-    },
-    numPlaceh: '请选择',
-    numArray: [ //编号
-      "请选择",
-      "1",
-      "2"
-    ],
-    jiedianArr: {},//节点
-    jiedianArrIndex: 0,
-    anjianArr: {},//按键
-    anjianArrIndex: 0,
-    numIndex: { //编号index
-      scene: [
-        { ifS: false, index: 0 },
-        { ifS: false, index: 0 },
-        { ifS: false, index: 0 },
-        { ifS: false, index: 0 },
-        { ifS: false, index: 0 },
-        { ifS: false, index: 0 }
-      ]
+    numArray: [],
+    changelist:[],
+    sceneArr:{
+      arr:[0,1,2,3,4,5],
+      hasCfms:true
     }
   },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
   onLoad: function (options) {
     this.setData({
       wgIpNow: options.wgIp,
@@ -47,6 +19,20 @@ Page({
     });
     this.username = wx.getStorageSync('username');
     this.getSmartRelated()
+    this.getShebeiBH()
+
+    let changelist = this.data.changelist;
+    let sceneArr = this.data.sceneArr;
+    sceneArr.arr.forEach((item, index, array) => {
+      if (sceneArr.hasCfms){
+        changelist[item] = 'qxz,qxz,qxz,0';
+      }else{
+        changelist[item] = 'qxz,qxz,qxz';
+      }
+    });
+    this.setData({
+      changelist: changelist
+    });
   },
   getSmartRelated: function () {
     var that = this;
@@ -67,7 +53,20 @@ Page({
       sh: function (res) {
         wx.hideLoading()
         if (res.data.result === 'success') {
-          
+          if (res.data.code.length > 0) {
+            var codeList=[],
+              changelist = that.data.changelist
+            for (let i = 0; i < res.data.code.length; i++) {
+              codeList[i] = res.data.code[i];
+              changelist[i] = res.data.code[i];
+            }
+            that.setData({
+              changelist: changelist
+            });
+            codeList.forEach((item, index, array) => {
+              that.selectComponent("#panel" + index).initdata(item)
+            });
+          }
         } else {
           wx.showToast({
             title: res.data.result,
@@ -80,16 +79,66 @@ Page({
   getShebeiBH: function () {
     tempcomjs.getShebeiBH(this)
   },
-  bindSnum: function (e) { //选择设备
-    tempcomjs.bindSnum(this, e)
+  propChange: function (e) {
+    this.data.changelist[e.detail.index] = e.detail.str;
+    this.setData({
+      changelist: this.data.changelist
+    })
   },
-  bindJiedian: function (e) {
-    tempcomjs.bindJiedian(this, e)
-  },
-  bindAnjian: function (e) {
-    tempcomjs.bindAnjian(this, e)
-  },
-  bindCmodel: function (e) {
-    tempcomjs.bindCmodel(this, e)
+  sureSetting: function (e) {
+    var that = this;
+    let tab = that.data.currentChannelIndex
+    let wgIp = that.data.wgIpNow
+    let jdIp = that.data.jdIpNow
+    let xh = that.data.xhNow
+    let changelist = that.data.changelist
+    var setVals = []
+    for (let i = 0; i < changelist.length; i++){
+      var arr = changelist[i].split(',');
+      if (arr.length>3){
+        setVals[i] = {
+          "qxz": arr[0],
+          "qxzNode": arr[1],
+          "qxzModel": arr[2],
+          "cfms": arr[3]
+        };
+      }else{
+        setVals[i] = {
+          "qxz": arr[0],
+          "qxzNode": arr[1],
+          "qxzModel": arr[2]
+        };
+      }
+    }
+    wx.showLoading({
+      title: '加载中',
+      mask: true
+    })
+    common.post({
+      url: '/equipmentManagement/panelSettings',
+      data: {
+        wgIp: wgIp,
+        jdIp: jdIp,
+        jdqls: xh,
+        index: 2,
+        value: JSON.stringify(setVals)
+      },
+      sh: function (res) {
+        wx.hideLoading()
+        if (res.data.result === 'success') {
+          wx.showToast({
+            title: '关联设置成功'
+          })
+          wx.navigateBack({
+            delta: 1
+          })
+        } else {
+          wx.showToast({
+            title: res.data.result,
+            icon: 'none'
+          })
+        }
+      }
+    })
   }
 })

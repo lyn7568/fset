@@ -1,1 +1,5 @@
-{}
+{
+  "usingComponents": {
+    "selectM": "/components/selectM/selectM"
+  }
+}

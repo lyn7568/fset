@@ -41,8 +41,6 @@ Page({
       refreshTime:util.formatTime(new Date())
     });
     this.username = wx.getStorageSync('username');
-    this.getCommonInfo();
-    this.getListOther();
   },
   onShow: function () {
     this.getCommonInfo();

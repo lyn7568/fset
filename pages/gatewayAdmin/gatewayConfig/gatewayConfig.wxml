@@ -82,14 +82,14 @@
             <input type="number" placeholder-class="phcolor" placeholder="请输入吸合时长" value="{{timeInterval}}" bindinput="bindTimeInterval"></input><text>秒</text>
           </view>
         </view>
-        <picker bindchange="bindCmodel" value="{{casIndex.base[0]}}" data-model="{{0}}" data-cas="base" range="{{casArray.base}}">
+        <picker bindchange="bindBmodel" value="{{casBIndex}}" range="{{casBase}}">
           <view class="weui-cell">
             <view class="weui-cell__bd">
               <text>触发方式</text>
             </view>
             <view class="weui-cell__ft">
               <view>
-                <text>{{casArray.base[casIndex.base[0]]}}</text>
+                <text>{{casBase[casBIndex]}}</text>
               </view>
             </view>
           </view>
@@ -104,27 +104,18 @@
       </view>
     </view>
     <view wx:if="{{currentChannelIndex===3}}">
-      <view wx:for="{{[0,1,2,3,4,5]}}" wx:key="">
-        <view class="weui-cells__title item_cell_box">
-          <text>按键{{item+1}}</text>
-          <text wx:if="{{numIndex.scene[item].ifS}}" class="del-item" bindtap="bindDelItem">删除</text>
-        </view>
-        <view class="weui-cells">
-          <template is="shebeiPick" data="{{item:item,modelS:'scene',numArray:numArray,numIndex:numIndex,jiedianArr:jiedianArr,jiedianArrIndex:jiedianArrIndex,anjianArr:anjianArr,anjianArrIndex:anjianArrIndex}}" />
-
-          <picker bindchange="bindCmodel" value="{{casIndex.scene[item]}}" data-model="{{item}}" data-cas="scene" range="{{casArray.scene}}">
-            <view class="weui-cell">
-              <view class="weui-cell__bd">
-                <text>触发模式</text>
-              </view>
-              <view class="weui-cell__ft">
-                <view>
-                  <text>{{casArray.scene[casIndex.scene[item]]}}</text>
-                </view>
-              </view>
-            </view>
-          </picker>
-        </view>
+      <view wx:for="{{navbarArray[currentChannelIndex].arr}}" wx:key="">
+        <selectM
+          copName="按键"
+          hasCfms="{{navbarArray[currentChannelIndex].hasCfms}}"
+          numArray="{{numArray}}"
+          modelS="{{navbarArray[currentChannelIndex].name}}"
+          copItem="{{item}}"
+          tabIndex="{{navbarArray[currentChannelIndex].index}}"
+          id="{{navbarArray[currentChannelIndex].name}}{{item}}"
+          bindgetAction="getDLInfo(clIdNow,currentChannelIndex)"
+          bindpropChange="propChange"
+        ></selectM>
       </view>
       <view class="weui-cells margintop2 marginbottom">
         <view class="weui-form-preview">
@@ -135,14 +126,18 @@
       </view>
     </view>
     <view wx:if="{{currentChannelIndex===5}}">
-      <view wx:for="{{[0,1,2,3]}}" wx:key="">
-        <view class="weui-cells__title item_cell_box">
-          <text>光控{{item+1}}</text>
-          <text wx:if="{{numIndex.light[item].ifS}}" class="del-item" bindtap="bindDelItem">删除</text>
-        </view> 
-        <view class="weui-cells">
-          <template is="shebeiPick" data="{{item:item,modelS:'light',numArray:numArray,numIndex:numIndex,jiedianArr:jiedianArr,jiedianArrIndex:jiedianArrIndex,anjianArr:anjianArr,anjianArrIndex:anjianArrIndex,sborder:true}}" />
-        </view>
+      <view wx:for="{{navbarArray[currentChannelIndex].arr}}" wx:key="">
+        <selectM
+          copName="光控"
+          hasCfms="{{navbarArray[currentChannelIndex].hasCfms}}"
+          numArray="{{numArray}}"
+          modelS="{{navbarArray[currentChannelIndex].name}}"
+          copItem="{{item}}"
+          tabIndex="{{navbarArray[currentChannelIndex].index}}"
+          id="{{navbarArray[currentChannelIndex].name}}{{item}}"
+          bindgetAction="getDLInfo(clIdNow,currentChannelIndex)"
+          bindpropChange="propChange"
+        ></selectM>
       </view>
       <view class="weui-cells margintop2 marginbottom">
         <view class="weui-form-preview">
@@ -153,14 +148,18 @@
       </view>
     </view>
     <view wx:if="{{currentChannelIndex===6}}">
-      <view wx:for="{{[0,1,2,3]}}" wx:key="">
-        <view class="weui-cells__title item_cell_box">
-          <text>红外{{item+1}}</text>
-          <text wx:if="{{numIndex.infrare[item].ifS}}" class="del-item" bindtap="bindDelItem">删除</text>
-        </view>
-        <view class="weui-cells">
-          <template is="shebeiPick" data="{{item:item,modelS:'infrare',numArray:numArray,numIndex:numIndex,jiedianArr:jiedianArr,jiedianArrIndex:jiedianArrIndex,anjianArr:anjianArr,anjianArrIndex:anjianArrIndex,sborder:true}}" />
-        </view>
+      <view wx:for="{{navbarArray[currentChannelIndex].arr}}" wx:key="">
+        <selectM
+          copName="红外"
+          hasCfms="{{navbarArray[currentChannelIndex].hasCfms}}"
+          numArray="{{numArray}}"
+          modelS="{{navbarArray[currentChannelIndex].name}}"
+          copItem="{{item}}"
+          tabIndex="{{navbarArray[currentChannelIndex].index}}"
+          id="{{navbarArray[currentChannelIndex].name}}{{item}}"
+          bindgetAction="getDLInfo(clIdNow,currentChannelIndex)"
+          bindpropChange="propChange"
+        ></selectM>
       </view>
       <view class="weui-cells margintop2 marginbottom">
         <view class="weui-form-preview">
@@ -171,27 +170,18 @@
       </view>
     </view>
     <view wx:if="{{currentChannelIndex===7}}">
-      <view wx:for="{{[0,1,2,3]}}" wx:key="">
-        <view class="weui-cells__title item_cell_box">
-          <text>其他{{item+1}}</text>
-          <text wx:if="{{numIndex.other[item].ifS}}" class="del-item" bindtap="bindDelItem">删除</text>
-        </view> 
-        <view class="weui-cells">
-          <template is="shebeiPick" data="{{item:item,modelS:'other',numArray:numArray,numIndex:numIndex,jiedianArr:jiedianArr,jiedianArrIndex:jiedianArrIndex,anjianArr:anjianArr,anjianArrIndex:anjianArrIndex}}" />
-
-          <picker bindchange="bindCmodel" value="{{casIndex.other[item]}}" data-model="{{item}}" data-cas="other" range="{{casArray.other}}">
-            <view class="weui-cell">
-              <view class="weui-cell__bd">
-                <text>触发模式</text>
-              </view>
-              <view class="weui-cell__ft">
-                <view>
-                  <text>{{casArray.other[casIndex.other[item]]}}</text>
-                </view>
-              </view>
-            </view>
-          </picker>
-        </view>
+      <view wx:for="{{navbarArray[currentChannelIndex].arr}}" wx:key="">
+        <selectM
+          copName="其他"
+          hasCfms="{{navbarArray[currentChannelIndex].hasCfms}}"
+          numArray="{{numArray}}"
+          modelS="{{navbarArray[currentChannelIndex].name}}"
+          copItem="{{item}}"
+          tabIndex="{{navbarArray[currentChannelIndex].index}}"
+          id="{{navbarArray[currentChannelIndex].name}}{{item}}"
+          bindgetAction="getDLInfo(clIdNow,currentChannelIndex)"
+          bindpropChange="propChange"
+        ></selectM>
       </view>
       <view class="weui-cells margintop2 marginbottom">
         <view class="weui-form-preview">

@@ -2,7 +2,6 @@
 const common = require('../../../utils/common.js');
 const tempcomjs = require('../../../template/tempList.js');
 
-
 Page({
 
   /**
@@ -21,40 +20,43 @@ Page({
         index: 1
     }, {
         text: '场景配置',
-        index: 2
+        index: 2,
+        name: 'scene',
+        arr: [0, 1, 2, 3, 4, 5],
+        hasCfms: true,
+        changelist:[]
     }, {
         text: '定时配置',
         index: 3
     }, {
         text: '光控配置',
-        index: 4
+        index: 4,
+        name: 'light',
+        arr: [0, 1, 2, 3, 4],
+        hasCfms: false,
+        changelist: []
     }, {
         text: '红外配置',
-        index: 5
+        index: 5,
+        name: 'infrare',
+        arr: [0, 1, 2, 3, 4],
+        hasCfms: false,
+        changelist: []
     }, {
         text: '其他配置',
-        index: 7
+        index: 7,
+        name: 'other',
+        arr: [0, 1, 2, 3, 4, 5],
+        hasCfms: true,
+        changelist: []
     }],
     array: [0, 1, 2,3,4,5,6,7],
     currentChannelIndex: 0,
-    casArray: { //模式
-      base: ['释放', '吸合'],
-      scene: ['反转', '吸合', '释放','点动'],
-      other: ['释放', '吸合', '反转']
-    },
-    casIndex:{ //模式index
-      base: [0],
-      scene: [0, 0, 0, 0, 0, 0],
-      other: [0, 0, 0, 0]
-    },
     numArray: [],//编号
-    jiedianArr: [],//节点
-    jiedianArrIndex: JSON.parse(JSON.stringify(tempcomjs.commonIndex)),
-    anjianArr:[],//按键
-    anjianArrIndex: JSON.parse(JSON.stringify(tempcomjs.commonIndex)),
-    numIndex: JSON.parse(JSON.stringify(tempcomjs.commonIndex)), //编号index
     tab1_kg: 0,
-    tab0_kg: 0
+    tab0_kg: 0,
+    casBase: ['释放', '吸合'],
+    casBIndex: 0
   },
 
   /**
@@ -66,10 +68,16 @@ Page({
       jdIpNow: options.jdIp
     });
     if (options.ty){
+      wx.setNavigationBarTitle({
+        title: '通用管理配置'
+      });
       this.setData({
         ifGeneral: options.ty
       });
     }else{
+      wx.setNavigationBarTitle({
+        title: '继电器管理配置'
+      });
       if (options.clId) {
         this.setData({
           clIdNow: options.clId
@@ -83,17 +91,12 @@ Page({
   getShebeiBH: function () {
     tempcomjs.getShebeiBH(this)
   },
-  bindSnum: function (e) { //选择设备
-    tempcomjs.bindSnum(this,e)
-  },
-  bindJiedian: function (e) {
-    tempcomjs.bindJiedian(this, e)
-  },
-  bindAnjian: function (e) {
-    tempcomjs.bindAnjian(this, e)
-  },
-  bindCmodel: function (e) {
-    tempcomjs.bindCmodel(this, e)
+  bindBmodel:function(e) {
+    var that = this
+    let modelValue = parseInt(e.detail.value);
+    that.setData({
+      casBIndex: modelValue
+    })
   },
   bindTimeDelay1: function (e) {
     this.setData({
@@ -108,19 +111,6 @@ Page({
   bindTimeInterval: function (e) {
     this.setData({
       timeInterval: e.detail.value
-    })
-  },
-  bindDelItem: function (e) {
-    wx.showModal({
-      title: '提示',
-      content: '确定要删除吗?',
-      success: function (res) {
-        if (res.confirm) {
-          console.log('用户点击确定')
-        } else if (res.cancel) {
-          console.log('用户点击取消')
-        }
-      }
     })
   },
   onTapNavbar: function (e) {
@@ -140,29 +130,43 @@ Page({
   },
   switchChannel: function (targetChannelIndex) {
     let navbarArray = this.data.navbarArray;
-    
     navbarArray.forEach((item, index, array) => {
       item.active = '';
       if (index == targetChannelIndex) {
         item.active = 'nav-active';
       }
+      if (item.arr){
+        item.arr.forEach((itemchild, indexchild, arraychild) => {
+          if (item.hasCfms) {
+            item.changelist[indexchild] = 'qxz,qxz,qxz,0';
+          } else {
+            item.changelist[indexchild] = 'qxz,qxz,qxz';
+          }
+        })
+      }
     });
     this.setData({
       navbarArray: navbarArray,
-      currentChannelIndex: targetChannelIndex,
-      jiedianArr: [],//节点
-      jiedianArrIndex: JSON.parse(JSON.stringify(tempcomjs.commonIndex)),
-      anjianArr: [],//按键
-      anjianArrIndex: JSON.parse(JSON.stringify(tempcomjs.commonIndex))
+      currentChannelIndex: targetChannelIndex
     });
     if (this.data.clIdNow){
       let tabClId = this.data.clIdNow
       this.getDLInfo(tabClId,targetChannelIndex);
     }
   },
+  propChange: function (e) {
+    var that = this;
+    var navbarArray = that.data.navbarArray
+    var currentChannelIndex = that.data.currentChannelIndex
+    navbarArray[currentChannelIndex].changelist[e.detail.index] = e.detail.str;
+    that.setData({
+      navbarArray: navbarArray
+    })
+  },
   getDLInfo: function (id,targetChannelIndex){
     var that = this;
-    let tabindex = that.data.navbarArray[targetChannelIndex].index
+    var navbarArray = that.data.navbarArray
+    var tabindex = navbarArray[targetChannelIndex].index
     wx.showLoading({
       title: '加载中',
       mask: true
@@ -187,13 +191,43 @@ Page({
               });
             }
           } else if (tabindex === 1) {
-            let base=[];
-            base = res.data.list[0].cl01.split(',');
-            that.setData({
-              timeDelay: base[0],
-              timeInterval: base[1],
-              // casIndex[base][0]: base[2]
-            });
+            let baseT=[];
+            if (res.data.list.length>0){
+              baseT = res.data.list[0].cl01.split(',');
+              that.setData({
+                timeDelay: baseT[0],
+                timeInterval: baseT[1],
+                casBIndex: baseT[2]
+              });
+            }
+          } else if (tabindex === 2 || tabindex === 4 || tabindex === 5) {
+            if (res.data.code.length > 0) {
+              var codeList = []
+              for (let i = 0; i < res.data.code.length; i++) {
+                codeList[i] = res.data.code[i];
+                navbarArray[targetChannelIndex].changelist[i] = res.data.code[i];
+              }
+              that.setData({
+                navbarArray: navbarArray
+              });
+              codeList.forEach((item, index, array) => {
+                that.selectComponent("#" + navbarArray[targetChannelIndex].name + index).initdata(item)
+              });
+            }
+          } else if (tabindex === 7) {
+            if (res.data.list.length > 0) {
+              var codeList = []
+              for (let i = 0; i < res.data.list.length; i++) {
+                codeList[i] = res.data.list[i];
+                navbarArray[targetChannelIndex].changelist[i] = res.data.list[i];
+              }
+              that.setData({
+                navbarArray: navbarArray
+              });
+              codeList.forEach((item, index, array) => {
+                that.selectComponent("#" + navbarArray[targetChannelIndex].name + index).initdata(item)
+              });
+            }
           }
         } else {
           wx.showToast({
@@ -206,10 +240,11 @@ Page({
   },
   sureSetting:function(e){
     var that = this;
+    let navbarArray = that.data.navbarArray
     let tab = that.data.currentChannelIndex
     let wgIp = that.data.wgIpNow
     let jdIp = that.data.jdIpNow
-    var setVals = ''
+    var setVals = []
     if (tab === 0){
       if (!that.data.timeDelay1) {
         wx.showToast({
@@ -244,47 +279,29 @@ Page({
       setVals = {
         "delay":that.data.timeDelay,
         "timer":that.data.timeInterval,
-        "onOff":that.data.casIndex.base[0]
+        "onOff":that.data.casBIndex
       }
-    } else if (tab === 3) {
-      let modas = 'scene'
-      setVals = [{ 
-          "qxz": that.data.numArray[numIndex[modas][0].index].id, 
-          "qxzNode": that.data.jiedianArr[that.data.jiedianArrIndex].id, 
-          "qxzModel": that.data.anjianArr[that.data.anjianArrIndex].id, 
-          "cfms": that.data.casIndex[modas][0] 
-        },{
-          "qxz": that.data.numArray[numIndex[modas][0].index].id,
-          "qxzNode": that.data.jiedianArr[that.data.jiedianArrIndex].id,
-          "qxzModel": that.data.anjianArr[that.data.anjianArrIndex].id,
-          "cfms": that.data.casIndex[modas][0]
-        }, {
-          "qxz": that.data.numArray[numIndex[modas][0].index].id,
-          "qxzNode": that.data.jiedianArr[that.data.jiedianArrIndex].id,
-          "qxzModel": that.data.anjianArr[that.data.anjianArrIndex].id,
-          "cfms": that.data.casIndex[modas][0]
-        }, {
-          "qxz": that.data.numArray[numIndex[modas][0].index].id,
-          "qxzNode": that.data.jiedianArr[that.data.jiedianArrIndex].id,
-          "qxzModel": that.data.anjianArr[that.data.anjianArrIndex].id,
-          "cfms": that.data.casIndex[modas][0]
-        }, {
-          "qxz": that.data.numArray[numIndex[modas][0].index].id,
-          "qxzNode": that.data.jiedianArr[that.data.jiedianArrIndex].id,
-          "qxzModel": that.data.anjianArr[that.data.anjianArrIndex].id,
-          "cfms": that.data.casIndex[modas][0]
-        },
-      ]
-    } else if (tab === 4) {
-      setVals = '{\"onOff\":' + that.data.tab1_kg + '\"}'
+    } else if (tab === 3 || tab === 5 || tab === 6 || tab === 7) {
+      for (let i = 0; i < navbarArray[tab].changelist.length; i++) {
+        var arr = navbarArray[tab].changelist[i].split(',');
+        if (navbarArray[tab].hasCfms) {
+          setVals[i] = {
+            "qxz": arr[0],
+            "qxzNode": arr[1],
+            "qxzModel": arr[2],
+            "cfms": arr[3]
+          };
+        } else {
+          setVals[i] = {
+            "qxz": arr[0],
+            "qxzNode": arr[1],
+            "qxzModel": arr[2]
+          };
+        }
+      }
     } else if (tab === 5) {
-      setVals = '{\"onOff\":' + that.data.tab1_kg + '\"}'
-    } else if (tab === 6) {
-      setVals = '{\"onOff\":' + that.data.tab1_kg + '\"}'
-    } else if (tab === 7) {
-      setVals = '{\"onOff\":' + that.data.tab1_kg + '\"}'
+      setVals = []
     }
-
     wx.showLoading({
       title: '加载中',
       mask: true
@@ -294,14 +311,24 @@ Page({
       data: {
         wgIp: wgIp,
         jdIp: jdIp,
-        index: that.data.navbarArray[tab].index,
+        index: navbarArray[tab].index,
         value: JSON.stringify(setVals),
-        type: 'ty',
-        username:that.username
+        type: that.data.ifGeneral?'ty':'dl',
+        username:that.username,
+        jdqls: that.data.ifGeneral ? '' : that.data.clIdNow.split('_')[2]
       },
       sh: function (res) {
         wx.hideLoading()
-        console.log(res)
+        if (res.data.result === 'success') {
+          wx.showToast({
+            title: '配置成功'
+          })
+        } else {
+          wx.showToast({
+            title: res.data.result,
+            icon: 'none'
+          })
+        }
       }
     })
   }

@@ -1,0 +1,53 @@
+<!--components/selectM/selectM.wxml-->
+<view class="weui-cells__title item_cell_box">
+  <text>{{copName}}{{copItem + 1}}</text>
+  <text wx:if="{{numIfs}}" class="del-item" bindtap="bindDelItem">删除</text>
+</view>
+<view class="weui-cells">
+  <picker bindchange="_bindSnum" value="{{numIndex}}" range="{{numArray}}" range-key="{{'name'}}">
+    <view class="weui-cell {{hasCfms ? 'weui-cell_border' : ((numIfs && jiedianArr.length>0) ? 'weui-cell_border' : '')}}">
+      <view class="weui-cell__bd">
+        <text>设备编号</text>
+      </view>
+      <view class="weui-cell__ft">
+        <text>{{numArray[numIndex].name}}</text>
+      </view>
+    </view>
+  </picker>
+  <picker wx:if="{{numIfs && jiedianArr.length>0}}" bindchange="_bindJiedian" value="{{jiedianArrIndex}}" range="{{jiedianArr}}" range-key="{{'name'}}">
+    <view class="weui-cell {{hasCfms ? 'weui-cell_border' : ((!jiedianIfs && anjianArr.length>0) ? 'weui-cell_border' : '')}}">
+      <view class="weui-cell__bd">
+        <text>节点</text>
+      </view>
+      <view class="weui-cell__ft">
+        <view>
+          <text>{{jiedianArr[jiedianArrIndex].name}}</text>
+        </view>
+      </view>
+    </view>
+  </picker>
+  <picker wx:if="{{!jiedianIfs && anjianArr.length>0}}" bindchange="_bindAnjian" range="{{anjianArr}}" range-key="{{'name'}}" value="{{anjianArrIndex}}">
+    <view class="weui-cell {{hasCfms?'weui-cell_border':''}}">
+      <view class="weui-cell__bd">
+        <text>按键</text>
+      </view>
+      <view class="weui-cell__ft">
+        <view>
+          <text>{{anjianArr[anjianArrIndex].name}}</text>
+        </view>
+      </view>
+    </view>
+  </picker>
+  <picker wx:if="{{hasCfms}}" bindchange="_bindCmodel" value="{{casIndex[modelS][copItem]}}" data-model="{{copItem}}" data-cas="{{modelS}}" range="{{casArray[modelS]}}">
+    <view class="weui-cell">
+      <view class="weui-cell__bd">
+        <text>触发模式</text>
+      </view>
+      <view class="weui-cell__ft">
+        <view>
+          <text>{{casArray[modelS][casIndex[modelS][copItem]]}}</text>
+        </view>
+      </view>
+    </view>
+  </picker>
+</view>

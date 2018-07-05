@@ -1,5 +1,6 @@
 // pages/gatewayAdmin/gatewayList/gatewayList.js
 const common = require('../../../utils/common.js');
+const tempcomjs = require('../../../template/tempList.js');
 
 Page({
   data: {
@@ -73,12 +74,67 @@ Page({
     })
   },
   delSelf: function (e) {
+    this.showDialogBtn()
+    this.setData({
+      updateId: e.currentTarget.dataset.ip,
+      updateState: true
+    })
+  },
+  tapName: function (e) {
+    if (e.detail.value !== '') {
+      this.setData({
+        updateState: false
+      })
+    } else {
+      this.setData({
+        updateState: true
+      })
+    }
+    this.setData({
+      nameS: e.detail.value
+    })
+  },
+  showDialogBtn: function () {
+    tempcomjs.showDialogBtn(this)
+  },
+  hideModal: function () {
+    tempcomjs.hideModal(this)
+  },
+  onConfirm: function () {
+    var that = this;
     wx.showModal({
       title: '提示',
-      content: '确定要删除该设备吗?',
+      content: '确定要删除吗?',
       success: function (res) {
         if (res.confirm) {
-          console.log('用户点击确定')
+          wx.showLoading({
+            title: '加载中',
+            mask: true
+          })
+          common.post({
+            url: '/android/equipmentManagement/deleteWg',
+            data: {
+              username: that.username,
+              ip: that.data.updateId,
+              password: that.data.nameS
+            },
+            sh: function (res) {
+              wx.hideLoading()
+              if (res.data.result === 'success') {
+                that.hideModal();
+                wx.showToast({
+                  title: '删除成功',
+                  icon: 'success'
+                })
+                that.getCasArray();
+              } else {
+                wx.showToast({
+                  title: res.data.result,
+                  icon: 'none'
+                })
+              }
+            }
+          })
         } else if (res.cancel) {
           console.log('用户点击取消')
         }
