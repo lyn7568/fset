@@ -29,7 +29,7 @@
   <picker wx:if="{{!jiedianIfs && anjianArr.length>0}}" bindchange="_bindAnjian" range="{{anjianArr}}" range-key="{{'name'}}" value="{{anjianArrIndex}}">
     <view class="weui-cell {{hasCfms?'weui-cell_border':''}}">
       <view class="weui-cell__bd">
-        <text>按键</text>
+        <text>{{hasCfms?'按键':'传感器'}}</text>
       </view>
       <view class="weui-cell__ft">
         <view>

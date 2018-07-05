@@ -14,7 +14,11 @@
   height: 68rpx;    
   margin-left: 20rpx;    
   margin-top: 20rpx;    
-}    
+}  
+.banner{
+  width:100%;
+  height:300px
+}   
 /* 遮罩层 */    
 .bg {      
   display: none;      
@@ -106,7 +110,6 @@
 }
 .page-section-gap{
   box-sizing: border-box;
-  padding: 0 30rpx;
 }
 
 .page-body-button {

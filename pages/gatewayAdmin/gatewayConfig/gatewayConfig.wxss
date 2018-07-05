@@ -25,9 +25,11 @@ scroll-view {
   justify-content: space-between;
   align-items: center;
   line-height:80rpx;
+  max-width: 480rpx;
 }
 .time-box>input{
   padding-right:8rpx;
   height:80rpx;
   line-height:80rpx;
+  max-width: 400rpx;
 }

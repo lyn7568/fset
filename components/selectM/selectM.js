@@ -237,16 +237,31 @@ Component({
       var changeList =[];
       if (hasCfms){
         if (numIndex!==0){
-          changeList= {
-            index: copItem,
-            str: numArray[numIndex].id + ',' + jiedianArr[jiedianArrIndex].id + ',' + anjianArr[anjianArrIndex].id + ',' + casThisNow
+          if (anjianArr.length > 0){
+            changeList = {
+              index: copItem,
+              str: numArray[numIndex].id + ',' + jiedianArr[jiedianArrIndex].id + ',' + anjianArr[anjianArrIndex].id + ',' + casThisNow
+            }
+          }else{
+            changeList = {
+              index: copItem,
+              str: numArray[numIndex].id + ',' + jiedianArr[jiedianArrIndex].id + ',' + casThisNow
+            }
           }
+          
         }
       } else {
         if (numIndex !== 0) {
-          changeList = {
-            index: copItem,
-            str: numArray[numIndex].id + ',' + jiedianArr[jiedianArrIndex].id + ',' + anjianArr[anjianArrIndex].id
+          if (anjianArr.length>0) {
+            changeList = {
+              index: copItem,
+              str: numArray[numIndex].id + ',' + jiedianArr[jiedianArrIndex].id + ',' + anjianArr[anjianArrIndex].id
+            }
+          }else{
+            changeList = {
+              index: copItem,
+              str: numArray[numIndex].id + ',' + jiedianArr[jiedianArrIndex].id
+            }
           }
         }
       }

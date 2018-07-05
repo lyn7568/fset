@@ -25,7 +25,7 @@
             <text>延时</text>
           </view>
           <view class="weui-cell__ft time-box">
-            <input type="number" placeholder-class="phcolor" placeholder="请输入延时" value="{{timeDelay1}}" bindinput="bindTimeDelay1"></input><text>毫秒</text>
+            <input type="number" class="weui-input" placeholder-class="phcolor" placeholder="请输入延时" value="{{timeDelay1}}" bindinput="bindTimeDelay1"></input><text>毫秒</text>
           </view>
         </view>
         <view class="weui-cell" wx:if="{{!ifGeneral}}">
@@ -71,7 +71,7 @@
             <text>吸合延时</text>
           </view>
           <view class="weui-cell__ft time-box">
-            <input type="number" placeholder-class="phcolor" placeholder="请输入吸合延时" value="{{timeDelay}}" bindinput="bindTimeDelay"></input><text>秒</text>
+            <input type="number" class="weui-input" placeholder-class="phcolor" placeholder="请输入吸合延时" value="{{timeDelay}}" bindinput="bindTimeDelay"></input><text>秒</text>
           </view>
         </view>
         <view class="weui-cell weui-cell_border">
@@ -79,7 +79,7 @@
             <text>吸合时长</text>
           </view>
           <view class="weui-cell__ft time-box">
-            <input type="number" placeholder-class="phcolor" placeholder="请输入吸合时长" value="{{timeInterval}}" bindinput="bindTimeInterval"></input><text>秒</text>
+            <input type="number" class="weui-input" placeholder-class="phcolor" placeholder="请输入吸合时长" value="{{timeInterval}}" bindinput="bindTimeInterval"></input><text>秒</text>
           </view>
         </view>
         <picker bindchange="bindBmodel" value="{{casBIndex}}" range="{{casBase}}">
