@@ -1,0 +1,133 @@
+/* components/selectM/selectM.wxss */
+.weui-cells__title {
+  margin-top: 20px;
+  margin-bottom: 0.3em;
+  padding-left: 15px;
+  padding-right: 15px;
+  color: #999;
+  font-size: 14px;
+  line-height: 60rpx;
+}
+
+.weui-cells {
+  position: relative;
+  background-color: #fff;
+  font-size: 32rpx;
+  line-height: 80rpx;
+  margin-top: 0;
+}
+
+.weui-cells:before {
+  top: 0;
+  border-top: 1rpx solid #d9d9d9;
+}
+
+.weui-cells:after, .weui-cells:before {
+  content: " ";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 1px;
+  color: #d9d9d9;
+}
+
+.weui-cells:after {
+  bottom: 0;
+  border-bottom: 1rpx solid #d9d9d9;
+}
+
+.weui-cell {
+  padding: 10px 15px;
+  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+}
+
+.weui-cell__bd {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+  flex: 1;
+}
+
+.weui-cell__ft {
+  text-align: right;
+  color: #999;
+}
+
+.weui-cell_border:after {
+  content: " ";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  height: 2px;
+  border-bottom: 2px solid #e5e5e5;
+  color: #e5e5e5;
+  -webkit-transform-origin: 0 0;
+  transform-origin: 0 0;
+  -webkit-transform: scaleY(0.5);
+  transform: scaleY(0.5);
+  z-index: 2;
+}
+
+.phcolor {
+  color: #999;
+}
+
+.weui-cells__title.item_cell_box{
+  display: flex;
+  justify-content: space-between;
+}
+.btn_cell{
+  margin-left:-20rpx;
+}
+.btn_cell>.btn-item {
+  color: rgba(0,124,185,1);
+  margin-left:20rpx;
+}
+
+.picker_group_time {
+  width:100%;
+  height: 85rpx;
+  line-height: 85rpx;
+  justify-content:flex-start;
+  display: flex;
+  align-items: center;
+  font-size: 30rpx;
+  color: #888;
+}
+
+.picker-item{
+  width: 48%;
+  justify-content:space-between;
+  box-sizing: border-box;
+  padding:0 30rpx;
+  display: flex;
+  align-items: center;
+}
+.padd-none{padding-left:0;}
+.picker-item picker {
+  color: #999;
+  height: 55rpx;
+  line-height: 55rpx;
+}
+.picker-item .pickerO{
+  flex: 2
+}
+.picker-item .pickerT{
+  flex: 1
+}
+
+
+.checkbox-group {
+  width: 100%;
+  display: flex;
+  flex-wrap:wrap;
+}
+.checkbox{
+  width: 25%;
+}

@@ -57,3 +57,23 @@
     </view>
   </view>
 </template>
+
+<template name="DateInterval">
+  <view class="picker_group_time">
+    <view class="picker-item padd-none">
+      <picker mode="date" value="{{dateStart}}" end="{{dateEnd}}" bindchange="bindDateChange">
+        <view class="picker">
+          {{dateStart}}
+        </view>
+      </picker>
+    </view>
+    至
+    <view class="picker-item">
+      <picker mode="date" value="{{dateEnd}}" start="{{dateStart}}" end="2050-01-01" bindchange="bindDateChange2">
+        <view class="picker">
+          {{dateEnd}}
+        </view>
+      </picker>
+    </view>
+  </view>
+</template>

@@ -125,6 +125,52 @@
         </view>
       </view>
     </view>
+    <view wx:if="{{currentChannelIndex===4}}">
+      <view class="weui-cells margintop">
+        <picker bindchange="bindTimingChoice" value="{{casBIndex}}" range="{{casBase}}">
+          <view class="weui-cell">
+            <view class="weui-cell__bd">
+              <text>定时选择</text>
+            </view>
+            <view class="weui-cell__ft">
+              <view>
+                <text>{{casBase[casBIndex]}}</text>
+              </view>
+            </view>
+          </view>
+        </picker>
+      </view>
+      <view class="weui-cells__title">
+        <text>节假日开始结束日期</text>
+      </view>
+      <view class="weui-cells">
+        <view class="weui-cell">
+            <template is="DateInterval" data="{{dateStart:dateStart,dateEnd:dateEnd}}" />
+        </view>
+      </view>
+      <selectTime
+        copName="节假日每天开启关闭"
+        tabIndex="{{navbarArray[currentChannelIndex].index}}"
+        bindgetAction="getDLInfo(clIdNow,currentChannelIndex)"
+        bindpropChange="propChange"
+      ></selectTime>
+      <view wx:for="{{shiduanArr}}" wx:key="">
+        <selectTime
+          copName="时段{{item+1}}"
+          hasWeek="{{true}}"
+          tabIndex="{{navbarArray[currentChannelIndex].index}}"
+          bindgetAction="getDLInfo(clIdNow,currentChannelIndex)"
+          bindpropChange="propChange"
+        ></selectTime>
+      </view>
+      <view class="weui-cells margintop2 marginbottom">
+        <view class="weui-form-preview">
+          <view class="weui-form-preview__ft">
+            <button type="submit" class="weui-form-preview__btn weui-form-preview__btn_primary" bindtap="sureSetting">确定</button>
+          </view>
+        </view>
+      </view>
+    </view>
     <view wx:if="{{currentChannelIndex===5}}">
       <view wx:for="{{navbarArray[currentChannelIndex].arr}}" wx:key="">
         <selectM

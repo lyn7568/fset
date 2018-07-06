@@ -56,7 +56,10 @@ Page({
     tab1_kg: 0,
     tab0_kg: 0,
     casBase: ['释放', '吸合'],
-    casBIndex: 0
+    casBIndex: 0,
+    dateStart:'开始日期',
+    dateEnd: '结束日期',
+    shiduanArr:[0,1,2,3,4]
   },
 
   /**
@@ -90,6 +93,19 @@ Page({
   },
   getShebeiBH: function () {
     tempcomjs.getShebeiBH(this)
+  },
+  // 日期段选择  
+  bindDateChange(e) {
+    let that = this;
+    that.setData({
+      dateStart: e.detail.value,
+    })
+  },
+  bindDateChange2(e) {
+    let that = this;
+    that.setData({
+      dateEnd: e.detail.value,
+    })
   },
   bindBmodel:function(e) {
     var that = this
