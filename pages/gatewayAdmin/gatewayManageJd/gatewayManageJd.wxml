@@ -110,7 +110,7 @@
             <view class="td">{{item.cl04}}</view>
           </view>
           <view class="touch-btn">
-            <view class="btn-item row-btn-1" bindtap="configSelf" data-id="{{item.cl00}}">管理</view>
+            <view class="btn-item row-btn-1" bindtap="configSelf" data-id="{{item.cl00}}" data-state="{{item.cl03}}">管理</view>
             <view class="btn-item row-btn-2" bindtap="updateSelf" data-id="{{item.cl00}}" data-name="{{item.cl01}}">编辑</view>
           </view>
         </view>

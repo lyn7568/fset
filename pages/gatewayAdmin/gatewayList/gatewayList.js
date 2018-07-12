@@ -143,7 +143,7 @@ Page({
   },
   updateSelf: function (e) {
     wx.navigateTo({
-      url: '../gatewayUpdate/gatewayUpdate?id=' + e.target.dataset.ip
+      url: '../gatewayUpdate/gatewayUpdate?flag=1&name=' + e.target.dataset.name + '&jw=' + e.target.dataset.jw
     })
   },
   getSelfMap: function (e) {

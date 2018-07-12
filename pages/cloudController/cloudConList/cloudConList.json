@@ -1,3 +1,4 @@
 {
-  "navigationBarTitleText": "云控制器管理"
+  "navigationBarTitleText": "云控制器管理",
+  "enablePullDownRefresh": true
 }

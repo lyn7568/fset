@@ -1,3 +1,3 @@
 /* pages/cloudController/cloudConList/cloudConList.wxss */
 
-@import '../../gatewayAdmin/gatewayNode/gatewayNode.wxss';
+@import '/pages/gatewayAdmin/gatewayNode/gatewayNode.wxss';

@@ -33,3 +33,9 @@ scroll-view {
   line-height:80rpx;
   max-width: 400rpx;
 }
+
+.state-img{
+  width:60rpx;
+  height:80rpx;
+  margin-top:20rpx;
+}

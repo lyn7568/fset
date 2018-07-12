@@ -1,0 +1,3 @@
+/* pages/cloudController/cloudConfig/cloudConfig.wxss */
+
+ @import '/pages/gatewayAdmin/gatewayConfig/gatewayConfig.wxss';

@@ -68,6 +68,10 @@ Page({
     } else if (navbarType === 'cgq') {
       jdType = '传感器'
     }
+    wx.showLoading({
+      title: '加载中',
+      mask: true
+    })
     common.post({
       url: '/equipmentManagement/checkJd',
       data: {
@@ -78,6 +82,7 @@ Page({
       sh: function (res) {
         console.log(res)
         if(res.data.result === 'success'){
+          wx.hideLoading()
           if (navbarType === 'kg') {
             wx.navigateTo({
               url: '../gatewayManageJd/gatewayManageJd?jdIp=' + jdIp + '&wgIp=' + wgIp + '&jdName=' + jdName
@@ -141,7 +146,6 @@ Page({
       },
       sh: function (res) {
         wx.hideLoading()
-        console.log(res)
         var $info = res.data.rows;
         if ($info.length > 0) {
           var parM = {};

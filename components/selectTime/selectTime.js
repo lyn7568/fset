@@ -6,14 +6,38 @@ Component({
    * 组件的属性列表
    */
   properties: {
+    typeT: {
+      type: String
+    },
     copName: {
       type: String
+    },
+    ifhasDate: {
+      type: Boolean
     },
     hasWeek: {
       type: Boolean
     },
     tabIndex: {
       type: Number
+    },
+    timgingIndex:{
+      type: Number
+    },
+    clwgIp:{
+      type: String
+    },
+    cljdIp: {
+      type: String
+    },
+    cldlIp: {
+      type: String
+    },
+    ifGeneral: {
+      type: Boolean
+    },
+    clykIp: {
+      type: String
     }
   },
 
@@ -21,55 +45,42 @@ Component({
    * 组件的初始数据
    */
   data: {
+    dateStart: '0000-00-00',
+    dateEnd: '0000-00-00',
     timeStart: '00:00',
     timeEnd: '23:59',
     casArray: ['固定', '经纬'],
     casSindex: 0,
     casEindex: 0,
     weekdays: [
-      { name: '1', value: '一' },
-      { name: '2', value: '二' },
-      { name: '3', value: '三' },
-      { name: '4', value: '四' },
-      { name: '5', value: '五' },
-      { name: '6', value: '六' },
-      { name: '0', value: '日' },
+      { name: '64', value: '一' },
+      { name: '32', value: '二' },
+      { name: '16', value: '三' },
+      { name: '8', value: '四' },
+      { name: '4', value: '五' },
+      { name: '2', value: '六' },
+      { name: '1', value: '日' },
     ]
+  },
+  attached(){
+    this.username = wx.getStorageSync('username');
   },
   /**
    * 组件的方法列表
    */
-  methods: {
-    initdata: function (codeList){
-      var that = this
-      let hasCfms = that.properties.hasCfms,
-        numArray = that.properties.numArray,
-        numIndex = that.data.numIndex,
-        casIndex = that.data.casIndex,
-        modelS = that.data.modelS,
-        copItem = that.data.copItem,
-        tabIndex = that.data.tabIndex
-
-      if (codeList) {
-        var arr = codeList.split(',')
-        numArray.forEach((item, index, array) => {
-          if (item.id === arr[0]) {
-            numIndex = index;
-            that.getShebeiJD(item.id, tabIndex, arr)
-            that.setData({
-              numIndex: numIndex,
-              numIfs: 1
-            });
-          }
-        });
-        if (hasCfms) {
-          casIndex[modelS][copItem] = arr[3];
-          that.setData({
-            casIndex: casIndex
-          })
-        }
-        
-      }
+  methods: {    
+    // 日期段选择  
+    bindDateChange(e) {
+      let that = this;
+      that.setData({
+        dateStart: e.detail.value
+      })
+    },
+    bindDateChange2(e) {
+      let that = this;
+      that.setData({
+        dateEnd: e.detail.value
+      })
     },
     // 时间段选择  
     bindTimeChange(e) {
@@ -90,7 +101,6 @@ Component({
       that.setData({
         casSindex: e.detail.value
       })
-      // that.propChangeData()
     },
     bindTimeE: function (e) {
       var that = this
@@ -98,55 +108,201 @@ Component({
       that.setData({
         casEindex: e.detail.value
       })
-      // that.propChangeData()
     },
     checkboxChange: function (e) {
-      console.log('checkbox发生change事件，携带value值为：', e.detail.value)
-    },
-    propChangeData: function () {
       var that = this
-      let casThisNow = that.data.casThisNow;
-      let hasCfms = that.data.hasCfms,
-          copItem = that.data.copItem;
-      let numArray = that.properties.numArray,
-          numIndex = that.data.numIndex,
-          jiedianArr = that.data.jiedianArr,
-          jiedianArrIndex = that.data.jiedianArrIndex,
-          anjianArr = that.data.anjianArr,
-          anjianArrIndex = that.data.anjianArrIndex;
-
-      var changeList =[];
-      if (hasCfms){
-        if (numIndex!==0){
-          if (anjianArr.length > 0){
-            changeList = {
-              index: copItem,
-              str: numArray[numIndex].id + ',' + jiedianArr[jiedianArrIndex].id + ',' + anjianArr[anjianArrIndex].id + ',' + casThisNow
-            }
-          }else{
-            changeList = {
-              index: copItem,
-              str: numArray[numIndex].id + ',' + jiedianArr[jiedianArrIndex].id + ',' + casThisNow
-            }
-          }
-          
+      let checkboxVal = e.detail.value
+      that.setData({
+        checkboxVal: checkboxVal
+      })
+    },
+    bindCheckDsItem: function (e) {
+      var that = this;
+      let typeT = that.properties.typeT
+      let wgIp = that.properties.clwgIp,
+        jdIp = that.properties.cljdIp,
+        ykIp = that.properties.clykIp,
+        clIdNow = that.properties.cldlIp,
+        timgingIndex = that.properties.timgingIndex,
+        weekdays = that.data.weekdays,
+        checkboxVal = that.data.checkboxVal;
+      if (!clIdNow) {
+        return;
+      }
+      wx.showLoading({
+        title: '加载中',
+        mask: true
+      })
+      var url = '', getVals = {}
+      if (typeT==='wg'){
+        url = '/relay/checkDs';
+        getVals = {
+          wgIp: wgIp,
+          jdIp: jdIp,
+          index: timgingIndex,
+          jdqls: clIdNow.split('_')[2]
         }
-      } else {
-        if (numIndex !== 0) {
-          if (anjianArr.length>0) {
-            changeList = {
-              index: copItem,
-              str: numArray[numIndex].id + ',' + jiedianArr[jiedianArrIndex].id + ',' + anjianArr[anjianArrIndex].id
-            }
-          }else{
-            changeList = {
-              index: copItem,
-              str: numArray[numIndex].id + ',' + jiedianArr[jiedianArrIndex].id
-            }
-          }
+      } else if (typeT === 'yk') {
+        url = '/crelay/checkDs';
+        getVals = {
+          jdIp: ykIp,
+          index: timgingIndex,
+          jdqls: clIdNow.split('_')[2]
         }
       }
-      that.triggerEvent('propChange', changeList);
+      common.post({
+        url: url,
+        data: getVals,
+        sh: function (res) {
+          console.log(res)
+          wx.hideLoading()
+          if (res.data.result === 'success') {
+            if (res.data.cl01) {
+              let jjr = res.data.cl01.split(',')
+              if (timgingIndex === 0) {
+                that.setData({
+                  dateStart: jjr[0],
+                  dateEnd: jjr[1],
+                  timeStart: jjr[2],
+                  casSindex: jjr[3],
+                  timeEnd: jjr[4],
+                  casEindex: jjr[5]
+                })
+              } else {
+                if (res.data.cl10!==''){
+                  checkboxVal = res.data.cl10.split(",");
+                  weekdays.forEach((item, index, array) => {
+                    checkboxVal.forEach((itemC, indexC, arrayC) => {
+                      if (item.name === itemC) {
+                        item.checked = 'true'
+                      }
+                    })
+                  });
+                  that.setData({
+                    weekdays: weekdays,
+                    checkboxVal: checkboxVal
+                  })
+                }
+                that.setData({
+                  timeStart: jjr[0],
+                  casSindex: jjr[1],
+                  timeEnd: jjr[2],
+                  casEindex: jjr[3]
+                })
+              }
+            }
+          } else {
+            wx.showToast({
+              title: res.data.result,
+              icon: 'none'
+            })
+          }
+        }
+      })
+    },
+    arrToStr: function (arr){
+      var str=0
+      arr.forEach((item, index, array) => {
+        str +=item
+      })
+      return (str > 100) ? str : ('0'+str);
+    },
+    sureSetting: function () {
+      var that = this;
+      let typeT = that.properties.typeT
+      let wgIp = that.properties.clwgIp,
+        jdIp = that.properties.cljdIp,
+        ykIp = that.properties.clykIp,
+        clIdNow = that.properties.cldlIp,
+        tabIndex = that.properties.tabIndex,
+        timgingIndex = that.properties.timgingIndex,
+        ifGeneral = that.properties.ifGeneral,
+
+        dateStart = that.data.dateStart,
+        dateEnd = that.data.dateEnd,
+        timeStart = that.data.timeStart,
+        casSindex = that.data.casSindex,
+        timeEnd = that.data.timeEnd,
+        casEindex = that.data.casEindex,
+        checkboxVal = that.data.checkboxVal
+
+      var setVals = {}
+      if (timgingIndex===0){
+        setVals = {
+          "dszIndex": timgingIndex,
+          "jr": dateStart.replace(/\-/g, '') + ',' + dateEnd.replace(/\-/g, '') + ',' + timeStart.replace(/\:/g, '') + ',' + casSindex + ',' + timeEnd.replace(/\:/g, '') + ',' + casEindex
+        }
+      } else if(timgingIndex===1){
+        setVals = {
+          "dszIndex": timgingIndex,
+          "sd1": timeStart.replace(/\:/g, '') + ',' + casSindex + ',' + timeEnd.replace(/\:/g, '') + ',' + casEindex + ',' + that.arrToStr(checkboxVal)
+        }
+      } else if (timgingIndex === 2) {
+        setVals = {
+          "dszIndex": timgingIndex,
+          "sd2": timeStart.replace(/\:/g, '') + ',' + casSindex + ',' + timeEnd.replace(/\:/g, '') + ',' + casEindex + ',' + that.arrToStr(checkboxVal)
+        }
+      } else if (timgingIndex === 3) {
+        setVals = {
+          "dszIndex": timgingIndex,
+          "sd3": timeStart.replace(/\:/g, '') + ',' + casSindex + ',' + timeEnd.replace(/\:/g, '') + ',' + casEindex + ',' + that.arrToStr(checkboxVal)
+        }
+      } else if (timgingIndex === 4) {
+        setVals = {
+          "dszIndex": timgingIndex,
+          "sd4": timeStart.replace(/\:/g, '') + ',' + casSindex + ',' + timeEnd.replace(/\:/g, '') + ',' + casEindex + ',' + that.arrToStr(checkboxVal)
+        }
+      } else if (timgingIndex === 5) {
+        setVals = {
+          "dszIndex": timgingIndex,
+          "sd5": timeStart.replace(/\:/g, '') + ',' + casSindex + ',' + timeEnd.replace(/\:/g, '') + ',' + casEindex + ',' + that.arrToStr(checkboxVal)
+        }
+      }
+
+      var url='',dataStr=''
+      if (typeT === 'wg') {
+        url = '/android/relay/jdqSettings';
+        dataStr = {
+          wgIp: wgIp,
+          jdIp: jdIp,
+          index: tabIndex,
+          value: JSON.stringify(setVals),
+          type: ifGeneral ? 'ty' : 'dl',
+          username: that.username,
+          jdqls: ifGeneral ? '' : clIdNow.split('_')[2]
+        }
+      } else if (typeT === 'yk') {
+        url = '/android/crelay/jdqSettings';
+        dataStr = {
+          jdIp: ykIp,
+          index: tabIndex,
+          value: JSON.stringify(setVals),
+          type: ifGeneral ? 'ty' : 'dl',
+          username: that.username,
+          jdqls: ifGeneral ? '' : clIdNow.split('_')[2]
+        }
+      }
+      wx.showLoading({
+        title: '加载中',
+        mask: true
+      })
+      common.post({
+        url: url,
+        data: dataStr,
+        sh: function (res) {
+          wx.hideLoading()
+          if (res.data.result === 'success') {
+            wx.showToast({
+              title: '配置成功'
+            })
+          } else {
+            wx.showToast({
+              title: res.data.result,
+              icon: 'none'
+            })
+          }
+        }
+      })
     }
   }
 })

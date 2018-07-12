@@ -109,6 +109,8 @@
   display: flex;
   align-items: center;
 }
+.picker_group_date>.picker-item picker{
+  width: 99%;}
 .padd-none{padding-left:0;}
 .picker-item picker {
   color: #999;

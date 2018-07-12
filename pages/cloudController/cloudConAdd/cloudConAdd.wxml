@@ -1,0 +1,52 @@
+<import src="/template/tempList.wxml" />
+<view class="mainbody">
+  <view class="weui-cells weui-cells_form">
+    <view class="weui-cell">
+      <view class="weui-cell__bd">
+        <text>设备地址</text>
+      </view>
+      <view class="weui-cell__ft">
+        <input class="weui-input" placeholder-class="phcolor" placeholder="请输入设备地址" value="{{eqIp}}" bindblur="findIsSure" />
+      </view>
+    </view>
+    <view class="weui-cell">
+      <view class="weui-cell__bd">
+        <text>名称</text>
+      </view>
+      <view class="weui-cell__ft">
+        <input class="weui-input" placeholder-class="phcolor" placeholder="请输入设备名称" value="{{eqName}}" bindinput="getEqName" />
+      </view>
+    </view>
+    <view class="weui-cell">
+      <view class="weui-cell__bd">
+        <text>类型</text>
+      </view>
+      <view class="weui-cell__ft">
+        <input class="weui-input" placeholder-class="phcolorRedonly" placeholder="获取到的设备类型" value="{{typeS}}" disabled />
+      </view>
+    </view>
+    <view class="weui-cell">
+      <view class="weui-cell__bd">
+        <text>型号</text>
+      </view>
+      <view class="weui-cell__ft">
+        <input class="weui-input" placeholder-class="phcolorRedonly" placeholder="获取到的设备型号" value="{{typeX}}" disabled />
+      </view>
+    </view>
+     <view class="weui-cell">
+      <view class="weui-cell__bd">
+        <text>经纬度</text>
+      </view>
+      <view class="weui-cell__ft">
+        <input class="weui-input" placeholder-class="phcolorRedonly" placeholder="获取到的位置经纬" value="{{typeJW}}" disabled  />
+      </view>
+    </view> 
+  </view>
+
+  <view class='margintop2'>
+    <button type="primary" disabled="{{isfindSure?false:true}}" bindtap="addEquipment">确定</button>
+    <button class='margintop' type="default" bindtap="cacelAdd">取消</button>
+  </view>
+</view>
+
+<template is="foot" />

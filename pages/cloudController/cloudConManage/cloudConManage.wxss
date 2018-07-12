@@ -1,2 +1,2 @@
 /* pages/cloudController/cloudConManage/cloudConManage.wxss */
-@import "../../gatewayAdmin/gatewayManageJd/gatewayManageJd.wxss";
+@import "/pages/gatewayAdmin/gatewayManageJd/gatewayManageJd.wxss";

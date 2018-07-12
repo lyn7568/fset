@@ -140,11 +140,11 @@ Page({
       sh: function (res) {
         wx.hideLoading()
         var arrLi=[],arrLi1 =[], arrLi2=[];
-        if (res.data.gz){
+        if (res.data.gz !== 'null'){
             res.data.gz.cltype = 'gz';
             arrLi1.push(res.data.gz);
         }
-        if (res.data.hw) {
+        if (res.data.hw !== 'null') {
           res.data.hw.cltype = 'hw';
           arrLi2.push(res.data.hw);
         }
@@ -165,8 +165,9 @@ Page({
       })
     } else if(tabTy === 'jdq'){
       let clid = e.currentTarget.dataset.id
+      let clState = e.currentTarget.dataset.state
       wx.navigateTo({
-        url: '../gatewayConfig/gatewayConfig?clId=' + clid +'&wgIp=' + this.data.wgIpNow + '&jdIp=' + this.data.jdIpNow
+        url: '../gatewayConfig/gatewayConfig?clId=' + clid + '&wgIp=' + this.data.wgIpNow + '&jdIp=' + this.data.jdIpNow + '&clState=' + clState
       })
     } else if (tabTy === 'cgq') {
       let cltype = e.currentTarget.dataset.tl

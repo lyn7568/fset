@@ -84,11 +84,28 @@ function getShebeiBH(that) {
     }
   })
 }
+function getYkShebeiBH(that) {
+  let ykIp = that.data.jdIpNow
+  common.post({
+    url: '/crelay/initEsnNumber',
+    data: {
+      wgIp: ykIp
+    },
+    sh: function (res) {
+      let delf = { id: 0, name: '请选择' }
+      res.data.unshift(delf);
+      that.setData({
+        numArray: res.data
+      });
+    }
+  })
+}
 
 module.exports = {
   touchstart,
   touchmove,
   showDialogBtn,
   hideModal,
-  getShebeiBH
+  getShebeiBH,
+  getYkShebeiBH
 }

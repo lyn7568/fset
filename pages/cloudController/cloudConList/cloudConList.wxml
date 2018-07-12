@@ -1,15 +1,16 @@
 <!--pages/cloudController/cloudConList/cloudConList.wxml-->
 <import src="/template/tempList.wxml" />
+<wxs src="../../../template/tempList.wxs" module="tempWxs" />
 
 <view class="search-bar">
   <view class="search-wrap">
     <icon type="search" size="16" class="icon-search" />
-    <input type="text" placeholder="请输入地址" class="search-input" name="searchKeyword" confirm-type="search" value="{{searchKeyword}}" bindconfirm='keywordSearch' />
+    <input type="text" placeholder="请输入云控制器地址" class="search-input" name="searchKeyword" confirm-type="search" value="{{searchKeyword}}" bindconfirm='keywordSearch' />
   </view>
 </view>
 <view class="containerr">
   <view class="weui-cells">
-    <navigator url="/pages/gatewayAdmin/gatewayAdd/gatewayAdd" class="weui-cell">
+    <navigator url="../cloudConAdd/cloudConAdd" class="weui-cell">
       <view class="weui-cell__bd">
         <text>添加设备</text>
       </view>
@@ -22,19 +23,39 @@
       <view class="tr bg-w">
         <view class="th">{{tableTh.one}}</view>
         <view class="th">{{tableTh.two}}</view>
+        <view class="th">{{tableTh.three}}</view>
+        <view class="th">{{tableTh.four}}</view>
       </view>
       <scroll-view scroll-y="true" bindscrolltolower="searchScrollLower" lower-threshold="50" class="scroll-tbody">
         <view class="touch-item {{item.isTouchMove ? 'touch-move-active' : ''}} {{index % 2 == 0 ? 'bg-g':'bg-w'}}" data-index="{{index}}" bindtouchstart="touchstart" bindtouchmove="touchmove" wx:for="{{listData}}" data-list="listData" wx:key="">
           <view class="tr touch-content">
             <view class="td">{{item.cl01}}</view>
             <view class="td">{{item.cl02}}</view>
+            <view class="td">{{item.cl04}}</view>
+            <view class="td">{{item.cl05}}</view>
           </view>
           <view class="touch-btn">
-            <navigator class="btn-item row-btn-1" url="../cloudConDetail/cloudConDetail?jdIp={{item.cl02}}&wgIp={{currendId}}">详情</navigator>
-            <view class="btn-item row-btn-2" bindtap="manageSelf" data-ip="{{item.cl02}}">管理</view>
+            <view class="btn-item row-btn-1" bindtap="manageSelf" data-ip="{{item.cl02}}" data-name="{{item.cl01}}">管理</view>
+            <view class="btn-item row-btn-2" bindtap="updateSelf" data-name="{{item.cl01}}" data-jw="{{item.cl06}}">编辑</view>
+            <view class="btn-item del-btn" bindtap="delSelf" data-ip="{{item.cl02}}">删除</view>
           </view>
         </view>
         <template is="loadSty" data="{{loadingModalHide:loadingModalHide,loadingComplete:loadingComplete}}" />
       </scroll-view>
     </view>
+</view>
+
+<!-- 删除弹窗 -->
+<view class="modal-mask" bindtap="hideModal" catchtouchmove="tempWxs.preventTouchMove" wx:if="{{showModal}}"></view>
+<view class="modal-dialog" wx:if="{{showModal}}">
+  <view class="modal-title">删除</view>
+  <view class="modal-content">
+    <view class="modal-input">
+      <input type="password" class="input" placeholder-class="phcolor" placeholder="请输入用户密码" bindinput="tapName" value="{{nameS}}"></input>
+    </view>
+  </view>
+  <view class="modal-footer">
+    <button class="btn-cancel" bindtap="hideModal" data-status="cancel">取消</button>
+    <button class="btn-confirm" bindtap="onConfirm" data-status="confirm" disabled="{{updateState}}">确定</button>
+  </view>
 </view>

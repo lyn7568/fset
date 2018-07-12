@@ -1,0 +1,2 @@
+/* pages/gatewayAdmin/gatewayConfigOther/gatewayConfigOther.wxss */
+ @import '/pages/gatewayAdmin/gatewayConfig/gatewayConfig.wxss';

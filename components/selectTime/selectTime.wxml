@@ -1,11 +1,32 @@
 <!--components/selectM/selectM.wxml-->
+<view class="weui-cells" wx:if="{{ifhasDate}}">
+  <view class="weui-cell">
+    <view class="picker_group_time picker_group_date">
+      <view class="picker-item padd-none">
+        <picker mode="date" value="{{dateStart}}" end="{{dateEnd}}" bindchange="bindDateChange">
+          <view class="picker">
+            {{dateStart}}
+          </view>
+        </picker>
+      </view>
+      至
+      <view class="picker-item">
+        <picker mode="date" value="{{dateEnd}}" start="{{dateStart}}" end="2050-01-01" bindchange="bindDateChange2">
+          <view class="picker">
+            {{dateEnd}}
+          </view>
+        </picker>
+      </view>
+    </view>
+  </view>
+</view>
+
 <view class="weui-cells__title item_cell_box">
   <text>{{copName}}</text>
   <view class="btn_cell">
-    <text class="btn-item" bindtap="bindDelItem">设置</text>
-    <text class="btn-item" bindtap="bindDelItem">读取</text>
+    <text class="btn-item" bindtap="sureSetting">设置</text>
+    <text wx-if="{{!ifGeneral}}" class="btn-item" bindtap="bindCheckDsItem">读取</text>
   </view>
-
 </view>
 <view class="weui-cells">
   <view class="weui-cell {{hasWeek ? 'weui-cell_border' : ''}}">
@@ -39,8 +60,8 @@
   </view>
   <view wx:if="{{hasWeek}}" class="weui-cell">
     <checkbox-group class="checkbox-group" bindchange="checkboxChange">
-      <label class="checkbox" wx:for="{{weekdays}}">
-        <checkbox value="{{item.name}}" checked="{{item.checked}}"/>{{item.value}}
+      <label class="checkbox" wx:for="{{weekdays}}" wx:key="">
+        <checkbox value="{{item.name}}" checked="{{item.checked}}" />{{item.value}}
       </label>
     </checkbox-group>
   </view>

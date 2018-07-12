@@ -73,11 +73,11 @@ Page({
   findIsSure(e) {
     var epid = e.detail.value
     var that = this;
-    wx.showLoading({
-      title: '设备搜索中',
-      mask: true
-    })
     if (epid){
+      wx.showLoading({
+        title: '设备搜索中',
+        mask: true
+      })
       common.post({
         url: '/android/equipmentManagement/findByIp',
         data: {

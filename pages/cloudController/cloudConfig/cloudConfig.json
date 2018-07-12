@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "selectM": "/components/selectM/selectM",
+    "selectTime": "/components/selectTime/selectTime"
+  }
+}

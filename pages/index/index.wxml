@@ -15,7 +15,7 @@
       </navigator> 
       <navigator url='../cloudController/cloudConList/cloudConList'>  
         <view class="wc">  
-          <text bindtap='tosat'>云控制器</text>  
+          <text>云控制器</text>  
         </view>
       </navigator> 
       <view class="line"></view>

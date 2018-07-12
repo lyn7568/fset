@@ -16,8 +16,12 @@
     "pages/gatewayAdmin/gatewayAddCgq/gatewayAddCgq",
     "pages/gatewayAdmin/gatewayAddDnb/gatewayAddDnb",
     "pages/cloudController/cloudConList/cloudConList",
+    "pages/cloudController/cloudConAdd/cloudConAdd",
     "pages/cloudController/cloudConManage/cloudConManage",
-    "pages/cloudController/cloudConDetail/cloudConDetail",
+    "pages/cloudController/cloudConfig/cloudConfig",
+    "pages/cloudController/cloudConfigOther/cloudConfigOther",
+    "pages/cloudController/cloudConAddCgq/cloudConAddCgq",
+    "pages/cloudController/cloudConAddDnb/cloudConAddDnb",
     "pages/getLocationMap/getLocationMap"
   ],
   "window":{
