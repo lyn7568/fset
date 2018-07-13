@@ -1,4 +1,3 @@
-<!--pages/gatewayAdmin/gatewaySensor/gatewaySensor.wxml-->
 <import src="/template/tempList.wxml" />
 
 <view class="containerr">

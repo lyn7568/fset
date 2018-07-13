@@ -1,12 +1,7 @@
-// pages/gatewayAdmin/gatewaySmart/gatewaySmart.js
 const common = require('../../../utils/common.js');
 const tempcomjs = require('../../../template/tempList.js');
 
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
     listData: [],
     startX: 0, //开始坐标
@@ -14,10 +9,6 @@ Page({
     showModal: false,
     nameS: ''
   },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
   onLoad: function (options) {
     this.setData({
       wgIpNow: options.wgIp,

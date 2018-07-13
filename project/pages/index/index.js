@@ -1,5 +1,3 @@
-//index.js
-
 //获取应用实例
 var start_clientX;
 var end_clientX;
@@ -13,7 +11,8 @@ Page({
     userInfo: {},
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
-    windowWidth: wx.getSystemInfoSync().windowWidth
+    windowWidth: wx.getSystemInfoSync().windowWidth,
+    baseUrl: common.baseUrl
   },
   onLoad: function () {
     var that = this

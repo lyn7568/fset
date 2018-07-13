@@ -1,4 +1,3 @@
-<!--pages/gatewayAdmin/gatewayUpdate/gatewayUpdate.wxml-->
 <import src="/template/tempList.wxml" />
 <view class="mainbody">
   <view class="weui-cells">

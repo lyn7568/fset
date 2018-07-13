@@ -1,4 +1,3 @@
-<!--pages/gatewayAdmin/gatewayList/gatewayList.wxml-->
 <import src="/template/tempList.wxml" />
 <wxs src="../../../template/tempList.wxs" module="tempWxs" />
 

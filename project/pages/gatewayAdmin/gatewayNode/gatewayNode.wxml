@@ -1,4 +1,3 @@
-<!--pages/gatewayAdmin/gatewayNode/gatewayNode.wxml-->
 <import src="/template/tempList.wxml" />
 
 <view class="search-bar">
@@ -35,7 +34,7 @@
             <view class="btn-item row-btn-2" bindtap="updateSelf" data-ip="{{item.cl02}}" data-name="{{item.cl01}}">编辑</view>
           </view>
         </view>
-        <template is="loadSty" data="{{loadingModalHide:loadingModalHide,loadingComplete:loadingComplete}}" />
+        <template is="loadSty" data="{{loadingModalHide:loadingModalHide,loadingComplete:loadingComplete,baseUrl:baseUrl}}" />
       </scroll-view>
     </view>
 

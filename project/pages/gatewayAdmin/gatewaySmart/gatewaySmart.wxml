@@ -1,4 +1,3 @@
-<!--pages/gatewayAdmin/gatewaySmart/gatewaySmart.wxml-->
 <import src="/template/tempList.wxml" />
 
 <view class="table">

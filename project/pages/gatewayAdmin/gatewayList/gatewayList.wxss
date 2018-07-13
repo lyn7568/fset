@@ -1,4 +1,3 @@
-/* pages/gatewayAdmin/gatewayList.wxss */
 @import "/pages/index/index.wxss";
 @import "/template/tempList.wxss";
 

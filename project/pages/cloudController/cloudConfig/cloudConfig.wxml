@@ -1,4 +1,3 @@
-<!--pages/cloudController/cloudConfig/cloudConfig.wxml-->
 <import src="/template/tempList.wxml" />
 
 <view class="containerr">  
@@ -33,8 +32,7 @@
             <text>当前状态</text>
           </view>
           <view class="weui-cell__ft">
-            <image mode="aspectFill" class="state-img" wx:if="{{clStateNow==='开启'}}" src="/lib/images/open.png"></image>
-            <image mode="aspectFill" class="state-img" wx:if="{{clStateNow==='关闭'}}" src="/lib/images/close.png"></image>
+            <image mode="aspectFill" class="state-img" src="{{clStateNow}}"></image>
           </view>
         </view>
       </view>

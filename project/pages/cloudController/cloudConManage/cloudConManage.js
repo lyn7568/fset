@@ -2,10 +2,6 @@ const common = require('../../../utils/common.js');
 const util = require('../../../utils/util.js');
 const tempcomjs = require('../../../template/tempList.js');
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
     navbarArray: [{
       text: '通用管理',
@@ -31,10 +27,6 @@ Page({
     showModal: false,
     nameS: ''
   },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
   onLoad: function (options) {
     this.setData({
       jdIpNow: options.ykIp,

@@ -1,4 +1,3 @@
-<!--pages/gatewayAdmin/gatewayConfigOther/gatewayConfigOther.wxml-->
 <import src="/template/tempList.wxml" />
 <view class="mainbody">
   <view wx:if="{{casType==='hw'}}" class="weui-cells weui-cells_form">

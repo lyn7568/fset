@@ -1,4 +1,3 @@
-// components/selectM/selectM.js
 const common = require('../../utils/common.js');
 
 Component({

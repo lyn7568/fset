@@ -1,4 +1,3 @@
-<!--pages/gatewayAdmin/gatewaySmartRelated/gatewaySmartRelated.wxml-->
 <view wx:for="{{sceneArr.arr}}" wx:key="">
     <selectM
       copName="按键"

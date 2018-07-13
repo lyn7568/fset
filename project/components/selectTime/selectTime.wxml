@@ -1,4 +1,3 @@
-<!--components/selectM/selectM.wxml-->
 <view class="weui-cells" wx:if="{{ifhasDate}}">
   <view class="weui-cell">
     <view class="picker_group_time picker_group_date">

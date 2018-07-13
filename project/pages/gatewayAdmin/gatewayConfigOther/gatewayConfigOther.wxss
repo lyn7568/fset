@@ -1,3 +1,1 @@
-/* pages/gatewayAdmin/gatewayConfigOther/gatewayConfigOther.wxss */
-
- @import '../gatewayConfig/gatewayConfig.wxss';
+@import '../gatewayConfig/gatewayConfig.wxss';

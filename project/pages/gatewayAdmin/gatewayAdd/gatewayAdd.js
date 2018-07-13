@@ -1,4 +1,3 @@
-// pages/gatewayAdmin/gatewayAdd/gatewayAdd.js
 const common = require('../../../utils/common.js');
 
 var city_new = require('../../../utils/city.data-3.js');
@@ -50,9 +49,6 @@ Page({
     cityholder:"请选择城市",
     isfindSure:false//设备是否存在
   },
-  /**
-   * 生命周期函数--监听页面加载
-   */
   onLoad: function () {
     //城市
     // 获取第一列元素 -- 北京

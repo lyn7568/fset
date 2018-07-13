@@ -1,18 +1,9 @@
-// pages/getLocationMap/getLocationMap.js
 const common = require('../../utils/common.js');
 
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
     height: 'auto'
   },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
   onLoad: function (options) {
     var that = this
     that.username = wx.getStorageSync('username');

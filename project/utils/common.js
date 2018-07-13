@@ -1,5 +1,4 @@
 //common.js
-
 const baseUrl = 'http://poxiao58.6655.la:50096/fset';
 
 const post = function (param) {

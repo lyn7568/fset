@@ -1,10 +1,2 @@
-/* pages/gatewayAdmin/gatewayUpdate/gatewayUpdate.wxss */
-.select-option{
-  display:flex;
-  justify-content: space-between;
-}
-.select-option .left-arrow{
-  margin-left:40rpx;
-  top:-36rpx;
-  right:-54rpx;
-}
+.select-option{display:flex;justify-content: space-between;}
+.select-option .left-arrow{margin-left:40rpx; top:-36rpx;right:-54rpx;}

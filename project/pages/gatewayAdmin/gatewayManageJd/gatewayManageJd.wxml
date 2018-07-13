@@ -1,4 +1,3 @@
-<!--pages/gatewayAdmin/gatewayManageJd/gatewayManageJd.wxml-->
 <import src="/template/tempList.wxml" />
 
 <view class="containerr">

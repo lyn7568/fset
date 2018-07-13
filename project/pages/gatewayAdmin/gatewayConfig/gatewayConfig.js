@@ -1,12 +1,7 @@
-// pages/gatewayAdmin/gatewayConfig/gatewayConfig.js
 const common = require('../../../utils/common.js');
 const tempcomjs = require('../../../template/tempList.js');
 
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
     navbarArray: [{
       text: '开关状态',
@@ -62,10 +57,6 @@ Page({
     shiduanArr:[0,1,2,3,4],
     clIdNow:''
   },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
   onLoad: function (options) {
     this.setData({
       wgIpNow: options.wgIp,
@@ -83,9 +74,15 @@ Page({
         title: '继电器管理配置'
       });
       if (options.clId) {
+        let stateImg =''
+        if (options.clState === '开启'){
+          stateImg = '/images/open.png'
+        } else if (options.clState=== '关闭'){
+          stateImg = '/images/close.png'
+        }
         this.setData({
           clIdNow: options.clId,
-          clStateNow: options.clState
+          clStateNow: common.baseUrl+stateImg
         });
         this.getDLInfo(options.clId, 0)
       }

@@ -1,4 +1,3 @@
-<!--pages/getLocationMap/getLocationMap.wxml-->
   <map
     id="myMap"
     style="width: 100%; height:{{height}}px;"

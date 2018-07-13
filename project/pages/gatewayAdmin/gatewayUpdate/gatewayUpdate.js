@@ -1,10 +1,6 @@
-// pages/gatewayAdmin/gatewayUpdate/gatewayUpdate.js
 const common = require('../../../utils/common.js');
 
 Page({
-  /**
-   * 页面的初始数据
-   */
   data: {
     longitudeIndex:0,
     longitude: ['东经', '西经'],//经度
@@ -12,10 +8,6 @@ Page({
     latitude: ['北纬', '南纬'],//纬度
     listData:[]
   },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
   onLoad: function (options) {
     this.setData({
       nameS: options.name,

@@ -3,9 +3,6 @@ const common = require('../../../utils/common.js');
 const tempcomjs = require('../../../template/tempList.js');
 
 Page({
-  /**
-   * 页面的初始数据
-   */
   data: {
     listData: [],
     tableTh: {
@@ -22,12 +19,9 @@ Page({
     loadingModalHide: false,
     loadingComplete: true,
     startX: 0, //开始坐标
-    startY: 0
+    startY: 0,
+    baseUrl:common.baseUrl
   },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
   onLoad: function () {
     this.username = wx.getStorageSync('username');
   },
