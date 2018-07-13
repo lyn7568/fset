@@ -1,7 +1,6 @@
 {
   "pages":[
     "pages/index/index",
-    "pages/echarts/echarts",
     "pages/login/login",
     "pages/gatewayAdmin/gatewayList/gatewayList",
     "pages/gatewayAdmin/gatewayAdd/gatewayAdd",

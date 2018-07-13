@@ -7,11 +7,11 @@
 		"urlCheck": false,
 		"es6": true,
 		"postcss": true,
-		"minified": true,
+		"minified": false,
 		"newFeature": true
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.1.1",
+	"libVersion": "2.1.3",
 	"appid": "wx34963ae01e730109",
 	"projectname": "fset",
 	"isGameTourist": false,
@@ -42,40 +42,10 @@
 					"query": "ykIp=22222222&ykName=测试云"
 				},
 				{
-					"id": -1,
-					"name": "登录",
-					"pathName": "pages/login/login",
-					"query": ""
-				},
-				{
-					"id": 2,
-					"name": "设备节点",
-					"pathName": "pages/gatewayAdmin/gatewayNode/gatewayNode",
-					"query": ""
-				},
-				{
-					"id": 3,
-					"name": "智能面板",
-					"pathName": "pages/gatewayAdmin/gatewaySmart/gatewaySmart",
-					"query": "jdIp=2&wgIp=12345677"
-				},
-				{
-					"id": 4,
+					"id": 1,
 					"name": "开关模块",
 					"pathName": "pages/gatewayAdmin/gatewayManageJd/gatewayManageJd",
 					"query": "jdIp=7&wgIp=12345676&jdName=节点7"
-				},
-				{
-					"id": 5,
-					"name": "传感器模块",
-					"pathName": "pages/gatewayAdmin/gatewaySensor/gatewaySensor",
-					"query": "jdIp=3&wgIp=12345677"
-				},
-				{
-					"id": -1,
-					"name": "通用管理配置",
-					"pathName": "pages/gatewayAdmin/gatewayConfig/gatewayConfig",
-					"query": ""
 				}
 			]
 		}

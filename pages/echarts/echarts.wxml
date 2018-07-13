@@ -1,4 +1,0 @@
-<!--pages/echarts/echarts.wxml-->
-<!-- <view class="chartsTab">
-      <ec-canvas id="mychart-dom-pie" canvas-id="mychart-pie" ec="{{ ec }}" style="width:100%;height:50%"></ec-canvas>
-     </view> -->
