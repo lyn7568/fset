@@ -261,5 +261,10 @@ Page({
     that.setData({
       isCity: true
     })
+  },
+  onShareAppMessage: function () {
+    return {
+      path: 'pages/index/index'
+    };
   }
 })

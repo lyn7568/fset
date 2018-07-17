@@ -243,5 +243,10 @@ Page({
         }
       }
     })
+  },
+  onShareAppMessage: function () {
+    return {
+      path: 'pages/index/index'
+    };
   }
 })

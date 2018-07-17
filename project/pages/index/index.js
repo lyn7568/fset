@@ -60,5 +60,10 @@ Page({
       display: "none",
       translate: '',
     })
+  },
+  onShareAppMessage: function () {
+    return {
+      path: 'pages/index/index'
+    };
   }
 })

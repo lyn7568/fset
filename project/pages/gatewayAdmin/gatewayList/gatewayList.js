@@ -187,5 +187,10 @@ Page({
       self.data.casIndex= 0
       self.getCasArray();
     })
+  },
+  onShareAppMessage: function () {
+    return {
+      path: 'pages/index/index'
+    };
   }
 })

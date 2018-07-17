@@ -226,5 +226,10 @@ Page({
   },
   touchmove: function (e) {
     tempcomjs.touchmove(this, e);
+  },
+  onShareAppMessage: function () {
+    return {
+      path: 'pages/index/index'
+    };
   }
 })

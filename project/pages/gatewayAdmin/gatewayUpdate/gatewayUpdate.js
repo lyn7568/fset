@@ -124,5 +124,10 @@ Page({
     wx.navigateBack({
       delta: 1
     })
+  },
+  onShareAppMessage: function () {
+    return {
+      path: 'pages/index/index'
+    };
   }
 })
