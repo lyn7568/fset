@@ -5,7 +5,8 @@
 /* 遮罩层 */
 .bg{display:none;position:fixed;top:0%;left:50%;width:100%;height:100%;background-color:black;z-index:1001;-moz-opacity:0.7;opacity:0.70;transition:width 2s;filter:alpha(opacity=70);}
 /* 悬浮菜单按钮 */
-.menu-float{position:fixed;width:100rpx;height:100rpx;top:60rpx;left:40rpx;z-index:100;border-radius:50%;background:rgba(255,255,255,.8);box-shadow:1px 1px 10px 1px #999999;display:flex;justify-content:center;align-items:center;}
+.menu-float{position:fixed;width:100rpx;height:100rpx;top:60rpx;left:40rpx;z-index:100;border-radius:50%;background:rgba(255,255,255,.8);box-shadow:1px 1px 10px 1px #999999;display: -webkit-box;display: -webkit-flex;display:flex;-webkit-box-align: center;-webkit-align-items: center; -ms-flex-align: center; align-items: center; -webkit-justify-content: center;
+-moz-justify-content: center; -ms-justify-content: center;-o-justify-content: center;justify-content: center;}
 .menu-icon{width:50rpx;}
 
  /* 侧滑栏 */
@@ -21,9 +22,9 @@
 .page-body-button{margin-bottom:30rpx;}
 .navigator-box{opacity:0;position:relative;background-color:#FFFFFF;line-height:1.41176471;font-size:32rpx;transform:translateY(-50%);transition:.3s;}
 .navigator-box-show{opacity:1;transform:translateY(0);}
-.navigator{padding:20rpx 30rpx;position:relative;display:flex;align-items:center;}
+.navigator{padding:20rpx 30rpx;position:relative;display: -webkit-box;display: -webkit-flex;display:flex;-webkit-box-align: center;-webkit-align-items: center; -ms-flex-align: center; align-items: center;}
 .navigator:after{content:" ";position:absolute;left:30rpx;bottom:0;right:30rpx;height:1px;border-bottom:1rpx solid #D8D8D8;color:#D8D8D8;}
 
-.navigator-text{flex:1;}
+.navigator-text{-webkit-box-flex: 1;-webkit-flex: 1;flex: 1;}
 .navigator-arrow{padding-right:26rpx;position:relative;}
 .navigator-arrow:after{content:" ";display:inline-block;height:18rpx;width:18rpx;border-width:2rpx 2rpx 0 0;border-color:#888888;border-style:solid;transform:matrix(0.71,0.71,-0.71,0.71,0,0);position:absolute;top:50%;margin-top:-8rpx;right:28rpx;}

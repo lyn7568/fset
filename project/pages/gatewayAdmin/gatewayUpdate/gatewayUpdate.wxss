@@ -1,2 +1,2 @@
-.select-option{display:flex;justify-content: space-between;}
+.select-option{display: -webkit-box;display: -webkit-flex;display:flex;-webkit-box-pack: justify;-webkit-justify-content: space-between;-ms-flex-pack: justify;justify-content: space-between;}
 .select-option .left-arrow{margin-left:40rpx; top:-36rpx;right:-54rpx;}

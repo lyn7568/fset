@@ -6,6 +6,7 @@ view,scroll-view{box-sizing:border-box;}
 .nav{white-space:nowrap;}
 .nav-default{width:calc(100% / 4.5);}
 .weui-cells__title{line-height:60rpx}
-.time-box{display:flex;justify-content:space-between;align-items:center;line-height:80rpx;max-width:480rpx;}
+.time-box{display: -webkit-box;display: -webkit-flex;display:flex;-webkit-box-pack: justify;-webkit-justify-content: space-between;-ms-flex-pack: justify;justify-content: space-between;-webkit-box-align: center;
+    -webkit-align-items: center; -ms-flex-align: center; align-items: center;line-height:80rpx;max-width:480rpx;}
 .time-box>input{padding-right:8rpx;height:80rpx;line-height:80rpx;max-width:400rpx;}
 .state-img{width:60rpx;height:80rpx;margin-top:20rpx;}
