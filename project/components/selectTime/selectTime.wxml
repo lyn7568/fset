@@ -44,12 +44,12 @@
       </view>
       <text>至</text>
       <view class="picker-item">
-        <picker mode="time" value="{{timeEnd}}" start="{{timeStart}}" end="23:59" bindchange="bindTimeChange2">
+        <picker class="pickerO" mode="time" value="{{timeEnd}}" start="{{timeStart}}" end="23:59" bindchange="bindTimeChange2">
           <view class="picker">
             {{timeEnd}}
           </view>
         </picker>
-        <picker bindchange="bindTimeE" value="{{casEindex}}" range="{{casArray}}">
+        <picker class="pickerT" bindchange="bindTimeE" value="{{casEindex}}" range="{{casArray}}">
           <view class="picker">
             <text>{{casArray[casEindex]}}</text>
           </view>
