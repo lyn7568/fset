@@ -7,7 +7,7 @@
         <input type="text" placeholder="请输入登录账号" class="frmtype" bindinput="getAccountName" />
       </view>
       <view class="frm-input">
-        <input type="password" placeholder="请输入登录密码" class="frmtype" bindinput="getAccountPwd" />
+        <input type="password" placeholder="请输入登录密码" class="frmtype" bindinput="getAccountPwd" bindconfirm="binding" />
       </view>
     </view>
     <view class="frmbing">

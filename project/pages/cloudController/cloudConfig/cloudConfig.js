@@ -39,7 +39,7 @@ Page({
   },
   onLoad: function (options) {
     this.setData({
-      jdIpNow: options.ykIp
+      ykIpNow: options.ykIp
     });
     if (options.ty) {
       wx.setNavigationBarTitle({
@@ -59,10 +59,12 @@ Page({
         } else if (options.clState === '关闭') {
           stateImg = '/images/close.png'
         }
+        console.log(options.clId)
         this.setData({
           clIdNow: options.clId,
           clStateNow: common.baseUrl + stateImg
         });
+        console.log(this.data.clIdNow)
         this.getDLInfo(options.clId, 0)
       }
     }
@@ -163,8 +165,8 @@ Page({
         if (res.data.result === 'success') {
           if (tabindex === 1) {
             let baseT = [];
-            if (res.data.list.length > 0) {
-              baseT = res.data.list[0].cl01.split(',');
+            if (res.data.data && res.data.data.length > 0) {
+              baseT = res.data.data[0].cl01.split(',');
               that.setData({
                 timeDelay: baseT[0],
                 timeInterval: baseT[1],
@@ -172,11 +174,11 @@ Page({
               });
             }
           } else if (tabindex === 4 || tabindex === 5) {
-            if (res.data.code.length > 0) {
+            if (res.data.data && res.data.data.length > 0) {
               var codeList = []
-              for (let i = 0; i < res.data.code.length; i++) {
-                codeList[i] = res.data.code[i];
-                navbarArray[targetChannelIndex].changelist[i] = res.data.code[i];
+              for (let i = 0; i < res.data.data.length; i++) {
+                codeList[i] = res.data.data[i].cl01;
+                navbarArray[targetChannelIndex].changelist[i] = res.data.data[i];
               }
               that.setData({
                 navbarArray: navbarArray
@@ -199,10 +201,10 @@ Page({
     var that = this;
     let navbarArray = that.data.navbarArray
     let tab = that.data.currentChannelIndex
-    let jdIp = that.data.jdIpNow
+    let jdIp = that.data.ykIpNow
     var setVals = []
     if (tab === 0) {
-      if (!that.data.timeDelay1) {
+      if (!that.data.timeDelay1 && that.data.ifGeneral) {
         wx.showToast({
           title: '延时不能为空',
           icon: 'none'
@@ -233,7 +235,7 @@ Page({
         "timer": that.data.timeInterval,
         "onOff": that.data.casBIndex
       }
-    } else if (tab === 3 || tab === 4 ) {
+    } else if (tab === 4 || tab === 5 ) {
       for (let i = 0; i < navbarArray[tab].changelist.length; i++) {
         var arr = navbarArray[tab].changelist[i].split(',');
         if (navbarArray[tab].hasCfms) {
@@ -264,7 +266,7 @@ Page({
         value: JSON.stringify(setVals),
         type: that.data.ifGeneral ? 'ty' : 'dl',
         username: that.username,
-        jdqls: that.data.ifGeneral ? '' : that.data.clIdNow.split('_')[2]
+        jdqls: that.data.ifGeneral ? '' : that.data.clIdNow.split('_')[1]
       },
       sh: function (res) {
         wx.hideLoading()

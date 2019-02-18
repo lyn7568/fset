@@ -125,7 +125,7 @@
             <view class="td">{{item.cl04}}</view>
           </view>
           <view class="touch-btn">
-            <view class="btn-item row-btn-1" bindtap="configSelf" data-tl="{{item.cltype}}">管理</view>
+            <view class="btn-item row-btn-1" wx:if="{{item.cltype !== 'km' && item.cltype !== 'ys'}}" bindtap="configSelf" data-tl="{{item.cltype}}">管理</view>
             <view class="btn-item row-btn-2" bindtap="updateSelf" data-id="{{item.cl00}}" data-name="{{item.cl01}}">编辑</view>
             <view class="btn-item del-btn"  bindtap="delSelf" data-id="{{item.cl00}}">删除</view>
           </view>

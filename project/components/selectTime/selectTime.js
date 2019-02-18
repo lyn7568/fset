@@ -146,7 +146,7 @@ Component({
         getVals = {
           jdIp: ykIp,
           index: timgingIndex,
-          jdqls: clIdNow.split('_')[2]
+          jdqls: clIdNow.split('_')[1]
         }
       }
       common.post({

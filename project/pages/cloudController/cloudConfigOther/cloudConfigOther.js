@@ -128,7 +128,7 @@ Page({
     var that = this;
     let jdIp = that.data.jdIpNow
     common.post({
-      url: '/crelay/showCgqSetting',
+      url: '/android/crelay/cgqSetting',
       data: {
         jdIp: jdIp,
         gyz: that.data.highNum,

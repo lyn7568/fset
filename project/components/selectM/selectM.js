@@ -22,6 +22,12 @@ Component({
     },
     tabIndex:{
       type: Number
+    },
+    ifYunKong: {
+      type:Boolean
+    },
+    clIdNow: {
+      type: String
     }
   },
 
@@ -44,7 +50,7 @@ Component({
     casIndex: { //模式index
       base: [0],
       scene: [0, 0, 0, 0, 0, 0],
-      other: [0, 0, 0, 0]
+      other: [0, 0, 0, 0, 0, 0]
     },
     casThisNow:0
   },
@@ -105,12 +111,25 @@ Component({
     },
     getShebeiJD:function(id, index, arr) {
       var that=this
-      common.post({
-        url: '/relay/getNodeList',
-        data: {
+      let ifYunKong = that.properties.ifYunKong
+      var url = '', getVals = ''
+      if (!ifYunKong) {
+        url = '/relay/getNodeList';
+        getVals = {
           id: id,
           index: index
-        },
+        }
+      } else {
+        url = '/crelay/getNodeList';
+        getVals = {
+          id: id,
+          index: index,
+          jdqls: that.properties.clIdNow.split('_')[1]
+        }
+      }
+      common.post({
+        url: url,
+        data: getVals,
         sh: function(res) {
           var jiedianArr=that.data.jiedianArr;
           jiedianArr = res.data.list
@@ -135,8 +154,13 @@ Component({
     },
     getShebeiAJ: function (id, index, arr) {
       var that = this
+      let ifYunKong = that.properties.ifYunKong
+      var url = '/relay/getSelectModelList'
+      if (ifYunKong) {
+        url = '/crelay/getSelectModelList'
+      }
       common.post({
-        url: '/relay/getSelectModelList',
+        url: url,
         data: {
           id: id,
           index: index
@@ -163,21 +187,23 @@ Component({
     },
     _bindSnum:function(e) { //选择设备
       var that=this
-      var numIndex = that.data.numIndex,
-        numIfs = that.data.numIfs,
-        modelValue = parseInt(e.detail.value);
-      let tabIndex = that.data.tabIndex;
-      let sbNum = that.properties.numArray[modelValue].id;
-      if (modelValue !== 0) {
-        numIfs = 1;
-      } else {
-        numIfs = 0;
+      if (e.detail.value !== '0'){
+        var numIndex = that.data.numIndex,
+          numIfs = that.data.numIfs,
+          modelValue = parseInt(e.detail.value);
+        let tabIndex = that.data.tabIndex;
+        let sbNum = that.properties.numArray[modelValue].id;
+        if (modelValue !== 0) {
+          numIfs = 1;
+        } else {
+          numIfs = 0;
+        }
+        that.setData({
+          numIndex: modelValue,
+          numIfs: numIfs
+        })
+        that.getShebeiJD(sbNum, tabIndex)
       }
-      that.setData({
-        numIndex: modelValue,
-        numIfs: numIfs
-      })
-      that.getShebeiJD(sbNum, tabIndex)
     },
     _bindJiedian: function (e) { 
       var that = this

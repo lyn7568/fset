@@ -194,7 +194,7 @@ Page({
             }
           } else if (tabindex === 1) {
             let baseT=[];
-            if (res.data.list.length>0){
+            if (res.data.list && res.data.list.length>0){
               baseT = res.data.list[0].cl01.split(',');
               that.setData({
                 timeDelay: baseT[0],
@@ -203,7 +203,7 @@ Page({
               });
             }
           } else if (tabindex === 2 || tabindex === 4 || tabindex === 5) {
-            if (res.data.code.length > 0) {
+            if (res.data.code && res.data.code.length > 0) {
               var codeList = []
               for (let i = 0; i < res.data.code.length; i++) {
                 codeList[i] = res.data.code[i];
@@ -217,7 +217,7 @@ Page({
               });
             }
           } else if (tabindex === 7) {
-            if (res.data.list.length > 0) {
+            if (res.data.list && res.data.list.length > 0) {
               var codeList = []
               for (let i = 0; i < res.data.list.length; i++) {
                 codeList[i] = res.data.list[i];
@@ -315,7 +315,7 @@ Page({
         value: JSON.stringify(setVals),
         type: that.data.ifGeneral?'ty':'dl',
         username:that.username,
-        jdqls: that.data.ifGeneral ? '' : that.data.clIdNow.split('_')[2]
+        jdqls: that.data.ifGeneral ? '' : that.data.clIdNow.split('_')[1]
       },
       sh: function (res) {
         wx.hideLoading()

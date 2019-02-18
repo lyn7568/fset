@@ -88,7 +88,7 @@
         <text>节假日开始结束日期</text>
       </view>
       <selectTime
-        typeT="wg"
+        typeT="yk"
         copName="节假日每天开启关闭"
         ifhasDate="{{true}}"
         clykIp="{{ykIpNow}}"
@@ -102,7 +102,7 @@
       ></selectTime>
       <view wx:for="{{shiduanArr}}" wx:key="">
         <selectTime
-          typeT="wg"
+          typeT="yk"
           copName="时段{{item+1}}"
           hasWeek="{{true}}"
           clykIp="{{ykIpNow}}"
@@ -125,6 +125,8 @@
           id="{{navbarArray[currentChannelIndex].name}}{{item}}"
           bindgetAction="getDLInfo(clIdNow,currentChannelIndex)"
           bindpropChange="propChange"
+          ifYunKong=true
+          clIdNow="{{clIdNow}}"
         ></selectM>
       </view>
       <view class="weui-cells margintop2 marginbottom">
@@ -147,6 +149,7 @@
           id="{{navbarArray[currentChannelIndex].name}}{{item}}"
           bindgetAction="getDLInfo(clIdNow,currentChannelIndex)"
           bindpropChange="propChange"
+          ifYunKong=true
         ></selectM>
       </view>
       <view class="weui-cells margintop2 marginbottom">

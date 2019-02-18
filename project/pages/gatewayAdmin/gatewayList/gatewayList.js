@@ -169,10 +169,12 @@ Page({
         ip: WgIp
       },
       sh: function (res) {
-        wx.hideLoading()
-        wx.navigateTo({
-          url: '../gatewayNode/gatewayNode?id=' + WgIp
-        })
+        setTimeout(function() {
+          wx.hideLoading()
+          wx.navigateTo({
+            url: '../gatewayNode/gatewayNode?id=' + WgIp
+          })
+        }, 3000)
       }
     })
 

@@ -136,11 +136,21 @@ Page({
       title: '加载中',
       mask: true
     })
+    var setPage = {
+      'curpage': that.data.pageno,
+      'pagesize': that.data.pagesize,
+      'sumcount': null
+    }
+    var setVal = {
+      'ip': that.data.searchKeyword,
+      'key': 'cl02',
+      'order': 'asc'
+    };
     common.post({
       url: '/android/cloudController/getJdList',
       data: {
-        page: '{\"curpage\":' + that.data.pageno + ',\"pagesize\":' + that.data.pagesize + ',\"sumcount\":null}',
-        values: '{\"ip\":\"' + that.data.searchKeyword + '\",\"key\": \"cl02\",\"order\": \"asc\"}',
+        page: JSON.stringify(setPage),
+        values: JSON.stringify(setVal),
         username: that.username
       },
       sh: function (res) {

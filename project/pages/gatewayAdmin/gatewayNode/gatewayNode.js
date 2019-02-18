@@ -129,12 +129,23 @@ Page({
       title: '加载中',
       mask: true
     })
-    let navbarArray = this.data.navbarArray;
+    var setPage = {
+        'curpage': that.data.pageno,
+        'pagesize':that.data.pagesize,
+        'sumcount':null
+    }
+    var setVal = {
+        'pid':that.data.wgIdNow,
+        'ip':that.data.searchKeyword,
+        'type': that.data.navbarArray[index].type,
+        'key': 'cl02',
+        'order': 'asc'
+    };
     common.post({
       url: '/equipmentManagement/getJdList',
       data: {
-        page: '{\"curpage\":' + that.data.pageno + ',\"pagesize\":' + that.data.pagesize + ',\"sumcount\":null}',
-        values: '{\"pid\":\"' + that.data.wgIdNow + '\",\"ip\":\"' + that.data.searchKeyword + '\",\"key\": \"cl02\",\"order\": \"asc\",\"type\": \"' + navbarArray[index].type + '\"}',
+        page: JSON.stringify(setPage),
+        values: JSON.stringify(setVal),
         fields: '[]'
       },
       sh: function (res) {

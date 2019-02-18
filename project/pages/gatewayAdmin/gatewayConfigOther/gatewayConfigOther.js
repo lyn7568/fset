@@ -136,7 +136,7 @@ Page({
     let wgIp = that.data.wgIpNow
     let jdIp = that.data.jdIpNow
     common.post({
-      url: '/relay/showCgqSetting',
+      url: '/android/relay/cgqSetting',
       data: {
         wgIp: wgIp,
         jdIp: jdIp,
