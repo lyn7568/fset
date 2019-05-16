@@ -179,7 +179,6 @@ Page({
     })
   },
   keywordSearch: function (e) {
-     console.log(e)
     if (e.detail.value) {
       this.setData({
         isFormSearch: true,
@@ -189,16 +188,16 @@ Page({
         searchKeyword: e.detail.value,
         searchTmp: e.detail.value
       });
-      this.getJdList(this.data.currentChannelIndex);
     } else {
       this.setData({
         searchKeyword: ""
       });
-      wx.showToast({
-        title: '请输入节点地址',
-        icon: 'none'
-      })
+      // wx.showToast({
+      //   title: '请输入节点地址',
+      //   icon: 'none'
+      // })
     }
+    this.getJdList(this.data.currentChannelIndex);
   },
   searchScrollLower: function () {
     let that = this;

@@ -1,7 +1,7 @@
 <import src="/template/tempList.wxml" />
 <view class="container main" style="height:{{scrollHeight}}px">
   <view class="middle">
-    <view class="binding">飞铄科技远程控制系统</view>
+    <view class="binding">智能照明管理云平台</view>
     <view class="frmboxNew">
       <view class='frm-input'>
         <input type="text" placeholder="请输入登录账号" class="frmtype" bindinput="getAccountName" />

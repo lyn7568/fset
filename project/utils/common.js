@@ -1,6 +1,6 @@
 //common.js
 // const baseUrl = 'http://poxiao58.6655.la:50096/fset';
-const baseUrl = 'http://www.zzfset.com/fset';
+const baseUrl = 'https://www.zzfset.com/fset';
 
 const post = function (param) {
   var selfPage = getCurrentPages()[getCurrentPages().length - 1];

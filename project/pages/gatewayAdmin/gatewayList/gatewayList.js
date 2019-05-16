@@ -10,7 +10,7 @@ Page({
   onLoad: function () {
     this.username = wx.getStorageSync('username');
   },
-  onShow: function () {
+  onReady: function () {
     this.setData({
       casIndex: 0
     })
@@ -25,11 +25,16 @@ Page({
         username: this.username
       },
       sh: function (res) {
-        that.setData({
-          listData:'',
-          casArray: res.data[0].name
-        })
-        that.getCheckEsn(res.data[0].name[0].id);
+        if (res.data.length > 0) {
+          that.setData({
+            listData: '',
+            casArray: res.data[0].name
+          })
+          if (res.data[0].name.length > 0) {
+            let checkId = res.data[0].name[0].id;
+            that.getCheckEsn(checkId);
+          }
+        }
       }
     })
   },

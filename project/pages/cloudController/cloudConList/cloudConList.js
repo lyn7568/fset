@@ -155,7 +155,6 @@ Page({
       },
       sh: function (res) {
         wx.hideLoading()
-        console.log(res)
         var $info = res.data.rows;
         if ($info.length > 0) {
           var parM = {};
@@ -226,8 +225,8 @@ Page({
       loadingModalHide: false,
       loadingComplete: true,
       listData: [],
-      searchKeyword: e.detail.value,
-      searchTmp: e.detail.value
+      searchKeyword: '',
+      searchTmp:''
     });
     this.getJdList();
   },

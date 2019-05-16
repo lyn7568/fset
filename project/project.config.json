@@ -8,11 +8,13 @@
 		"es6": true,
 		"postcss": true,
 		"minified": false,
-		"newFeature": true
+		"newFeature": true,
+		"uglifyFileName": false,
+		"checkInvalidKey": true
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.3.2",
-	"appid": "wx34963ae01e730109",
+	"libVersion": "2.7.0",
+	"appid": "wxed7b0fa5a1a8a86c",
 	"projectname": "fset",
 	"isGameTourist": false,
 	"simulatorType": "wechat",
