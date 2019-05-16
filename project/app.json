@@ -1,5 +1,5 @@
 {
-  "pages":[
+  "pages": [
     "pages/index/index",
     "pages/login/login",
     "pages/gatewayAdmin/gatewayList/gatewayList",
@@ -23,10 +23,11 @@
     "pages/cloudController/cloudConAddDnb/cloudConAddDnb",
     "pages/getLocationMap/getLocationMap"
   ],
-  "window":{
-    "backgroundTextStyle":"dark",
+  "window": {
+    "backgroundTextStyle": "dark",
     "navigationBarBackgroundColor": "#2f4050",
     "navigationBarTitleText": "飞烁科技",
-    "navigationBarTextStyle":"white"
-  }
+    "navigationBarTextStyle": "white"
+  },
+  "sitemapLocation": "sitemap.json"
 }

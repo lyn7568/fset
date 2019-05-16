@@ -1,1 +1,2 @@
 @import '/pages/gatewayAdmin/gatewayConfig/gatewayConfig.wxss';
+.nav-default{width:calc(100% / 4);}

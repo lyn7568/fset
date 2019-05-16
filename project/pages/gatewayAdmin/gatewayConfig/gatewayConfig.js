@@ -20,12 +20,14 @@ Page({
         arr: [0, 1, 2, 3, 4, 5],
         hasCfms: true,
         changelist:[]
-    }, {
-        text: '定时配置',
-        index: 3,
-        name: 'timing',
-        changelist: []
-    }, {
+    }, 
+    // {
+    //     text: '定时配置',
+    //     index: 3,
+    //     name: 'timing',
+    //     changelist: []
+    // }, 
+    {
         text: '光控配置',
         index: 4,
         name: 'light',
@@ -47,8 +49,9 @@ Page({
         hasCfms: true,
         changelist: []
     }],
-    array: [0, 1, 2,3,4,5,6,7],
+    array: [0, 1, 2, 3, 4, 5, 6], //, 7
     currentChannelIndex: 0,
+    currentTabInIndex: 0,
     numArray: [],//编号
     tab1_kg: 0,
     tab0_kg: 0,
@@ -149,7 +152,8 @@ Page({
     });
     this.setData({
       navbarArray: navbarArray,
-      currentChannelIndex: targetChannelIndex
+      currentChannelIndex: targetChannelIndex,
+      currentTabInIndex: navbarArray[targetChannelIndex].index
     });
     if (this.data.clIdNow){
       let tabClId = this.data.clIdNow

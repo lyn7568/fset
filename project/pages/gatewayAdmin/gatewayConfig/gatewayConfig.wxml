@@ -9,7 +9,7 @@
 </view>
 <view class="search-result result-con">
   <scroll-view scroll-y="true">
-    <view wx:if="{{currentChannelIndex===0}}">
+    <view wx:if="{{currentTabInIndex===0}}">
       <view class="weui-cells margintop">
         <view class="weui-cell">
           <view class="weui-cell__bd">
@@ -44,7 +44,7 @@
         </view>
       </view>
     </view>
-    <view wx:if="{{currentChannelIndex===1}}">
+    <view wx:if="{{currentTabInIndex===6}}">
        <view class="weui-cells margintop">
         <view class="weui-cell">
           <view class="weui-cell__bd">
@@ -63,7 +63,7 @@
         </view>
       </view>
     </view>
-    <view wx:if="{{currentChannelIndex===2}}">
+    <view wx:if="{{currentTabInIndex===1}}">
       <view class="weui-cells margintop">
         <view class="weui-cell">
           <view class="weui-cell__bd">
@@ -102,7 +102,7 @@
         </view>
       </view>
     </view>
-    <view wx:if="{{currentChannelIndex===3}}">
+    <view wx:if="{{currentTabInIndex===2}}">
       <view wx:for="{{navbarArray[currentChannelIndex].arr}}" wx:key="">
         <selectM
           copName="按键"
@@ -124,7 +124,7 @@
         </view>
       </view>
     </view>
-    <view wx:if="{{currentChannelIndex===4}}">
+    <view wx:if="{{currentTabInIndex===3}}">
       <view class="weui-cells__title">
         <text>节假日开始结束日期</text>
       </view>
@@ -136,7 +136,7 @@
         cljdIp="{{jdIpNow}}"
         cldlIp="{{clIdNow}}"
         ifGeneral="{{ifGeneral}}"
-        tabIndex="{{navbarArray[currentChannelIndex].index}}"
+        tabIndex="{{currentTabInIndex}}"
         timgingIndex="{{0}}"
       ></selectTime>
       <view wx:for="{{shiduanArr}}" wx:key="">
@@ -148,12 +148,12 @@
           cljdIp="{{jdIpNow}}"
           cldlIp="{{clIdNow}}"
           ifGeneral="{{ifGeneral}}"
-          tabIndex="{{navbarArray[currentChannelIndex].index}}"
+          tabIndex="{{currentTabInIndex}}"
           timgingIndex="{{item+1}}"
         ></selectTime>
       </view>
     </view>
-    <view wx:if="{{currentChannelIndex===5}}">
+    <view wx:if="{{currentTabInIndex===4}}">
       <view wx:for="{{navbarArray[currentChannelIndex].arr}}" wx:key="">
         <selectM
           copName="光控"
@@ -175,7 +175,7 @@
         </view>
       </view>
     </view>
-    <view wx:if="{{currentChannelIndex===6}}">
+    <view wx:if="{{currentTabInIndex===5}}">
       <view wx:for="{{navbarArray[currentChannelIndex].arr}}" wx:key="">
         <selectM
           copName="红外"
@@ -197,7 +197,7 @@
         </view>
       </view>
     </view>
-    <view wx:if="{{currentChannelIndex===7}}">
+    <view wx:if="{{currentTabInIndex===7}}">
       <view wx:for="{{navbarArray[currentChannelIndex].arr}}" wx:key="">
         <selectM
           copName="其他"

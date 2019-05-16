@@ -10,10 +10,12 @@ Page({
     },{
       text: '基本配置',
       index: 1
-    },{
-      text: '定时配置',
-      index: 3
-    }, {
+    },
+    // {
+    //   text: '定时配置',
+    //   index: 3
+    // }, 
+    {
       text: '光控配置',
       index: 4,
       name: 'light',
@@ -28,8 +30,9 @@ Page({
       hasCfms: false,
       changelist: []
     }],
-    array: [0, 1, 2, 3, 4],
+    array: [0, 1, 2, 3], //, 4
     currentChannelIndex: 0,
+    currentTabInIndex: 0,
     numArray: [],//编号
     tab1_kg: 0,
     tab0_kg: 0,
@@ -130,7 +133,8 @@ Page({
     });
     this.setData({
       navbarArray: navbarArray,
-      currentChannelIndex: targetChannelIndex
+      currentChannelIndex: targetChannelIndex,
+      currentTabInIndex: navbarArray[targetChannelIndex].index
     });
     if (this.data.clIdNow) {
       let tabClId = this.data.clIdNow
